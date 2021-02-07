@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"akemihomura0105.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="自用的计网笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计网笔记">
+<meta property="og:url" content="http://akemihomura0105.github.io/2020/04/30/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="自用的计网笔记">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E6%A8%A1%E5%9E%8B.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E8%B7%B3%E5%88%B0%E8%B7%B3%E7%9A%84%E4%BC%A0%E9%80%92.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/NRZ.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/NRZ-L%20and%20NRZ-I.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E6%9B%BC%E5%BD%BB%E6%96%AF%E7%89%B9.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/AMI%E7%BC%96%E7%A0%81.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/2B1Q.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/FDM.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E6%A8%A1%E6%8B%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/interleaving.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/FHSS.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/DSSS.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/UTP-STP.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%8F%8C%E7%BB%9E%E7%BA%BF%E5%88%86%E7%B1%BB.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/RJ45.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%90%8C%E8%BD%B4%E7%94%B5%E7%BC%86.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%85%89%E7%BA%A4%E4%BC%A0%E6%92%AD%E6%96%B9%E5%BC%8F.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%85%89%E7%BA%A4%E8%BF%9E%E6%8E%A5%E5%99%A8.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E6%97%A0%E7%BA%BF%E4%BC%A0%E6%92%AD%E6%96%B9%E5%BC%8F.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E6%97%A0%E7%BA%BF%E6%B3%A2%E6%AE%B5.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E9%99%A4%E6%B3%95.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_field.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_control_field.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_no-number_control_frame.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_no-number_control_frame_add0.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_connect_and_break.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_error_free.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_error.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_frame_format.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_transition_phase.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_multplexing.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/LCP_group.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/LCP_group_list.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PAP_group.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/CHAP_group.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_IPCP.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_example.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/hidden_station_problem.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/exposed_station_problem.png">
+<meta property="og:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/MAC_address.png">
+<meta property="article:published_time" content="2020-04-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-08-23T01:48:24.461Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E6%A8%A1%E5%9E%8B.png">
+
+<link rel="canonical" href="http://akemihomura0105.github.io/2020/04/30/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>计网笔记 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://akemihomura0105.github.io/2020/04/30/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计网笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-04-30 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-30T00:00:00+08:00">2020-04-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-23 09:48:24" itemprop="dateModified" datetime="2020-08-23T09:48:24+08:00">2020-08-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>自用的计网笔记</p>
+<a id="more"></a>
+
+<h2 id="第一章：引论"><a href="#第一章：引论" class="headerlink" title="第一章：引论"></a>第一章：引论</h2><h3 id="1-1-数据通信"><a href="#1-1-数据通信" class="headerlink" title="1.1 数据通信"></a>1.1 数据通信</h3><ol>
+<li><p>数据传输的好坏有四个因素决定：</p>
+<p>1、**传递性(Delivery)**：数据必须从发送方传递到接收方。</p>
+<p>2、**准确性(Accuracy)**：系统必须准确的传递数据。</p>
+<p>3、**延迟(Timeless)**：数据必须快速传递。</p>
+<p>4、**抖动(Jitter)**：不同数据到达时间与最初发送时间的变化。</p>
+</li>
+<li><p>数据传输的五个部分：</p>
+<p>1、**报文(message)**，用于交流通信的数据。</p>
+<p>2、<strong>发送方(sender)</strong></p>
+<p>3、<strong>接收方(receiver)</strong></p>
+<p>4、**传输介质(Transmission medium)**，传输的物理通路。</p>
+<p>5、**协议(protocol)**，规定了设备之间通信的方式，没有协议，设备只能相连但不能通信。</p>
+</li>
+<li><p>两台设备之间的通信可以是<strong>单工(simplex)**，</strong>半双工(Half-duplex)<strong>，</strong>全双工(Full-duplex)**。单工只能允许其中一个设备向另一个设备通信，半双工可以允许两个设备之间互相通信，但是同一时间只能由其中一个设备向另一个设备发送信息，全双工允许两个设备同时互相通信。</p>
+</li>
+</ol>
+<h3 id="1-2-网络"><a href="#1-2-网络" class="headerlink" title="1.2 网络"></a>1.2 网络</h3><ol>
+<li><p>绝大部分网络采用**分布式处理(distrubted processing)**，网络里的每一个计算机都会执行任务。</p>
+</li>
+<li><p>网络对其<strong>性能(performance)**有一定要求，网络性能可以由</strong>吞吐量(throughput)<strong>和</strong>延迟(delay)**来衡量。吞吐量表明了网络传输数据量的多少，延迟表明数据在传送过程中的时间延迟。</p>
+</li>
+<li><p>网络的**可靠性(reliability)**，网络的可靠性可以用错误发生的次数，发生错误后恢复的时间，在重大错误下的鲁棒性来描述。其衡量了一个网络的稳定程度。</p>
+</li>
+<li><p>网络的**安全性(security)**，安全性包括保护数据被未授权访问，保护数据不被攻击或篡改，对出现问题的数据的恢复策略和方法。</p>
+</li>
+<li><p>网络的物理结构：</p>
+<p>1、连接类型。<strong>点到点连接(Point-to-Point)**，点到点连接提供了两个设备之间的专有链路。</strong>多点连接(multipoint connection)**中，多个设备共享同一链路。如果多个设备可以同时通信，我们称其为在空间上共享链路。如果多个设备必须轮流使用链路，我们称其为在时间上共享链路。</p>
+<p>2、物理拓扑逻辑。拓扑逻辑描述了多个设备在网络以一个什么样的形式连接起来。拓扑逻辑分为：<strong>网状(mesh)，星型(star)，总线(bus)，环形(ring)**，</strong>混合型<strong>。网状结构中，每个设备之间都有一条点到点链路连接，$n$个设备就要有$n(n-1)$个链路连接。星型拓扑由若干设备和一个</strong>集线器(hash)**组成。所有设备都有一条连向集线器的链路，不同设备之间的相互通信必须通过集线器进行。总线拓扑中，所有设备通过分接头连接到同一条线缆上。环状拓扑中，所有设备与其相邻的两个设备之间互相连接，以此构成一个环。每个设备都有一个中继器，这用来再次发送接收的信号。混合型，顾名思义，一个网络里有多个拓扑结构。</p>
+<p>3、网络之间的互相连接。根据网络的大小，我们将网络分为局域网，广域网，城域网。下图是一个连接着一个用户与两个局域网的广域网。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E8%AE%A1%E7%BD%91%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E6%A8%A1%E5%9E%8B.png" alt="局域网与广域网"></p>
+<p>WAN中通过交换机相连，交换机本身不保存数据，其仅仅转发数据。通过路由器实现LAN与WAN的连接</p>
+</li>
+</ol>
+<h3 id="1-3-因特网"><a href="#1-3-因特网" class="headerlink" title="1.3 因特网"></a>1.3 因特网</h3><p>现在，大多数LAN或者WAN都不是孤立的，它们之间互相连接，形成了因特网。因特网服务由<strong>网络提供商(ISP-Internet Service Provider)**提供。各个ISP通过</strong>网络接入点NAPs(Network Access Points)<strong>互相连接。一些ISP也支持通过</strong>对等点(peering point)**与其他网络直接相连，这样的连接方式将提供更高的传输速率。</p>
+<h3 id="1-4-协议与标准"><a href="#1-4-协议与标准" class="headerlink" title="1.4 协议与标准"></a>1.4 协议与标准</h3><p>协议就是计算机通信的规则，标准是确定下来的规则。</p>
+<p>因为计算机之间传输的数据是传输的数字位，我们需要协议来规定这些数字代表的含义。没有协议，计算机无法理解这些数字代表的含义。协议由三个关键部分组成：1、<strong>语法(Syntax)**。语法决定了数据的格式，语法确定了数据将有哪几部分组成，确定了每个部分的长度是可变长还是不可变长，如果不可变长，应该是多少位等。2、</strong>语义(Semantics)<strong>。语义决定了数据每一部分所代表的含义，它解释了数据该如何被翻译。3、</strong>定时(Timing)**。定时决定了数据发送的时间以及发送的速率。</p>
+<p>如果不同人，不同厂商都各自采取自己的一套协议，那么它们互相的交流必定非常困难。如果我们能统一口径，就可以省去许多不必要的麻烦，因此我们就有了标准。有的标准是业界内约定俗成的，没有明文规定必须使用这一标准，但是大家全部不约而同的执行。而有的标准是由政府或组织推动创建的。一些著名的组织，如IEEE，ISO，都在推动国际标准化上做出了大量贡献。</p>
+<h2 id="第二章：网络模型"><a href="#第二章：网络模型" class="headerlink" title="第二章：网络模型"></a>第二章：网络模型</h2><h3 id="2-1-初识网络模型"><a href="#2-1-初识网络模型" class="headerlink" title="2.1 初识网络模型"></a>2.1 初识网络模型</h3><p>计算机的网络通信包含了大量的任务，从硬件到软件的设计都很复杂。为了更好的解决问题，通信这一任务被拆分为多个子任务，将每个子任务看作一个层，从顶层的用户，到底层的物理数据传输，每层的任务汇总起来，完成了网络通信。我们将这样的结构称之为网络模型。</p>
+<h3 id="2-2-OSI网络模型"><a href="#2-2-OSI网络模型" class="headerlink" title="2.2 OSI网络模型"></a>2.2 OSI网络模型</h3><p>ISO组织提出了<strong>OSI(Open Systems Interconnection)**模型。尽管事实上所应用的模型并不是OSI模型而是早已投入使用经过验证的TCP/IP协议族，但OSI模型仍具有参考意义。OSI模型总共有7层，自顶向下分别是</strong>应用层(Application)<strong>，</strong>表示层(Presentation)<strong>，</strong>会话层(Session)<strong>，</strong>传输层(Transport)<strong>，</strong>网络层(Network)<strong>，</strong>数据链路层(Data link)<strong>，</strong>物理层(Physical)**。</p>
+<p>OSI模型中的每一层都包含着实现该层次应该实现的函数，对于同一台机器来说，每一层都使用其下一层的服务来完成其任务。在不同机器之前，相同层级的通信过程被称之为**对等过程(peer-to-peer process)**。如物理层的数据传输，数据链路层与网络层中交换机与交换机之间的通信，路由器与路由器之间的通信，这都属于对等过程。</p>
+<p>OSI中的相邻层之间会提供接口以保证数据的正常传输。对于发送方，数据从顶层流向底层，而对于接收方则正好相反。对于发送方而言OSI的每一层会将本层的信息添加到数据的头部或者尾部中，以此来实现本层的功能。而对于接收方来说，OSI的每一层会将这些信息读取出来，并移除后转交给上一层。这种行为在OSI中叫做封装，底层并不关心从上层传下来的数据内容，其将上层的数据内容视为一个数据单元，并在这个数据单元的头或尾添加本层的数据，随后将这个数据传递给下一层。</p>
+<p>如果将OSI的底层标为第1层，顶层标为第7层。那么从第1-3层可以被划分为网络支持层，第5-7层可以被划分为用户支持层，而第4层则作为两者之间的连接存在。顶层的层级几乎全部由软件来实现，随着层级不断向下，硬件实现部分不断增多，到了物理层，其几乎全部是由硬件来实现。</p>
+<h3 id="2-3-OSI网络模型各层的功能"><a href="#2-3-OSI网络模型各层的功能" class="headerlink" title="2.3 OSI网络模型各层的功能"></a>2.3 OSI网络模型各层的功能</h3><ol>
+<li><p>物理层。物理层对应的功能是将比特流通过物理媒介传递给另外的设备。物理层所包含的内容有：</p>
+<p>1、物理传输口与媒介。</p>
+<p>2、比特流的发送方式（数字或者模拟）。</p>
+<p>3、数据发送的速率。</p>
+<p>4、线路配置。</p>
+<p>5、物理拓扑。</p>
+<p>6、传输模式（单工，半双工，双工）。</p>
+</li>
+<li><p>数据链路层。数据链路层负责将物理层中不可靠（因为各种原因带来的数据传输错误）的链路变成可靠的链路。数据链路层所包含的内容有：</p>
+<p>1、成帧。将连续的一串串比特划分为一个个数据单元（帧）。</p>
+<p>2、物理寻址。用来在数据中添加物理地址，使得数据能够发送到接收方。</p>
+<p>3、流量控制。如果发送方发送的速度大于接收方，数据链路层将进行处理以防止接收方数据溢出。</p>
+<p>4、差错控制。用于解决数据在传输过程中的差错问题。</p>
+<p>5、访问控制。当多台设备连接到同一个链路时，数据链路层决定谁将有权力来在给定的时间内控制这个链路。</p>
+<p>数据链路层可以将数据从一个交换机传向另一个交换机，这个过程称之为<strong>跳到跳(hop-to-hop)传递</strong>。在每一跳过后，数据的物理地址都会发生改变，以此来指示数据接下来被传递的地点。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E8%B7%B3%E5%88%B0%E8%B7%B3%E7%9A%84%E4%BC%A0%E9%80%92.png" alt="跳到跳传递"></p>
+</li>
+<li><p>网络层。网络层负责提供源端到目的端的数据包传输。网络层包含的内容有：</p>
+<p>1、逻辑地址。用于数据在不同网络之间的跨边界传输。数据链路层的物理地址负责处理在本地网络的传输。</p>
+<p>2、提供路由功能。路由器可以在将数据传递给下一个设备。路由器与交换机看似都是将数据转发，没有区别。其具体的区别，将在后面提到。目前可以认识到，路由器负责提供不同网络之间的数据传输，交换机负责提供同一网络内部数据的传输。</p>
+</li>
+<li><p>传输层。传输层负责进程到进程之间的数据传输。传输层包含的内容有：</p>
+<p>1、端口寻址。通过端口寻址，数据将可以被传递到某一计算机上的特定程序上。</p>
+<p>2、分段和组装。将连续的数据分段并表上序号，在接受到数据后根据序号组装回原来的数据。</p>
+<p>3、连接控制。负责在传输层层面建立连接。</p>
+<p>4、流量控制。负责在传输层控制发送流量。</p>
+<p>5、差错控制。负责在传输层控制差错。</p>
+</li>
+<li><p>会话层。会话层负责对话控制和同步。会话层包含的内容有：</p>
+<p>对话控制。会话层允许两个系统进入会话。</p>
+<p>同步。允许进程在数据流中加入检查点或同步点，用来在一定间隔检查错误。</p>
+</li>
+<li><p>表示层。负责翻译，加密和压缩数据。表示层包含的内容有：</p>
+<p>翻译。不同计算机有着不同的编码，翻译用来将信息格式转换为同一的格式发送。</p>
+<p>加密。对数据加密。</p>
+<p>压缩。对数据压缩。</p>
+</li>
+<li><p>应用层。提供了用户接口和服务支持。</p>
+</li>
+</ol>
+<h3 id="2-4-TCP-IP-协议族"><a href="#2-4-TCP-IP-协议族" class="headerlink" title="2.4 TCP/IP 协议族"></a>2.4 TCP/IP 协议族</h3><p>TCP/IP协议族出现在OSI模型之前，并在现在被广泛应用。TCP/IP协议族分为四层：主机到网络层，互联网层，传输层，应用层。尽管其与OSI模型有着很大的不同，我们仍可以粗略将其对应起来，主机到网络层对应OSI模型中的物理层到数据链路层，互联网层对应着网络层，传输层对应传输层，而应用层对应其余的三层。TCP/IP协议由多个协议组成，每个协议之间不一定是相互依存的关系。这意味着我们可以根据特定的功能选择特定的协议。</p>
+<p>TCP/IP协议的不同层包含的协议如下：</p>
+<ol>
+<li><p>物理层和数据链路层：TCP/IP协议支持所有物理层和数据链路协议，其本身不定义任何协议。</p>
+</li>
+<li><p>网络层：</p>
+<p>1、**网际协议(IP-Internetworking Protocol)**。IP协议提供不可靠，无连接的传输服务。其采用尽力传输。尽力指IP协议不提供差错检查与跟踪。这种简单的传输方式使得其在某些情况下能高效率完成任务。</p>
+<p>2、**地址解析协议(ARP-Address Revolution Protocol)**。ARP协议将逻辑地址与物理地址联系起来，其用于在已知逻辑地址的情况下寻找物理地址。</p>
+<p>3、**逆地址解析协议(RARP-Reverse Address Revolution Protocol)**。RARP协议用于仅知道物理地址的情况下寻址逻辑地址。如一台第一次连接到网络上的计算机就要使用这个协议来获取逻辑地址。</p>
+<p>4、**因特网控制报文协议(ICMP-Internet Control Message Protocol)**。ICMP是由主机和网关所使用的一种机制，用来向发送方通知数据报发生的问题。</p>
+<p>5、**因特网组报文协议(IGMP-Internet Group Message Protocol)**。用于将一个报文同时发给一组接收者。</p>
+</li>
+<li><p>传输层：</p>
+<p>1、**用户数据报协议(UDP-User Datagram Protocol)**是一个较为简单的一个进程到进程的协议。其仅将端口号、校验和差错控制及信息长度添加到数据中。</p>
+<p>2、**传输控制协议(TCP-Transmission Control Protocol)**。为应用程序提供了完整的数据传输服务，是一个可靠的流传输协议。</p>
+<p>3、**流控制传输协议(SCTP-Stream Control Transmission Protocol)**。结合UDP与TCP的一个协议。</p>
+</li>
+<li><p>应用层：暂略，包含多个协议。</p>
+</li>
+</ol>
+<h3 id="2-5-寻址"><a href="#2-5-寻址" class="headerlink" title="2.5 寻址"></a>2.5 寻址</h3><p>采用TCP/IP协议的互联网使用四层地址：<strong>物理地址(physical address)**，</strong>逻辑地址(IP address)<strong>，</strong>端口地址(port address)<strong>，</strong>专用地址(specific address)**。四个地址分别对应TCP/IP协议中的四个层。四个地址的功能如下：</p>
+<ol>
+<li>物理地址。物理地址在LAN和WAN中使用，通常使用以太网来连接。以太网使用6字节48位的物理地址，这也被称为MAC地址。物理地址是固定的，在每台设备的网卡上都有一个固定的物理地址。物理地址位于数据链路层的传输中，是最低级的地址。MAC地址的表示形式用形如$07:01:02:01:2C:4B$这样的用冒号分隔的12个十六进制数来表示。数据链路协议中，目的地址在前，源地址在后。</li>
+<li>逻辑地址。逻辑地址用来实现全世界通信。目前，对于IPv4协议来说，IP地址由32位组成，连接至互联网的每一台机器都有着不同的IP地址。但是显然，$2^{32}$这个数字小于全世界连接至互联网的设备，在以后的章节可以看到，我们将采取特殊的方式，使得多个设备可以共享同一IP地址。同时，新的IP协议IPv6也可以解决IP地址数目不够的问题。在多数协议中，IP地址的源地址在前，目的地址在后，与数据链路协议正好相反。在跳到跳的传输中，逻辑地址不变，物理地址改变，以此来寻找下一跳的位置。</li>
+<li>端口地址。端口对应进程，通过将数据发送至不同的端口来实现将数据发送到不同的进程。端口地址有16位。同样的，跳到跳传输过程中，端口地址与逻辑地址一样保持不变。</li>
+<li>专有地址。如电邮的地址以及URL这一类地址。</li>
+</ol>
+<h2 id="第三章：数据与信号"><a href="#第三章：数据与信号" class="headerlink" title="第三章：数据与信号"></a>第三章：数据与信号</h2><h3 id="3-1-模拟与数字"><a href="#3-1-模拟与数字" class="headerlink" title="3.1 模拟与数字"></a>3.1 模拟与数字</h3><p>模拟指连续的，数字指离散的。信号可以是连续或者离散的，数据也可以是连续或者离散的。</p>
+<h3 id="3-2-周期模拟信号"><a href="#3-2-周期模拟信号" class="headerlink" title="3.2 周期模拟信号"></a>3.2 周期模拟信号</h3><p>具体内容</p>
+<p>移步信号与系统与高中函数。可以确定的是，复合信号由许多正弦波构成。当信号是周期的，复合信号由有限个正弦波构成，频率为$f$的正弦波和复合信号的频率一样，我们称之为<strong>第一频率</strong>。而后频率为$f,2f…$，分别被称为第二频率，第三频率……</p>
+<p>复合信号包含的频率范围称为<strong>带宽</strong>，带宽是上限频率与下限频率的差值。</p>
+<h3 id="3-3-数字信号"><a href="#3-3-数字信号" class="headerlink" title="3.3 数字信号"></a>3.3 数字信号</h3><p>数字信号可以用高电平代表$1$，低电平代表$0$。我们也可以用多个电位代表多个电平，这样就可以传输更多的信息。如果有$2$个电平，我们一次可以发送$1$bit的数据，如果有4个电平，我们一次可以发送$2bit$的数据。如果有$2^n$个电平，一次就可以发送$n$bit的数据。</p>
+<p><strong>比特率</strong>：比特率表示每秒发送的位数，单位为$bps$。传输信道的带宽与比特率成正比。</p>
+<p><strong>位长</strong>：位长=传播速度$\times$传播时间。</p>
+<p>基于傅里叶分析(详见信号与系统)，数字信号也是复合信号。如果其是周期的，那么复合信号由无数个离散的正弦波组成，如果其是非周期的，那么复合信号由无数个连续的正弦波组成。</p>
+<p>为了在有限带宽传输数字信号，我们需要找到传输信号所需要的正弦波。如果我们在一个有限带宽的低通信号中传输，对于一个比特率为$N$的信号，正弦波中的最大频率至少为$\frac N 2$，此时信道的带宽为$\frac N 2$。这个大致近似的最大频率我们称之为第一谐波频率，我们可以通过增大带宽来达到更好的模拟效果，如采用第三谐波，第五谐波等。此时信道的带宽分别为$\frac32N$，$\frac52N$。</p>
+<h3 id="3-4-传输减损"><a href="#3-4-传输减损" class="headerlink" title="3.4 传输减损"></a>3.4 传输减损</h3><p>信号在传输过程中会因为各种原因导致接收方与发送方的信号存在偏差。</p>
+<p>常见的三种类型分别为：</p>
+<ol>
+<li><p><strong>衰减</strong>：因为能量的传输会有损失，在传输过程中信号会越来越弱。</p>
+<p>为了说明衰减的程度，我们引入<strong>分贝</strong>的概念。分贝的公式为$$dB=10log_{10}\frac{P_2}{P_1}$$。如果其值为正，说明信号2比信号1要强。</p>
+</li>
+<li><p><strong>失真</strong>：不同成分的信号在传输介质中的传输速度不同，接收方和发送方的信号会存在相位差异。</p>
+</li>
+<li><p><strong>噪声</strong>：因为各种原因使得信号的强度获得额外信号。</p>
+<p><strong>信噪比</strong>：用来描述传输信号中噪声的量，用$SNR$表示。$SNR=\frac{平均信号功率}{平均噪声功率}$</p>
+<p>因为信噪比是两个功率的比值，因此信噪比也可以用分贝来表示。</p>
+</li>
+</ol>
+<h3 id="3-5-信号传输速率"><a href="#3-5-信号传输速率" class="headerlink" title="3.5  信号传输速率"></a>3.5  信号传输速率</h3><p>信号传输速率由三方面决定：</p>
+<ol>
+<li>可用带宽的大小。</li>
+<li>使用的信号电平的个数。</li>
+<li>信道的噪声</li>
+</ol>
+<p>我们有两个公式来描述信号传输的最大速率，用于无噪声信道的<strong>奈奎斯特公式</strong>与用于噪声信道的<strong>香农公式</strong>。</p>
+<p>奈奎斯特公式：$比特率=2\times带宽\times log_2L$。其中L为信号电平的个数。</p>
+<p>香农公式：$通道容量=带宽\times log_2(1+SNR)$。</p>
+<h3 id="3-6-衡量网络性能的参数"><a href="#3-6-衡量网络性能的参数" class="headerlink" title="3.6 衡量网络性能的参数"></a>3.6 衡量网络性能的参数</h3><ol>
+<li>**带宽(Bandwidth)**。带宽一词在不同情况下具有不同的含义，我们既可以用频率来表示带宽，也可以用比特率来表示带宽。两种带宽之间是一个正比关系。</li>
+<li>**吞吐量(Throughput)**。其描述的是实际传输中信号传输的速率，而带宽则是用来描述理论上信号传输的速率。</li>
+<li><strong>延迟(Delay)**。延迟定义了从第一个位被发出到所有位都被接收所需要的时间。延迟由四部分组成：</strong>传播时间Propagation Time)<strong>，</strong>传输时间(Transmission Time)<strong>，</strong>排队时间(Queuing Time)<strong>，</strong>处理时延(Processing Delay)**四部分组成。传播时间指一个位从发出放传输到接收方的时间，传输时间指一个信息完全从接收方发出的时间，排队时间指信息发送的等待时间，处理时延指软硬件处理的时间。</li>
+<li>带宽与延迟的乘积。这决定了在某个传输过程中一个链路上最多有多少位在运输。</li>
+<li>抖动。信号的某特定时刻相对于其理想时间位置上的短期偏离称为抖动。在传输类似音频数据与视频的时候，数据先后到达的时间非常重要。</li>
+</ol>
+<h2 id="第四章：-数字传输"><a href="#第四章：-数字传输" class="headerlink" title="第四章： 数字传输"></a>第四章： 数字传输</h2><h3 id="4-1-数字到数字"><a href="#4-1-数字到数字" class="headerlink" title="4.1 数字到数字"></a>4.1 数字到数字</h3><p>信号是数据的载体，在我们传输的过程中我们发送信号，信号的排列代表了数据的信息。发送数据的速率我们有时称为比特率，而发送信号的速率我们有时称为**波特率(baud rate)**。</p>
+<p>我们定义比率$r$为每个信号元素承载的数据元素的数量。</p>
+<p><strong>数据速率与信号速率的关系式</strong>如下：$S=c\times N \times \frac 1r baud$。其中$N$是数据速率，$c$是情形因子，用来描述数据中01的出现的情况(全0或全1或不同情况的01交替，数据与信号的对应关系是不同的)。一般情形下，亦为平均情况下，$c=\frac 12$，通常只关心一般情况。</p>
+<p><strong>最小带宽与数据速率的关系式</strong>如下：$B_{min}=c\times N\times \frac1r$</p>
+<p><strong>基线</strong>：接收方接收到信号功率的平均值，接收方以此为基准来判断信号的值。</p>
+<p><strong>基线偏移</strong>：一串$0$或$1$将使得基线的值发生偏移，从而导致接收方不能正确的解码。</p>
+<p><strong>直流成分</strong>：当信号中有一串连续的$0$或$1$时，在传输过程中会出现一段较长的直流成分。对于这个直流成分来说，其频率较低，会对不允许通过低频的系统或使用电子耦合的系统带来问题。</p>
+<p><strong>同步</strong>：接收方与发送方的数据的每一位的时间间隔必须一致。</p>
+<p><strong>自同步</strong>：数据采用特殊的编码形式，如在每一位中间都加入一个跳变，使得接收方可以根据这个跳变来同步时钟。</p>
+<p><strong>差错检测</strong>：数据可以通过增加冗余位来实现检测数据来实现检错或纠错的效果。</p>
+<p><strong>抗噪声</strong>：数据编码形式抵抗噪声和干扰的能力。</p>
+<p><strong>复杂性</strong>，系统实现的难度。如加大信号电平的个数会提升系统实现的难度。</p>
+<p>各种编码方案如下：</p>
+<ol>
+<li><p>**不归零(NRZ-not return to zero)**方案。信号高电平为$1$，零点平为$0$。信号在跳变的过程中不会经过零点平。这样导致功耗增大，该方案不用于数据通信中。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/NRZ.png" alt="NRZ"></p>
+</li>
+<li><p><strong>极性NRZ</strong>方案。极性NRZ方案有两种，分别式<strong>NRZ-L(NRZ-Level)**与，</strong>NRZ-I(NRZ-Invert)**。两者都用了两个电平。对于NRZ-L，低电平表示$1$，高电平表示$0$。对于NRZ-I，如果信号为$1$，则当前信号和之前的信号比发生跳变，如果信号为$0$，则当前信号和之前信号具有同样的电平。两者都有可能发生基线偏移。NRZ-I只会在信号全$0$时发生这种情况，而NRZ-L会在信号全$0$或全$1$的时候发生这种情况。对于自同步能力来说，也是一样的情况。NRZ-I只会在全$0$的序列中丧失自同步能力。两者都含有直流成分，都有着$\frac N2baud$的平均速率。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/NRZ-L%20and%20NRZ-I.png" alt="NRZ-L and NRZ-I"></p>
+</li>
+<li><p><strong>曼彻斯特(Manchester)**方案。位的持续时间被分为两部分，前一部分使用一个电平，后一个时间使用另一个电平。另外的，还存在</strong>差分曼彻斯特(Differential Manchester)**，差分曼彻斯特方案中，如果正在表示信号为$0$，那么我们将在正在表示的位与前一位的交替处迎来一次跳变，如果信号为$1$，则不会发生跳变。因为每一位都会至少发生一次跳变，因此这类编码方案具有自同步能力，信号中没有直流成分，不会发生基线偏移。其缺点是其传输相同的数据所需要的信号是NRZ方案的两倍（因为其在每一个位都会迎来一次跳变，此时$r=\frac12$。其传输的平均速率为$Nbaud$。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E6%9B%BC%E5%BD%BB%E6%96%AF%E7%89%B9.png" alt="Manchester"></p>
+</li>
+<li><p>**AMI(alternate mark inversion)与伪三元(pseudoternary)**方案。该方案是对NRZ的改进。对于AMI来说，$0$编码为零电平，$1$交替编码为高电平和低电平。对于伪三元方案，则是将$1$编码为零电平，将$0$交替编码为高电平和低电平。这样处理解决了直流问题。对于AMI来说，当信号全$0$时，会出现同步问题。其传输速率与NRZ的速率相同。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/AMI%E7%BC%96%E7%A0%81.png" alt="AMI"></p>
+</li>
+<li><p>**多电平(Multilevel)**方案。通过用更多的信号元素来编码数据元素，我们可以得到冗余的组合，这些组合可以用来避免基线偏移，进行同步，以及差错检测。我们使用$mBnL$来区分编码类型。其中$m$代表的是数据元素的个数，$n$代表信号元素的个数，$L$代表信号元素的电平个数。$L$一般用字母替换，$B$为二元，$T$为三元，$Q$为四元。$L^n-2^m$就是冗余出来的组合个数。</p>
+<p><strong>2B1Q</strong>方案。因为此时一个2个数据元素用一个信号元素表示，意味着其发送速率可以比NRZ快一倍。其信号传输的平均速率为$\frac 14baud$。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/2B1Q.png" alt="2B1Q"></p>
+</li>
+<li><p>**4D-PAM(four dimensional five-level pulse amplitude)**方案。4D指的是信号同时在4个通道上传输。该方案有5个电平，但是零电平只用来进行差错检测。也就是说，一个信号可以表示2个数据。</p>
+</li>
+<li><p><strong>MLT-3</strong>，信号为0时保持原状态，如果是1，则发生跳变。如果我们把信号中0对应编码的电平移除，序列将在高电平、零点平，低电平之间上下摆动。</p>
+</li>
+<li><p>**块编码(block coding)**。记作$mB/nB$。斜线用于与多电平编码区分。其用处是增加冗余位。与多电平增加天平不同，块编码在数据中每隔$m$位将数据抽出，用特定的方式加入$n-m$个位，构成一个$n$位的新块。应用块编码我们获得了冗余位，这些冗余位可以被用来进行差错检测。也可以通过在特定序列中插入特定位来解决在类似之前NRZ-I中出现全0编码时造成的无法同步以及直流信号。</p>
+</li>
+<li><p>**扰动(Scrambling)**。在AMI编码中，非0信号在高零低三个电平之间跳动。当信号全0时，我们会面临同步问题。如果我们在遇到一段0的时候进行特殊的置换处理，我们就可以解决同步问题。接下来介绍的两个编码方案中，V代表违反AMI编码规则，B代表与AMI规则相一致的非零电平。</p>
+<p><strong>B8ZS(bipolar with 8-zero substitution</strong>方案将连续的8个0替换为000VB0VB。</p>
+<p>**HDB3(high-destiny bipolar 3-zero HDB3)**方案将连续的4个0替换为000V或B00V，每次置换选择不同的方案使得置换后的非零脉冲为偶数。如果上次置换后到现在，非零脉冲数为奇数，那么我们选择000V，否则我们选择B00V。</p>
+</li>
+</ol>
+<h3 id="4-2-模拟到数字"><a href="#4-2-模拟到数字" class="headerlink" title="4.2 模拟到数字"></a>4.2 模拟到数字</h3><p>数字信号在传输等方面优于模拟信号，所以我要通过一些办法将模拟信号转换为数字信号。</p>
+<p>把模拟信号转换为数字信号的通用形式为**脉冲码调制(PCM-pulse code modulation)**。PCM有三个工作过程，采样，量化，编码。</p>
+<p>**采样(sampling)**，详见信号与系统。使用脉冲信号对模拟信号进行取样并记录。根据奈奎斯特采样定理，采样速率必须是信号所含频率的2倍以上。</p>
+<p><strong>量化(quantization)**，我们通过取样得到的数据需要被离散化。我们可以根据幅度进行不同的划分，划分的个数称之为</strong>量化等级(quantization level)<strong>，量化的等级越高，划分的个数越多，离散后的结果就越接近我们原始的值。因为在离散的过程中我们得到的是一个近似值，产生的误差我们称之为</strong>量化误差(quantization error)**。量化误差改变了信号的信噪比。</p>
+<p>量化的位数$n$与量化等级$L$有如下关系：$L=2^n$</p>
+<p>量化误差的带来的信噪比公式为：$SDR_{dB}=6.02n+1.76dB$</p>
+<p>**编码(encoding)**，每一次采样，我们都能得到个数为$n$的一个数据，我们将数据编码并传输。其比特率公式为$比特率=采样速率\times 每个样本位数$。</p>
+<p>在接收方收到PCM编码的数字信号后，通过低通滤波器等器件，可以将信号还原，详见信号与系统。</p>
+<p><strong>delta调制(DM)</strong></p>
+<p>DM调制将当前采样的结果与前一个采样的结果做对比，如果增大则输出1，否则输出0。解调器通过梯形生成器和延迟单元来生成模拟信号，在经过低通滤波器平滑，得到信号。</p>
+<h3 id="4-3-传输模式"><a href="#4-3-传输模式" class="headerlink" title="4.3 传输模式"></a>4.3 传输模式</h3><p>传输分为<strong>并行传输(Parallel Transmission)**与</strong>串行传输(Serial Transmission)**两种。</p>
+<p>并行传输时，使用n条线路同时进行传输。相比于串行传输，其有着更高的价格与更快的传输速度。</p>
+<p>串行传输又可以分为<strong>异步(Asynchronous)**与</strong>同步(Synchronous)**两种。</p>
+<p>异步传输时，每次传输数据的间隔不定，传输中信号的时序不重要。为了知道什么时候开始什么时候结束，传输信号的字节前后会增加开始位与结束位。传输在字节内是同步的，在字节外无需同步。</p>
+<p>同步传输时，数据被划分为更长的帧。每一帧由若干个字节组成。在帧内的字节连续，没有间隙。在帧之间可以存在间隙。在帧内是同步的。同步传输的一个好处是速度快，无需添加开始位与结束位。</p>
+<p>在实时音频和视频中，帧间的不等延迟不可接受，整个流必须同步，此时需要**等时传输(isochronous)**技术。</p>
+<h2 id="第五章：模拟传输"><a href="#第五章：模拟传输" class="headerlink" title="第五章：模拟传输"></a>第五章：模拟传输</h2><h3 id="5-1-数字到模拟转换"><a href="#5-1-数字到模拟转换" class="headerlink" title="5.1 数字到模拟转换"></a>5.1 数字到模拟转换</h3><p>数字信号在传输中有很多优点，如可以加密，受到噪声的影响更小。但是我们传输数字信号需要低通通道。当低通通道不可用的时候，我们就只能将数字信号转换为模拟信号从而在带通通道传输，转换的过程称为调制。根据改变正弦波的特性的不同，我们有三种调制的方法：<strong>幅移键控(ASK-amplitude shift keying)**，</strong>频移键控 (FSK-frequency shift keying)<strong>，</strong>相移键控(PSK-phase shift keying)<strong>。我们可以将幅移键控和相移键控结合起来得到第四种更好的方法</strong>正交振幅调制(QAM-quadrature amplitude modulation)**</p>
+<p>类似的，在模拟信号传输中，我们也同样有比特率，波特率，带宽等概念，并且这些概念与在数字信号传输中提出的类似，在此不在赘述。</p>
+<p>**载波信号(carrier signal)**，通常为一个频率较高的，用来承载信息信号的基波。通过改变基波信号的特性，我们就可以传输信息，这个过程就是调制。</p>
+<p>二进制ASK(BASK)，我们通过改变基波的振幅来生成信号元素。当数字信号为$0$时，基波的振幅为$0$，当数字信号为$1$时，基波的振幅为我们设定的一个值。其波特率除了与带宽有关以外，还与一个因子$d\in(0,1)$有关，该因子取决于调制与过滤处理，其载波频率位于带宽中间。$B=(1+d)\times S$</p>
+<p>FSK，频移键控通过改变基波的频率来生成信号元素。我们选取多个基波，并把它们移动到不同的频率段上，彼此之间互不冲突。对于FSK来说，基波之间需要有一定的间隔，记作$2\Delta f$。如果我们有$L$个基波那么我们有$B=(1+d)S+(L-1)\times2\Delta f$</p>
+<p>PSK，相移键控通过改变基波的相位来生成信号元素。通过改变基波的相位，我们将得到一系列正交的正弦波，我们通过将它们合成的正弦波来传递信息。相比于FSK，PSK对带宽有着更好的利用，并且相比于ASK判断振幅的方法，PSK判断相位的方法有着更好的抗噪声能力。</p>
+<p>**星座图(constellation diagram)**，用于定位信号元素的振幅和相位。星座图是一个定义在二维上的的图表。可以用极坐标来理解。极角就是相位，极径就是振幅。</p>
+<p>QAM，同时改变基波的振幅与相位，模拟信号将可以承载更多的信息。</p>
+<p>此处省略模拟信号到模拟信号的调制部分。</p>
+<p>小结：为了适应传输要求，适应可使用的带宽，我们将数字信号转换为模拟信号来传输。在转换的过程中，我们用一个系统，向其输入基波与数字信号，根据我们的数字信号来对基波进行振幅，频率，相位的操作，来得到一系列正交的正弦波。将这些正弦波合成并发送，接收方接受信号后通过解调的过程将其复原，我们就能传送信息。</p>
+<h2 id="第六章：带宽利用"><a href="#第六章：带宽利用" class="headerlink" title="第六章：带宽利用"></a>第六章：带宽利用</h2><h3 id="5-1-带宽复用"><a href="#5-1-带宽复用" class="headerlink" title="5.1 带宽复用"></a>5.1 带宽复用</h3><p>带宽是传输过程中重要的资源，而在某些场合中，输入到链路中的数据不足以完全利用整个带宽，因此我们可以采用多种技术来将不同的数据放在同一个链路上进行传输，这样可以起到充分利用带宽的作用。</p>
+<p>在带宽复用中，多个数据输入至<strong>复用器(MUX, multiplexer)**中，复用器将数据合并，一起通过链路发送至</strong>分离器(DEMUX, demultiplexer)**中。分离器再将数据分离成最开始的多个数据，分别进行传输。</p>
+<p>我们有多种带宽复用的方式，基本的三种技术分别是：<strong>频分复用(FDM, frequency-division multiplexing)**，</strong>波分复用(WDM, wave-division multiplexing)<strong>，</strong>时分复用(TDM, time-division multiplexing)**。</p>
+<p>频分复用，FDM。我们可以对不同的输入用不同频率的载波信号进行调制，完成传输后，使用滤波器将信号进行分离。数据在这些不同频率的载波信号上进行传输，在不同频率上形成了一个个通道。不同的通道之间需要有一定的频率间隔来防止冲突。我们认为FDM是模拟复用技术（对模拟信号进行复用）。如果我们要对数字信号应用此技术，我们可以先使用第五章中的方法，将数字信号转换为模拟信号后应用FDM。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/FDM.png" alt="FDM"></p>
+<p>电话公司为了提升基础设施的效率，会把低带宽的线路复用到高带宽的线路上。传统的方法是使用FDM来进行，一次构建模拟载波系统。AT&amp;T的模拟层次结构如下图所示，在超群层次及其上层的层次中，信号的复用需要添加防护频带。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E6%A8%A1%E6%8B%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.png"></p>
+<p>波分复用，WDM。WDM应用与光信号的传输中，WDM的原理与频分复用相同，因为频率与波长本身就存在着固定的转化关系（速度=频率×波长）。因为光波的频率极大，所以我们用波长来表示。WDM是合并多个光信号的模拟多路复用技术，其想法可以简单的通过棱镜来解释。据物理中所学的知识，不同频率的光波在经过棱镜时有不同的折射角，通过选取合理的角度和入射位置，从不同位置沿不同方向射入的光便可合并成同一条直线。同时，在分离器中，我们同样可以使用棱镜，对复用器的合并过程完成类似的逆向操作（光路可逆原理）。</p>
+<p>时分复用，TDM。TDM是数字复用技术。类似的，为了对模拟信号应用TDM，我们可以将模拟信号取样得到数字信号，再对其应用TDM。在FDM中，多个通道在空间上共享。而在TDM中，多个信号在时间上共享。多个输入轮流向链路输入数据。TDM方案可以被分为两种，<strong>同步的时分复用(synchronous TDM)**，</strong>统计的时分复用(statistical TDM)**。</p>
+<p>首先要阐述两个概念，<strong>时隙(slot)**与</strong>帧(frame)**，时隙是数据传输的一个单元，多个时隙合并在一起构成了帧。</p>
+<p>在同步TDM中，一个帧由各路输出的一个时隙构成。如果复用器接受$n$个输入，那么一个帧就有$n$个时隙。同步TDM从每个输入中依次接受一个时隙的数据，并将其组合成帧，连续发送。因为帧是连续发送的，因此我们需要在每个帧的头部增加一定位数的同步位，依次来完成发送方和接收方的同步。同步TDM可以看作两个快速旋转的开关，一个位于复用一侧，另一个位于分离一侧。当开关旋转到某一输入或输出时，一个时隙的数据就会被导入或导出。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/interleaving.png" alt="TDM"></p>
+<p>空时隙。在同步TDM中，因为每个输入在一个帧内所占用的时隙是相同的。而链路的输入不一定是连续不断的。因此，当某个输入没有数据发送时，在这个对应的帧中就会有一个空时隙。这会造成链路的浪费。</p>
+<p>TDM的数据速率管理。当输入数据速率不同时，为了使用TDM，我们必须将其速度调至一致。有三种方法来处理这个问题：<strong>多级复用(multilevel multiplexing)**，</strong>多时隙分配(multiple-slot allocation)<strong>，</strong>脉冲填充(pulse stuffing)**。多级复用：先将多个速率较低的信号进行复用，得到速率更高的传输链路，再将其进行合并。多时隙分配：将速率较高的信号进行分离，得到多个速率较低的传输链路，再对这些链路进行合并。脉冲填充：对链路填充数据，使该链路的速率与其他的速率同步。</p>
+<p>与FDM被用于模拟信号系统一样，TDM被应用于数字信号服务。也具有类似的数字层次结构。</p>
+<p>统计时分复用：为了解决同步TDM中空时隙的问题，统计时分复用应运而生。在同步TDM中，输出时隙全部由数据占用。在统计TDM中，我们抛弃掉同步TDM中固定的输入顺序。我们随机选择需要链路进行输入。此时，为了让接受方知道该信号将要被发送到哪一个输出，统计TDM的每一帧除了携带数据，还要携带目的地址。此时数据时按帧级传送的，因此不需要同步位来进行帧的同步。同时，因为我们需要在信号中加入目的地址，每一帧数据的长度如果过小，则会导致链路的大量资源被用于传输地址，效率会降低。</p>
+<h3 id="5-2-扩频"><a href="#5-2-扩频" class="headerlink" title="5.2 扩频"></a>5.2 扩频</h3><p>首先给出扩频的应用范围以及作用：扩频是为无线应用设计的。通过扩频，我们可以提升传输的抗干扰能力，提供加密服务，降低信号的功率。</p>
+<p>之后我们来看一下什么是扩频。扩频，顾名思义就是将频率扩大，用更大的带宽来传输原有的数据。这里介绍<strong>跳频扩频(FHSS)**与</strong>直接序列扩频**，并在后面从感性上简单理解为什么要扩频。</p>
+<p>跳频扩频。我们用源信号调制出$M$个不同的载波频率。我们通过伪随机代码生成器在每个**跳周期(hopping)**来生成$k$个位，通过这$k$个位代表的数字，来在这个大小为$M$频率表中选取我们的载波频率。据此，我们就将我们原本的数据分散到M个不同的载波上。因为我们的$k$是按照规律随机生成的，如果监听者没有拿到相应的程序，其无法知道下一跳的$k$值，无法适应下一跳变，依次起到加密的作用。同时，因为传输的频段变宽了，如果噪声发生在某一特定频段，其也仅仅只会影响到某一使用这个频段的跳。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/FHSS.png" alt="FHSS"></p>
+<p>跳频扩频的带宽共享。因为每次一个站点在一个跳周期只用了一个频率，那么其他站点就可以使用剩下的$M-1$个频率来进行传输，通过适合的调制技术，我们就可以完成跳频扩频的带宽共享。</p>
+<p>直接序列扩频。在直接序列扩频中，每个数据位用扩展编码的$n$位代替。如果入侵者不知道该编码，就无法知道其具体的信息。以此起到保密的用处。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/DSSS.png" alt="DSSS"></p>
+<p>根据香农公式，带宽越大，能容忍的噪声就越大。直观的可以来理解为原本的噪声被分摊到不同的频段中，使得每个频段的噪声功率变低，信噪比变大。（本段话全为个人理解，极大概率出错）。</p>
+<h2 id="第七章-：传输介质"><a href="#第七章-：传输介质" class="headerlink" title="第七章 ：传输介质"></a>第七章 ：传输介质</h2><p>传输介质在广义上定义为从源端传送信息到目的端的任何介质，在数据传输中，传输介质通常是电缆，光纤，或者一个空间。</p>
+<h3 id="7-1-有向介质"><a href="#7-1-有向介质" class="headerlink" title="7.1 有向介质"></a>7.1 有向介质</h3><p><strong>有向介质(guided media)**，指那些在设备之间提供通路的实体介质。有向介质主要有：</strong>双绞线(twisted-pair cable)<strong>，</strong>同轴电缆(coaxial cable)<strong>，</strong>光缆(fiber-optic cable)**。</p>
+<p><strong>双绞线</strong>由两根导线（通常是铜线，因铜的导电性能好， 发热少）绞合形成。线路中的一条信号用于传输数据，另一条信号用作接地参考点，两条信号的电平差就是所传输的信号。</p>
+<p>双绞线之所以采用绞合而不是平行的原因：当有噪声干扰的时候，如果线缆平行，则其中一条线缆会因离噪声源更近而受到更多的干扰，使得两线电平差发生变化。而如果采取绞合的形式，则可以最大的减少这种情况的发生。单位长度线缆的绞合数越高，线缆的质量越高（抗干扰越强）。</p>
+<p>通信中常用的双绞线是<strong>非屏蔽双绞线(unshielded twisted-pair, UTP)**，IBM公司自己生产了自己使用的双绞线类型</strong>屏蔽双绞线(shielded twisted-pair, STP)**。STP相比UTP而言，在带有绝缘层的导体与最外层的塑料封套之间有一层金属薄片或织成网状的包覆材料。这使得线缆有着更强的抗噪声与串扰的能力。但是相对的，其重量更大，造价也更为昂贵。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/UTP-STP.png" alt="UTP-STP"></p>
+<p>电子工业协会将UTP分为七类标准</p>
+<p>鉴于书（第四版）的内容已过于陈旧，其所描述的线缆速率普遍低于现在的标准，现<del>援引</del>维基百科。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%8F%8C%E7%BB%9E%E7%BA%BF%E5%88%86%E7%B1%BB.png" alt="UTP分类"></p>
+<p>我们现在日常所用的网线多为5类线或超5类线。最常用的UTP连接器是RJ45，也就是我们平时的网线接口。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/RJ45.png" alt="RJ45"></p>
+<p>测试双绞线的性能通常使用频率和距离的衰减曲线。衰减越大，性能越差。</p>
+<p><strong>同轴电缆</strong>与双绞线相比可以传输更高频率的信号。同轴电缆使用一根位于中央的实心或者多股绞合的核心金属丝导体。导体封装在绝缘护套中，然后再封装在金属组成的外部导体中。外部导体既可以用来屏蔽噪声，也可以作为第二导体。随后再在外部导体的外面套上绝缘护套和塑料外套进行保护。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%90%8C%E8%BD%B4%E7%94%B5%E7%BC%86.png" alt="同轴电缆"></p>
+<p>同轴电缆，即将退出它的历史舞台。在生活中，你只能在电视或者一些古老器件上见到它们。受限于已有的设施建设，在中国，仍有大量的电视采用同轴线缆而不是光纤来传输数据。但随着时代的发展，同轴电缆将会从我们的生活中淡去。</p>
+<p>光缆。由玻璃或塑料构成，用于传输光信号。光缆支持两种模式传输（多模和单模）。而多模又分为阶跃折射率模式和渐变折射率模式。三者的传播方式如下。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%85%89%E7%BA%A4%E4%BC%A0%E6%92%AD%E6%96%B9%E5%BC%8F.png" alt="光纤传播方式"></p>
+<p>光缆由玻璃或塑料芯来承担传输光信号的任务，其外层是塑料缓冲层以及用于增加强度的纤维材料。最外层再用胶套封装。光缆有三种连接器，<strong>用户通道(subscriber channel, SC)**，用于有线电视中。</strong>直插式**(straight-tip, ST)用于网络设备中，MT-RJ则是一种新型连接器，其与RJ45的规格相同。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%85%89%E7%BA%A4%E8%BF%9E%E6%8E%A5%E5%99%A8.png" alt="光缆连接器"></p>
+<p>光缆的优点：</p>
+<ol>
+<li>高带宽。光缆支持的带宽远超UTP与同轴电缆，目前，光缆得数据速率与带宽利用受到得不是介质的限制。其受限于信号生成与接受技术。</li>
+<li>信号衰减小。光纤传输距离明显高于其他介质，这使得其在传输的过程中不需要很多中继器。</li>
+<li>无电磁干扰。因为传输的是光信号，电磁噪声不能影响光缆。</li>
+<li>抗腐蚀。玻璃更抗腐蚀。</li>
+<li>重量轻。显然，光缆又细，平均密度又小。</li>
+<li>不易被窃听。其他有向介质的铜缆会形成天线，易于被窃听。</li>
+</ol>
+<p>光缆的缺点：</p>
+<ol>
+<li>安装维护较难。光缆的安装维护需要专门技能，作为一门较新的技术，掌握技能的人力资源并没有特别容易就可以获得。</li>
+<li>单向性。光的传播是单向的，若要进行双向通信需要铺设两根光纤。</li>
+<li>成本。光纤成本相对较高。</li>
+</ol>
+<h3 id="7-2-无线通信"><a href="#7-2-无线通信" class="headerlink" title="7.2 无线通信"></a>7.2 无线通信</h3><p><strong>无向介质(unguided media)</strong> 不使用物理介质来进行传播，这种类型的通信通常指无线通信。无向信号的传播方法有：地表传播，天空传播和视线传播。</p>
+<p><strong>地表传播(ground propagation)**，较低频率的无线电波通过大气层的最低部分紧绕地球传播，传输距离取决于信号功率的大小。</strong>天空传播(sky propagation)<strong>较高频率的无线电波向上传播到电离层，从电离层再反射回地球。这种类型的传输可以使用较低的输出功率传输更远的距离。</strong>视线传播(line-of-sight)**，非常高频率的信号沿直线直接在天线之间传输。天线必须是有向，正对，且足够高或足够近来克服地球曲面的影响。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E6%97%A0%E7%BA%BF%E4%BC%A0%E6%92%AD%E6%96%B9%E5%BC%8F.png" alt="无线传播"></p>
+<p>在电磁频谱种，其每个波段都受到政府的管制。电磁波段是不可再生的珍贵资源。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E6%97%A0%E7%BA%BF%E6%B3%A2%E6%AE%B5.png" alt="波段"></p>
+<h2 id="第八章：交换"><a href="#第八章：交换" class="headerlink" title="第八章：交换"></a>第八章：交换</h2><p>暂无</p>
+<h2 id="第九章：-使用电话网和有线电视网进行数据传输"><a href="#第九章：-使用电话网和有线电视网进行数据传输" class="headerlink" title="第九章： 使用电话网和有线电视网进行数据传输"></a>第九章： 使用电话网和有线电视网进行数据传输</h2><p>暂无</p>
+<h2 id="第十章：检错与纠错"><a href="#第十章：检错与纠错" class="headerlink" title="第十章：检错与纠错"></a>第十章：检错与纠错</h2><h3 id="10-1-引言"><a href="#10-1-引言" class="headerlink" title="10.1 引言"></a>10.1 引言</h3><p>数据在传输的过程中会因为不可预测的外部环境而对信号传输发生<strong>干扰(interference)**。这些干扰使得信号传输的接收方获得的数据与发送方发出的数据存在差异。为了检测或纠正这些错误，我们便有了</strong>检错(error detection)<strong>与</strong>纠错(error correction)**的概念。</p>
+<p><strong>单个位差错(single-bit error)**指在给定的数据单元中，仅有一个位发生变化。通常，单个位差错发生的概率比较小。因噪声或干扰的持续时间通常长于一个位传输的时间。</strong>突发性差错(burst error)**指在给定的数据单元中，有数个位发生变化。其比单个位差错更容易发生。</p>
+<p>**冗余(redundancy)**，通过发送额外的位，我们就能在传输中传递额外的信息。我们便可以用这些信息来进行检错与纠错。</p>
+<p>有两种主要的纠错方法。1：<strong>向前纠错(forward error correction)**，指接收方通过使用冗余位来推断出没有错误的报文的一种方法。2：</strong>重传(retransmission)**，接收方直接要求发送方再次发送一遍数据，直到接收方认为该数据没有错误为止。</p>
+<p><strong>编码(coding)**，为了准确的检测与纠错，编码的设计必须足够精巧。这里介绍简单的</strong>块编码(block coding)**。</p>
+<h3 id="10-2-块编码"><a href="#10-2-块编码" class="headerlink" title="10.2 块编码"></a>10.2 块编码</h3><p>在块编码中，报文被划分成块，每个块有$k$位，称为<strong>数据字(dataword)**，并增加$r$位冗余位构成总长度为$n=k+r$的新块。这个新块被称为</strong>码字(codeword)**。$2^n-2^k$是不用于数据传输的码字，我们用这多余的信息来进行检错与纠错。</p>
+<p><strong>汉明距离(Hamming distance)**是在差错控制编码里的一个核心概念。两个相同长度的码字的汉明距离是两个码字中对应位不同的数量，也就是两个码字的对应位的亦或和。据此，我们可以定义编码中的</strong>最小汉明距离(minimum Hamming distance)**。最小汉明距离定义为在一组编码中，所有合法码字之间汉明距离的最小值。</p>
+<p>最小汉明距离告诉了我们编码中最相似的（位数相同个数最多的）两个码字之间不同位的个数。当干扰发生时，如果干扰影响到的位的个数小于最小汉明距离，那么干扰便一定不会将这个码字转换为另一个码字。也就达到了检错的目的。据此我们可以推出，如果有一个编码的最小汉明距离是$s$，那么其最多可以检测出$s-1$个任意形式的差错。</p>
+<p>同样的，对于纠错而言，我们需要分辨受到干扰的码字究竟属于原先的哪一个码字。我们选取离这个信号的汉明距离最近的一个码字来进行纠错。我们需要让这个值唯一固定。假设发生$t$个差错时，一种临界的情况是受到干扰的码字距离多个码字之间的距离都为$t$。此时这些码字之间的最小汉明距离最大为$2t$。所以，如果我们将最小汉明距离设置为$2t+1$，我们就可以进行最多$t$位的纠错。</p>
+<h3 id="10-3-线性块编码"><a href="#10-3-线性块编码" class="headerlink" title="10.3 线性块编码"></a>10.3 线性块编码</h3><p>目前，几乎所有使用的块编码都属于**线性块编码(linear block code)**的子集。线性块编码的正式定义需要抽象代数理论，故在此不予以给出。一个非正式定义是：在线性块编码中，任何两个属于线性块编码中的有效码字的亦或产生的新码字都是一个新的有效码字。</p>
+<p>设$t$为一个码字中数字$1$的个数，可以证明，线性块编码中的最小汉明距离是编码中非零码字里$t$的最小值。</p>
+<p><strong>简单奇偶校验码(simple parity-check code)**。在这个编码中，我们在$k$位数据字后加$1$位</strong>奇偶位(parity bit)**，得到一个$k+1$位的码字。通过额外添加的这一位，我们使得编码中$1$的个数为偶数（或者规定为奇数）。此时我们的最小汉明距离为$2$。</p>
+<p>**二维奇偶校验(two-dimensional parity check)**。在二维奇偶校验中，数据字按照行列表格形式组织。每隔一定长度的数据字我们将其添加奇偶位后，将其整个码字变为表格中的一行。重复多次后，在最后一行里，我们对当前表格的每一列的数据情况，在最后一行添加对应列的奇偶位。此时，我们可以检出最多$3$位的任意差错并对最多$1$位进行纠错。</p>
+<p>**汉明码(Hamming code)**。汉明码广泛应用于内存和磁盘数据传输的纠错。设计上，汉明码的最小汉明距离$d_{min}=3$，因此，其可以进行任意最多$2$位的检错以及任意$1$位的纠错。如果校验位有$r$位，码字有$n$位。那么我们有如下的汉明不等式：$2^r-1 \ge n$。</p>
+<p>汉明码的编码方式可以按照以下步骤执行。我们将汉明码中的每一位从右向左编号，同时在第$2^t$位上插入奇偶校验位。奇偶校验位负责的位数是任意与该奇偶校验位位数相与为$1$的所有位。以数据位为0111来举例，首先插入校验位，得到011<strong>0</strong>1<strong>00</strong>（粗体为校验位），随后$2^0$位上的校验位检测以下位<strong>0</strong>1<strong>1</strong>0<strong>1</strong>0<strong>0</strong>，进行偶校验，赋值为0。随后$2^1$位上的校验位检测以下位<strong>01</strong>10<strong>10</strong>0，进行偶校验，赋值为0。随后$2^2$位上的校验位检测以下位<strong>0110</strong>100，赋值为0。最后得到的汉明码就是0110100。</p>
+<p>汉明码只能纠正单个错误，这使得直接传输的情况下，面对影响多位的突发差错无能为力。但是我们可以将数据在传输的时候进行拆分，把多个码字拆分成帧，在每一帧中都包含着许多码字的一个汉明码。这样，当发生突发差错的时候，突发差错影响了一个帧的多个位，但是在每个汉明码中实际上之影响了一个位。通过这样的做法，汉明码得以应对影响多个位的突发差错。</p>
+<p>**循环编码(cyclic code)**，在循环编码中，对某一个有效码字进行循环移位，其得到的新的码字依然是另一个有效码字。如将有效码字0100111向左移位，得到1001110，这个新的码字也是一个有效码字。</p>
+<p>一种简单的循环编码是<strong>循环冗余校验码(cyclic redundancy check, CRC</strong>。与汉明不等式类似，CRC中也有相同的关系。同样的，其具体的数学理论知识超出我们需要掌握的范围，在此依旧简单的抛出结论。CRC需要一种叫做**生成多项式(generator polynominal)**的码串，一些简单的码串如10011，1011。以生成多项式为1011，数据位为1001为例，CRC校验位可以按照如下方式生成。将数据位后填$r-1$位的0（$r$是生成多项式的位数），得到1001000。随后将1001000作为被除数，生成多项式作为除数，进行二进制除法。最后得到的余数110就是校验位。对于CRC编码的验证也非常简单，我们只需要将得到的码字用当初生成它的生成多项式除，如果不能整除，那么数据在传输过程中发生了错误。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E9%99%A4%E6%B3%95.png" alt="多项式除法"></p>
+<p><strong>校验和(checksum)**，又是一个即将被时代淘汰的编码方式，CRC正在不断的取代校验和。校验和的概念比较简单。如果我们发送到目的地的数据是$5$个$4$位数字，那么我们将数字相加得到一个和，将这个和用于校验。接收方再将数据相加与校验和比较，如果相等，就认为没有差错。否则，就认为有差错。同时，因为校验和的位数很有可能会大于我们发送数据的位数，因此我们使用</strong>反码(one’s complement)**算法来解决这一问题。在这个算法里，数字以无符号数的形式存在，所有的负数都会被取反。如果这个数字多于$n$位（n位发送数字的位数），我们便把超出的位切割出来，加到右边的位上。如，将数字$21$用$4$位来表示，其二进制位是10101，我们将最左侧超出范围的那一位1加到右侧，即0101+0001，得到0110，也就是6。</p>
+<h2 id="第十一章：数据链路控制"><a href="#第十一章：数据链路控制" class="headerlink" title="第十一章：数据链路控制"></a>第十一章：数据链路控制</h2><h3 id="11-1-成帧"><a href="#11-1-成帧" class="headerlink" title="11.1 成帧"></a>11.1 成帧</h3><p>物理层直接发送的是01位，数据链路层负责将这些01位分组，添加发送方和接受方的物理地址等信息。<strong>成帧(framing)**所做的工作就是将报文分离成这样的组。形成的帧大小长度可以是</strong>固定大小成帧(fixed-size framing)<strong>，也可以是</strong>可变大小成帧(variable-size framing)**。固定大小成帧用于ATM广域网中，在此，我们先关注可变大小成帧。在可变大小成帧中，我们需要规定帧的开始与结束。可能的方式有面向字符，面向位。</p>
+<p><strong>面向字符协议(character-oriented protocol)**，在这个协议中，数据用来自ASCII编码系统的$8$位字符传输。为了将帧分离开，该协议在帧的开始和结束添加了一个$8$位的</strong>标记(flag)<strong>。但是这样会有一个问题，如果我们传输的数据中本身就有这个标记，那么计算机将不能正确的识别帧的开始或结束。为了解决这一问题，我们采取与c语言中转义字符类似的形式。如果在数据中出现了标记字符，我们就在这个字符之前添加一个</strong>转义字符(escape character, ESC**，使用这个协议传输时，接收方会自动将这个字符移除，并把这个字符的下一个字符看作数据而不是帧的开始或结束的标记。然而，面向字符协议的编码系统与现今广泛应用的Unicode系统相互冲突，因此接下来介绍的面向位的协议是大势所趋。</p>
+<p><strong>面向位协议(bit-oriented protocol)**，帧的数据段可以是任何表示数据的01序列，同时为了区分开始和结束，大多数协议都会使用一个特殊的8位模式的标记01111110来作为分隔符。同样的，我们也会遇到和面向字符协议中相同的问题：如果这个分隔符恰好在数据中出现了怎么办。对于这个问题，我们采取</strong>位填充(bit stuffing)**的策略。位填充将在数据中遇到1个0后跟5个1时就在第5个1后面添加一个0的操作。接收方将自动去掉这个0。这样，帧里面的8位标记就不会出现在数据段中。</p>
+<h3 id="11-2-流量控制和差错控制"><a href="#11-2-流量控制和差错控制" class="headerlink" title="11.2 流量控制和差错控制"></a>11.2 流量控制和差错控制</h3><p><strong>流量控制(flow control)**，</strong>差错控制(error control)<strong>被视为数据链路层中最重要的功能，这些功能被视为</strong>数据链路控制(data link control)**。</p>
+<p>数据从发送方发送至接收方，但是发送的速率和接收的速率可能不匹配。如果发送方发送的速率大于接收方处理的速率，发送方发送的数据迟早要将接收方的缓冲区填满。而流量控制就是一系列程序，其用来限制发送方在等到确认之前发送的数据数量。</p>
+<p>数据在传输过程中会有帧的丢失和破坏，在数据链路层中，差错控制通常指差错检测和重传的方法。当数据链路层检测到错误时，就要重传这个错误的帧，这个过程被称为**自动重复请求(automatic repeat request, ARQ)**。</p>
+<h3 id="11-3-协议"><a href="#11-3-协议" class="headerlink" title="11.3 协议"></a>11.3 协议</h3><p>协议的存在使得接收方能理解发送方发送的数据，使得两方能互相沟通完成任务。在这里，我们谈论的协议与现实有所不同。我们认为数据之能单向传输。并且在数据链路层中，存在一些特殊的帧，如<strong>确认帧(acknowledgment, ACK)**，</strong>否定帧(negative acknowledgement, NAK)<strong>，这些帧可以反向传输，以实现数据链路控制。在现实生活的网路中，数据链路协议是双向实现的，数据可以双向流动。在这些协议中，数据链路控制的信息通过</strong>捎带(piggybacking)**包含在数据帧中。</p>
+<h3 id="11-4-无噪声通道"><a href="#11-4-无噪声通道" class="headerlink" title="11.4 无噪声通道"></a>11.4 无噪声通道</h3><p>在无噪声的理想通道下，我们有一个简单的协议<strong>停止等待协议(stop-and-wait protocol</strong>。根据这个协议，当发送方发送一个数据帧后，其必须停止发送，等待接收方发送一个ACK帧来确认收到后，才能继续发送下一个数据帧。这样的设计使得接收方永远不会过载。</p>
+<h3 id="11-5-有噪声通道"><a href="#11-5-有噪声通道" class="headerlink" title="11.5 有噪声通道"></a>11.5 有噪声通道</h3><p>我们将11.4 无噪声通道中的停等协议稍加修改，就可以得到适用于噪声信道的一个简单协议，**停止等待自动重复请求(Stop-and-Wait ARQ)**，在这个协议中，数据需要加上冗余位来进行校验。同时，发送方需要加上一个定时器。每次发送后开始计时。接收方在接收数据以后进行校验，如果数据无误，就发送一个ACK帧给发送方。否则，丢弃数据，不做处理。当发送方收到ACK时，重置定时器的时间，正常发送下一个数据。如果发送方没有收到ACK，当计时器的时间到了以后，发送方便会将之前的帧重新发送一遍。此时，出现这种情况的原因可能有：数据从发送方到接收方的过程中被丢失或损坏，ACK从接收方到发送方的过程中被丢失或损坏。对于第二种情况，接收方需要有能力辨认从发送方发送的这一帧数据是否是之前发送的。因此，我们需要在数据帧中加入一个序号，以此来表明该帧是否是之前已经接收的帧。同样的道理，既然我们在数据帧加入了一个序号，那么我们也需要在确认帧中加入一个确认号，确认号总是告知接收方期待的下一个序列号。</p>
+<p>当通道粗（带宽大）且长（往返延迟长）时，停等ARQ算法是非常低效的。发送方有大量的时间都花费在等待ARQ上了。第三章中提到，**带宽延迟乘积(bandwidth-delay product)**描述了通道里容纳位的个数，我们可以用通道中位实际的个数除以带宽延迟乘积来得到通道的利用率。</p>
+<p><strong>流水线(pipelining)操作</strong>，指在一个任务尚未完成时，同时进行下一个任务的处理。在接下来介绍的协议中，我们将会用到流水线的思想来改进我们的协议，提升协议的效率。</p>
+<p>**滑动窗口(sliding window)**，其模型可以看作一个双端队列。在这里，我们用它来定义发送方和接收方所关心的序列号范围。在发送窗口中，一部分定义了已经发送的帧，另一部分定义了可以被发送的帧。当发送方接收到了一个ACK帧时，说明该帧及以前的数据帧都被接收方所接收，我们便可以将窗口向右滑动一位或多位，可以被发送的帧便向右扩展了。</p>
+<p>**回退N帧自动重发请求(Go-Back-N Automatic Repeat Request)**。在这个协议中，我们使用滑动窗口来帮助我们完成流水线操作。先给定一个相关的结论，如果我们的帧中，序列号的位数位$m$，那么发送窗口的最大值是$2^m-1$。接收窗口的值始终为1。同时，我们在这个协议中设置一个定时器，如果定时器计时完毕，我们将重新发送当前为止在发送窗口的帧并重启计时器。在接收方，任何到达的失序帧或错误帧都将被直接丢弃。现在让我们来看一下为什么发送窗口的最大值是$2^m-1$。考虑临界条件当发送窗口的最大值为$2^m$时，当发送方发送的数据帧接收方全部收到，但是接收方发送的ACK帧全部丢失的情况。此时发送方会将发送窗口中的帧全部重传。而此时，我们会发现一个问题，此刻发送方发送的是一个接收方已经接收的帧，但因为发送窗口的最大值与序列号最大值相同的缘故，此时接收方正好期待的数据帧的序列号与此时发送方发送的帧一样，这会导致接收方错误的将旧有的帧当作新帧来接收。</p>
+<p>当链路中噪声干扰较大时。Go-Back-N ARQ会重复发送大量的帧，在这个过程中，有很多的帧被无意义的重复发送，这降低了链路的效率。**选择性重复ARQ(Selective Repeat ARQ)**的提出就是为了解决此问题。选择重复ARQ中的发送窗口与接收窗口的大小相等，均为$2^{m-1}$。此时接收窗口中的信息分为两部分，一部分为已经接收到，另一部分为等待接收。接收窗口的存在使得接收方可以在一定程度上乱序接收。这里的一定程度指其在数据链路层上可以乱序接收，但是其不能将乱序的数据转交给网络层。当接收窗口左端的帧已收到时，窗口便可右移，扩大接收帧的范围。当接收方收到一个完好的帧时，其会发送一个ACK帧，而当其收到一个破损的帧时，其会发送一遍NAK帧，随后等待发送方重新发送。在此协议中，发送方的每一个发送的帧都要有一个对应的计时器，当计时器到时且未收到ACK帧时，该帧就会被重新发送。现在，让我们来看下发送窗口与接收窗口的大小为何为$2^{m-1}$。与Go-Back-N ARQ类似，考虑临界情况，当其大小大于$2^{m-1}$时，当所有发送方的数据帧均被接收方收到，但所有接收方的ACK帧全部丢失的情况下，此时发送方依次重发数据帧。然而此时发送方发送的前几个帧（具体数目与滑动窗口超出$2^{m-1}$的大小相同）恰恰时接收方正在期待的帧。之后接收方就会将之前的旧帧当作新帧来读取。</p>
+<h3 id="11-6-高级数据链路控制"><a href="#11-6-高级数据链路控制" class="headerlink" title="11.6 高级数据链路控制"></a>11.6 高级数据链路控制</h3><p>**高级数据链路控制(High-level Data Link Control, HDLC)**。HDLC是一种面向位的，实现了上述的ARQ的一个协议。</p>
+<p>HDLC提供了两种通用的传输模式，分别是<strong>正常响应模式(normal response mode， NRM)**与</strong>异步平衡方式(asynchronous balanced mode, ABM)<strong>。在正常相应方式中，存在</strong>主站(primary station)<strong>与</strong>从站(secondary station)**。主站可以发送指令，而从站只能响应从主站发送的命令。而在异步平衡模式中，配置是平衡的，每一个设备作为对等站点同时具有主站和从站的功能。</p>
+<p>HDLC中有三种帧格式，分别为<strong>信息帧(information frames, I-frames)**，</strong>管理帧(supervisory frames, S-frames<strong>，</strong>无编号帧(unnumbered frames, U-frames)**。信息帧用来传输数据信息以及捎带的控制信息，管理帧指发送控制信息，无编号帧用作链路本身的管理。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_field.png" alt="HDLC_field"></p>
+<p>HDLC帧中最多包含六个字段，开始标记字段，地址字段，控制字段，信息字段，校验字段，结束标记字段。</p>
+<ol>
+<li><p>标记字段。标记字段用于标记真的开始与结束，使用01111110来标记。</p>
+</li>
+<li><p>地址字段。地址字段描述了一个地址。如果从主站产生的这个帧，则其包含一个目的地址，如果是从站产生的地址，则其包含一个发送地址。地址可以由多个字节组成。每个字节的最后一位用来标记地址是否结束。如果最后一位是0，那么则说明地址没有结束，如果最后一位是1，则该字节是最后一个表示地址的字节。因为最后一位被用于标识地址是否结束，所以一个字节可以用来表示$2^7=128$个地址</p>
+</li>
+<li><p>控制字段。控制字段的长度可以是一个字节，也可以是两个字节，具体的值需要在链路建立时由双方协商得到。这个字段用于流量控制与差错控制。控制字段前几位决定了HDLC帧的类型，根据帧的类型不同，其剩余位的具体意义也不同。</p>
+</li>
+<li><p>信息字段。信息字段承载了信息帧与管理帧的数据与控制信息。</p>
+</li>
+<li><p>校验字段。使用$2$到$4$字节的ITU-T CRC来进行校验。</p>
+</li>
+</ol>
+<p>控制字段的格式如下图所示。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_control_field.png" alt="HDLC_control_field"></p>
+<p>当控制字段的第一位为0时，该帧为信息帧。N(S)用来存放发送数据的编号。在两者中间的P/F位用于表示帧是否是轮询或终止状态。当其位为1时，当帧时从主站发出的，其意味着轮询。当帧从从站发出时，其意味着终止。</p>
+<p>当控制字段的前两位为10时，该帧为管理帧。当某个时刻设备需要发送管理信息时，但是又不适合使用捎带技术（如没有数据发送或想要发送的管理信息不是ACK），我们需要单独发送一个帧。这个帧就是管理帧。管理帧的N(R)部分用来存放管理信息的编号。而在code部分的$2$位，可以用来表示为$2^2=4$种不同的管理信息。它们分别是：</p>
+<ol>
+<li>**准备接受(Receive ready, RR)**，其表示对一个已经被安全接受的帧进行确认，此时，N(R)用来的值是确认号。</li>
+<li>**不准备接受(Receive not ready, RNR)**，其本身具有RR的功能，同时该帧还告诉发送方需要减慢发送的速度，以此实现拥堵控制功能。此时，N(R)依旧是确认号。</li>
+<li>**拒收(Reject, REJ)**，其是一个NAK帧，用于Go-Back-N ARQ中，用于告知接收方帧被损坏或丢失，其N(R)部分是否定确认号。</li>
+<li>**选择性拒收(Selective reject, SREJ)**，用于选择性重复ARQ协议中的NAK帧，其N(R)部分依旧是否定确认号。</li>
+</ol>
+<p>当控制字段前两位为11时，改帧为无编号帧。无编号帧负责在连接的设备之间交换会话管理和控制信息。在链路建立以及销毁的过程中，都需要无编号帧的参与。其多数信息都包含在控制字段中。一些指令如下。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_no-number_control_frame.png" alt="HDLC_no_number_control_frame"></p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_no-number_control_frame_add0.png" alt="HDLC_no_number_control_frame_add0"></p>
+<p>链路连接断开的示例。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_connect_and_break.png" alt="HDLC_connect_break"></p>
+<p>无差错捎带的示例。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_error_free.png" alt="HDLC_error_free"></p>
+<p>有差错捎带的示例。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/HDLC_error.png" alt="HDLC_error"></p>
+<h3 id="11-7-点到点协议"><a href="#11-7-点到点协议" class="headerlink" title="11.7 点到点协议"></a>11.7 点到点协议</h3><p>虽然HDLC支持点到点和多点配置，但是在点到点访问这件事情上，你几乎见不到HDLC的身影。**点到点协议(Point-to-Point, PPP)**是这方面最常用的协议。事实上，PPP协议已经不仅仅是一个数据链路层的协议，我们可以将其看作一个2.5层协议（既有数据链路层的内容也有网络层的内容）。</p>
+<p>PPP协议提供以下服务：</p>
+<ol>
+<li>PPP定义了帧的格式。</li>
+<li>PPP定义了设备之间的协商方法。</li>
+<li>PPP定义了网络层如何将数据封装到数据链路层中的帧里。</li>
+<li>PPP定义了两台设备之间鉴别的方法。</li>
+<li>PPP支持通过一系列不同的协议来提供多个网络层服务。</li>
+<li>PPP提供多链路连接。</li>
+<li>PPP提供网络地址配置。</li>
+</ol>
+<p>与HDLC相比，PPP删除了以下内容：</p>
+<ol>
+<li>PPP不提供流量控制。</li>
+<li>PPP只进行简单的差错检测，在发现错误后直接丢弃帧，不会要求重传。这方面的内容需要由网络层来解决。</li>
+<li>多点配置中，PPP无法提供高级的地址分配机制来处理帧。</li>
+</ol>
+<p>PPP协议是一个面向字节的协议，PPP帧的格式如下图所示。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_frame_format.png" alt="PPP_frame_format"></p>
+<ol>
+<li>标记。标记定义了帧的开始和结束。标记字节是01111110。但是因为其是面向字节的协议，所以我们在数据字段遇见01111110时需要在其前面填充01111101。</li>
+<li>地址。PPP协议中地址字段为常量11111111（广播地址），双方可以通过协商省略此字段。</li>
+<li>控制。这个字段被设置为常量11000000（效仿HDLC中的无编号帧）。因为PPP协议不提供流量控制，也不提供复杂的差错控制，因此该字段也可以通过协商被省略。</li>
+<li>协议。通过协议字段，我们可以知道有效载荷字段承载的信息的意义。该字段默认为两个字节，通过协商可以同一只用一个字节。</li>
+<li>有效载荷字段。数据字段，承载着用户信息或其他信息。其最大数量的默认值为1500字节。因其没有相应字段来界定该字段的开始或结束。因此，如果内容达不到最大数量，将通过填充是其达到确定的最大数量。</li>
+</ol>
+<p>PPP连接可以通过如下的**转换阶段图(transition phase)**来描绘其传输的各个阶段</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_transition_phase.png" alt="PPP_transition phase"></p>
+<ol>
+<li>**闲置(Dead)**。闲置阶段下，链路没有被使用。物理层上没有活动的载体，链路是安静的。</li>
+<li>**建立(Establish)**。当结点之间需要通信时，首先就会进入这个阶段。在这个阶段，双方对链路的一些属性进行协商。如果协商成功，会按照需求进入鉴别阶段或直接进入联网阶段。在建立的过程中需要使用接下来提到的链路控制协议。</li>
+<li>**鉴别(Authenticate)**。在鉴定阶段过程中，双方会发送一些与鉴别信息分组来鉴别身份。如果鉴别通过，则进入联网阶段，否则其进入终止阶段。</li>
+<li>**联网(Network)**。PPP支持网络层中的多个协议，在这一阶段，双方需要对使用的网络协议进行协商。</li>
+<li>**打开(Open)**。在这个阶段，双方开始进行数据传输。连接将持续到其中一个终端希望终止连接为止。</li>
+<li>**终止(Terminate)**。连接被终止，双方交换一些分组以拆除链路。</li>
+</ol>
+<p>PPP协议结合了其他的协议，这使得PPP协议更加强大。PPP协议定义了三组协议，一个<strong>链路控制协议(Link Control Protocol, LCP)**，两个</strong>鉴别协议(Authentication Protocols, APs)<strong>，和多个</strong>网络控制协议(Network Control Protocols, NCPs)**。因为PPP有多个网络控制协议，PPP可以从不同的网络层协议中接受信息并传输。下图描绘了各种协议与PPP的关系。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_multplexing.png" alt="PPP_multiplexing"></p>
+<p>链路控制协议的职责是建立、维系、确认并终止链路。该协议允许双方以协商的方式来决定链路的属性。下图描述了LCP分组如何被封装在PPP帧中。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/LCP_group.png" alt="LCP_group"></p>
+<p>下图描述了LCP分组中不同编码字段的含义。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/LCP_group_list.png" alt="LCP_group_list"></p>
+<p>LCP分组可以分为三类。第一类，包含前四种分组类型，用于建立阶段的链路配置。第二类，包含第5、6中分组类型，用于终止链路。第三类，后五种分组，用于链路的监控和调试。</p>
+<p>LCP中的ID字段是一个编号，其用于将请求与应答相匹配。长度字段决定了LCP分组的长度。信息字段承载着不同分组类型所需的信息。</p>
+<p>鉴别协议。PPP协议被设计用于拨号链路中，因此我们需要鉴别协议来区分身份。PPP有两种鉴别协议：口令鉴别协议和查询握手鉴别协议。</p>
+<p>**口令鉴别协议(Password Authentication Protocol, PAP)**总共有两步鉴别。</p>
+<ol>
+<li>访问系统的用户发送用于证明自己身份的用户名与口令信息。</li>
+<li>系统检测身份和口令的合法性，随后选择接收或拒绝连接。</li>
+</ol>
+<p>PAP总共有三个分组，分别是鉴别-请求，鉴别-确认和鉴别-不确认。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PAP_group.png" alt="PAP_group"></p>
+<p>**查询握手鉴别协议(Challenge Handshake Authentication Protocol, CHAP)**总共有三步鉴别。</p>
+<ol>
+<li>系统向访问系统的用户发送一个包含查询值的查询分组。</li>
+<li>用户根据收到的查询分组，将查询值与自己的口令进行一个函数运算得到一个结果，用户将该结果放到一个响应分组里发送给系统。</li>
+<li>系统使用相同的功能，用自己已知的用户的口令与查询值进行函数运算，将得到的结果与用户发送过来的结果作对比。如果相同，则允许访问，否则拒绝访问。</li>
+</ol>
+<p>CHAP比PAP更加安全。如果我们经常更换查询值，即使中间过程中某一次响应分组里的结果被入侵者获取了，入侵者也不知道用户的口令。当我们更换查询值后，入侵者之前获取的信息便毫无作用。</p>
+<p>CHAP的协议值为0xC223。CHAP总共有四个分组，分别是查询，响应，成功和失败。查询被用来发送查询值，第二个分组被用户用来返回计算结果，系统用第三个和第四个分组来响应用户的请求。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/CHAP_group.png" alt="CHAP_group"></p>
+<p>网络控制协议。PPP是一个多网络层的协议，它能使用因特网限定的协议，如OSI、Xerox、DECnet、AppleTalk、Novel等来运载网络层的数据分组。PPP为每一个网络协议都界定了一个特定的网络控制协议。例如，IPCP（互联网络协议控制协议）配置用来承载IP数据分组的链路。但是需要注意的是，这里的网络控制协议，并不会传输网络层中的任何数据。其用处仅仅是用于网络层在数据链路层中的数据配置。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_IPCP.png" alt="PPP_IPCP"></p>
+<p>下图是PPP传递信息的全部阶段。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/PPP_example.png" alt="PPP_example"></p>
+<h2 id="第十二章：-多路访问"><a href="#第十二章：-多路访问" class="headerlink" title="第十二章： 多路访问"></a>第十二章： 多路访问</h2><p>在第十一章为数据链路层中设计的协议默认设备之间有一个专有的链路。而当链路不是专用的时候，（如移动电话的网络，同一个网络中接入了多个设备）如果多个设备同时直接发送信号，那么信号之间将发生**冲突(collision)**，两个信号将全部失效。为了解决在多点链路或广播链路这样的公共链路上的信号传输问题，我们需要用多路访问协议来调配共享链路的访问。这些协议可以分为随机访问协议，受控访问协议，通道化协议三种。</p>
+<h3 id="12-1-随机访问协议"><a href="#12-1-随机访问协议" class="headerlink" title="12.1 随机访问协议"></a>12.1 随机访问协议</h3><p>在<strong>随机访问(random access)**或</strong>竞争(contention)**访问方法中，所有站点都是平等的。其随机特性在于，站点的传输没有固定的时间。其竞争的特性在于，没有规则决定下一个访问链路的是哪一个站点，站点之间需要通过竞争来解决这一个问题。</p>
+<p>在介绍协议之前，先给出相关符号极其代表的含义：</p>
+<ol>
+<li>$K$：尝试的次数</li>
+<li>$T_p$：链路中帧最长传播的时间</li>
+<li>$T_{fr}$：一个帧的平均传输时间</li>
+<li>$T_B$：补偿时间</li>
+<li>$G$：一个帧传输时间内系统产生的帧的平均数量</li>
+<li>$S$：吞吐量</li>
+</ol>
+<p>在ALOHA协议中，当站点有帧需要传送时，站点直接将帧发送到网络中。站点通过接受方的ACK帧来确认帧在发送的过程中是否发生了碰撞。如果发生了碰撞，则站点将经过一个$T_B$的补偿时间后再次进行传输，同时$K$的值将发生增加。$T_B$由一个公式随机确定，其中一个通用公式叫做**二进制指数回退(binary exponential back-off)**。根据这个公式，我们有$T_B=(T_p,or,T_{fr})\times random[0,2^K)$。其中$or$表示选用两种中的任意一种，$random$表示在给定区间内随机。在站点经历了$K_{max}$次尝试后，站点将停止发送该帧。ALOHA协议通过这样的补偿时间解决了站点之间因不断重发，从而造成帧不断碰撞的这一现象。</p>
+<p>**脆弱时间(vulnerable time)**用来描述一个帧与其他帧可能发生碰撞的时间。在ALOHA协议中，一个帧如果想要无冲突的被发送，则要求在其整个传输过程的$T_{fr}$时间与传输开始前$T_{fr}$时间内其他站点都没有帧发送（前者帧的后部分与当前发送的帧发生碰撞，后者的帧的前部分与当前发生的帧碰撞）。那么ALOHA的脆弱时间就是$2\times T_{fr}$</p>
+<p>**吞吐量(Throughput)**，用来衡量网络在单位时间内无冲突传送帧的数目。对于ALOHA，我们假定帧的发送符合泊松分布。在此我们回忆泊松分布，泊松分布公式为</p>
+<p>$$P(X=k)=\frac {e^{-\lambda}\lambda ^k}{k!}$$</p>
+<p>其中$\lambda$是随机变量$X$的期望。我们设随机变量$X$为脆弱时间内系统产生帧的次数。那么如果我们想要无冲突的传输一个帧，在脆弱时间内系统就不能发送任何其他的帧。于是我们可以根据上述定义得到，此时$\lambda = 2G,,k=0$，无冲突传输的概率为$e^{-2G}$。G为一个帧传输时间内系统产生帧的平均数量。据此，我们可以得到，吞吐量S，即一个帧传输时间内系统发送的无冲突帧的个数$S=Ge^{-2G}$。当$G=\frac 12$时，系统达到最大吞吐率。</p>
+<p>**时隙ALOHA(slotted ALOHA)**，为了缩短之前纯ALOHA的脆弱时间以提高吞吐量，时隙ALOHA将时间划分为一段一段的时隙，每个时隙大小为$f_{fr}$。每个帧只能在时隙的开始被发送。这样，如果一个站点错过了某个时隙，其必须等到下一个时隙才可以发送。换言之，如果我们在时隙的开始时没有发生碰撞，那么以后也就不会发生碰撞了。由此，我们可以看到，如果在某一时隙我们发送了一个帧，与其碰撞的一定是在上个时隙内准备发送但是还没来得及发送的帧。这个时间就是时隙ALOHA的脆弱时间，也就是$f_{fr}$。</p>
+<p>如果我们知道了时隙ALOHA的脆弱时间，同样的，我们根据泊松分布公式，此时$\lambda=G,k=0$，无冲突传输的概率为$e^{-G}$，此时系统的吞吐率$S=Ge^{-G}$，当$G=1$时，有最大吞吐率。</p>
+<p>**载波侦听多路访问(Carrier sense multiple access, CSMA)**。CSMA通过对物理介质进行侦听来判别链路中是否发生碰撞.通过这个方法，CSMA可以确定在帧发送时链路是没有碰撞发生的。但是，因为帧在链路中有传播速度，因而发生在远方的碰撞不能被当前设备及时侦听到。因此CSMA仍然会发生帧的碰撞。那么让我们来思考CSMA的脆弱时间，考虑极端情况，两个设备分别在链路的两端，帧从一端到另一端的传输时间就是$T_p$。在其中一个设备的帧花费$T_p$时间传输到另一端之前，另一个设备始终不知道该帧的存在。如果在这个$T_p$时间内，另一个设备发送帧的话，两个帧便会发生碰撞。据此，我们可以推断出，CSMA的最长的脆弱时间就是$T_p$。</p>
+<p>**能量级别(Energy Level)**，通道中的能量级别有三种。级别0，正常与不正常。当通道空闲时，其处于级别0.当通道无冲突传输时，其处于正常。当通道发生冲突时，其是不正常。站点根据能量级别来判断通道的状态。</p>
+<p>CSMA有三种方法来处理处理侦听：</p>
+<ol>
+<li>**1-持续方法(1-persistent method)**。设备不间断的侦听链路的状态，当检测到没有冲突的时候，设备立即向链路发送自己的帧。可以想象，因为帧的传输具有延迟，这样做的后果很可能导致站点之间因为传输时延的缘故，在各自检测到链路空闲后发送自己的帧，引起冲突。 以太网使用的就是这种方法。</li>
+<li>**非持续方法(nonpersistent method)**。与1-持续方法相对，设备在检测到没有冲突后，等待一个随机时间后再进行侦听，若空闲就发送自己的帧。这样的做法有助于减少冲突，但是却有可能降低效率。其原因是，即使链路是空闲的，设备也需要等待一个随机时间。在这段随机事件中，链路是不工作的。</li>
+<li>**p-持续时间(p-persistent method)**。当有帧需要发送时，站点检查链路的状态。如果空闲，站点会进行一次随机，有$p$概率发送帧，有$1-p$概率在下一个时隙的开始再检查线路。如果链路繁忙，站点就会等待一个补偿时间$T_B$。</li>
+</ol>
+<p>CSMA没有给出发送出的帧在发生碰撞后站点的处理方式，接下来介绍的方法将给出具体的解决方案。</p>
+<p><strong>带冲突检测的载波侦听多路访问(Carrier sense multiple access with Collision Detection, CSMA/CD)**。回忆ALOHA协议，为了检测我们的帧是否成功发送，我们需要接收方发送ACK帧。而在CSMA/CD，我们将通过侦测链路的状态来判断帧是否被成功发送。站点发送出去的帧就像我们向平静的湖面中扔一颗石子后扩散的涟漪，如果有两颗石子被扔到这个湖面中，涟漪之间就会碰撞叠加，从而被站点监听到。当有帧需要传输时，站点最初选择CSMA侦听的三种方法中的任意一种，满足条件后发送该帧。当站点监听到其自身发送的帧发生碰撞后，会发送一个</strong>干扰信号(jamming signal)**使碰撞加强。随后，其会等待一个补偿时间$T_B$，之后再次选择CSMA中的三种方法中的一种侦听链路，再次将其发送。该方法就像是将ALOHA协议与CSMA结合了起来。在这个方法中，帧的发送和侦听是同时进行的，站点有两个端口，一个负责发送，一个负责侦听。同时，为了保留站点发送帧的副本以及掌握是否发生碰撞，帧的长度必须足够长，以使站点在确认该帧不被碰撞时，该帧仍处于发送的状态。同样的，考虑临界情况，站点从开始传输帧到发生碰撞的时间为$f_p$，而从碰撞发生地传回站点的时间也是$f_p$，总计需要$2f_p$的时间。如果假设信号的传输速率为$S$，那么我们有帧长$L=2f_pS$</p>
+<p><strong>带冲突避免的载波侦听多路访问(Carrier sense multiple access with Collision Avoidance, CSMA/CA)</strong></p>
+<p>在有线传输中，因为有中继器的存在，链路中的能量通常是稳定的，这使得站点可以通过侦听链路中的能量来判断是否发生碰撞。而在无线传输中，能量的损耗将会非常迅速，这使得站点无法通过能量来判断是否发生碰撞，此时并不能使用CSMA/CD。于是，我们引入了CSMA/CA。虽然我们不能侦听是否发生了碰撞，但是我们仍然可以侦听此时链路中是否有帧在传输。在这一方法中，一个帧的成功发送需要经历三个部分：CSMA，帧间间隔，竞争。站点采取CSMA中的一种方法进行侦听，如果成功，则等待一个<strong>帧间间隔(Interframe Space, IFS)**后再次侦听，如果如果此时链路繁忙，则返回到CSMA侦听阶段，如果链路空闲，则进入竞争状态。竞争状态下，有一个</strong>竞争窗口(Contention Window)**。竞争窗口中有多个时隙，时隙的数量由二进制指数回退公式来决定，每次发送的帧发生冲突后，窗口数量都要翻倍。在竞争状态下，如果侦听到链路空闲，则当前状态会在窗口中前进一步，如果侦听到链路繁忙，则会停止在原地，等待下一个时隙。在全部前进完毕后，该帧将会被发送。如果站点在定时器的计时时间内收到ACK帧，则本次传输成功，否则站点将回到最开始的CSMA阶段，同时把用于二进制指数回退公式中的$K=K+1$。</p>
+<h3 id="12-2-受控访问"><a href="#12-2-受控访问" class="headerlink" title="12.2 受控访问"></a>12.2 受控访问</h3><p>在**受控访问(controlled access)**中，站点内部通过协商来确定某一时刻谁可以发送，谁不可以发送。流行的三种受控访问方法有：预约，轮询，令牌传递。</p>
+<p>在**预约(Reservation)**中，时间被划分为若干个区间。在每一个区间内，发送数据帧前会先发送一个预约帧。如果系统有$N$个站点，那么一个预约帧就会有$N$个时隙。每一个站点都拥有其中的一个时隙。当某个站点要发送信息时，其会在其自己的预约时隙内做一个预约。只有进行了预约的站点才能发送数据。</p>
+<p>在**轮询(Polling)**中，我们需要一个具有主站和从站的拓扑结构。通道上所有信息的收发都由主站控制。为了实现这种控制，主站具有轮询和选择两种功能。轮询，轮流询问，主站会依次向从站发送$POLL$帧来询问从站是否要发送信息。如果从站不发送信息，其会发送$NAK$帧，否则从站会向主站发送数据帧。选择，主站选择一个从站来接受数据。主站向需要接受数据的从站发送一个$SEL$帧来询问从站是否准备接受数据。如果从站发送一个$ACK$帧，那么主站就可以向从站发送数据。</p>
+<p>在**令牌传递(token passing)**中，站点之间有前驱和后继的拓扑关系。在站点之间有一个虚拟的令牌。获得令牌的站点就会获得对通道的控制权。在这种方法的实现中，为了防止因令牌丢失而造成网络的停摆，我们需要对令牌进行监控。同时，还需要确保每一个站点不会持有过长时间的令牌。</p>
+<h3 id="12-3-通道化"><a href="#12-3-通道化" class="headerlink" title="12.3 通道化"></a>12.3 通道化</h3><p>**通道化(channelization)**也是一种多路访问方法，不同的站点在频率，时间或者是编码上共享带宽。</p>
+<p><strong>频分多路访问(frequency-division multiple access, FDMA)**，</strong>时分多路访问(time-division multiple access, TDMA)**两者的原理与FDM及TDM一样。两者的细微区别在于，FDM与TDM是在物理层上的复用，其将上层传来的数据通过多路复用器进行拆分，对于FDM是调制到不同频段上，对于TDM则是划分到不同时隙。而FDMA与TDMA则是在数据链路层上直接告诉站点其发送数据的频率与时隙，此时在物理层上并没有多路复用器。从站点发送出来的数据直接在物理层自然而然的混合发送。</p>
+<p>**码分多路访问(code-division multiple access, CDMA)**，CDMA有着一个可以允许多个站点同时发送数据的通道。用一个简单的例子来说明CDMA的原理。假定有４个站点，我们设计一套编码，其具有两个特性：1、两个不同编码相乘等于$0$。2、两个相同编码相乘等于4（站点数量）。假定4个站点发送的数据分别为$d_1,d_2,d_3,d_4$，4个站点的编码分别时$c_1,c_2,c_3,c_4$，每个站点将其数据与自身的编码相乘得到的信息发送至通道中，那么四个站点发送的信息叠加起来就是$d_1c_1+d_2c_2+d_3c_3+d_4c_4$。如果站点$1$想要监听站点$3$的数据，那么站点$1$就将通道中的数据乘以站点$3$的编码$c_3$，因为编码的两个特性，经过乘法操作以后，站点$1$就会得到$4d_3$。此时站点$1$只需要将数据除以$4$即可得到其需要的数据。</p>
+<p>CDMA是基于编码理论的，再次不进行解释其技术细节。需要知道的是，每个站点被分配到的编码是一串**正交序列(orthogonal sequence)**。通过构造Walsh表（行列相同的矩阵）我们可以产生这个序列。Walsh表可以通过递推来构造。通过$W_{11}$我们可以得到$W_{22}$，进而得到$W_{44}.W_{88}$。需要注意的是，Walsh表的行列数是$2$的幂次，而这也就决定了正交序列的长度必须是$2$的幂次。</p>
+<h2 id="第十三章：有线局域网（以太网）"><a href="#第十三章：有线局域网（以太网）" class="headerlink" title="第十三章：有线局域网（以太网）"></a>第十三章：有线局域网（以太网）</h2><h3 id="13-1-IEEE标准"><a href="#13-1-IEEE标准" class="headerlink" title="13.1 IEEE标准"></a>13.1 IEEE标准</h3><p>IEEE标准将数据链路层分为了两个子层，<strong>逻辑链路控制层(logical link control, LLC)**与</strong>介质访问控制层(media access control, MAC)**</p>
+<p>流量控制，差错控制被集中到LLC中。随机访问，受控访问，通道化被集中到MAC中。成帧的工作被分配给LLC与MAC两个层。</p>
+<p>LLC定义了<strong>协议数据单元(protocol data unit, PDU)**。PDU的头部字段包含源端和目的端的上层协议，分别成为</strong>目的业务接入点(destination service access point, DSAP)<strong>和</strong>源业务接入点(source service access point, SSAP)**。同时，类似HDLC，PDU的头部也包含控制字段，用于流量控制和差错控制。随后是一个数据字段，用来保存上层的数据。</p>
+<p>显然，LLC存在的意义便是向上层协议提供流量控制与差错控制。然而多数上层协议并不需要这两个功能。</p>
+<h3 id="13-2-标准以太网"><a href="#13-2-标准以太网" class="headerlink" title="13.2 标准以太网"></a>13.2 标准以太网</h3><p>以太网经历了四次迭代发展，分别是：标准以太网，快速以太网，千兆以太网，10千兆以太网。</p>
+<p>对于标准以太网来说，其mac帧有7部分构成，按顺序分别是：前导符(premble)，起始帧分隔符(SFD)，目的地址(DA)，源地址(SA)，长度/类型，数据，CRC。</p>
+<p>前导符：7字节56位的10交替的串，其用来标明帧的到来，并起到同步时钟的作用。实际上，前导符与接下的SFD都在物理层加入，其并不属于帧的一部分。</p>
+<p>SFD：1字节8位的10101011，其用来标明下一个字节是DA。SFD的存在使得前导符前面的部分允许被丢弃。</p>
+<p>DA：6个字节，标明目的地址的物理地址。</p>
+<p>SA：6个字节，标明接受地址的物理地址。</p>
+<p>长度/类型：2个字节，用来标明PDU上层协议的类型或者数据的长度。</p>
+<p>数据：用来存储上层协议的数据。</p>
+<p>CRC：4个字节，差错检测信息，在此情况下位CRC-32</p>
+<p>在标准以太网中，MAC帧的大小有一定要求，这是因为标准以太网的介质访问采用了CSMA/CD协议，而该协议的正常工作需要保证传输的一个最小时间。MAC帧长度的最小值为64字节。除去帧的头部和尾部，数据字段的最小长度为48字节。MAC帧的最大长度因为历史原因被定义为1518字节。</p>
+<p>每个站点都有一个网卡(network interface card, NIC)，网卡给设备提供一个6字节的物理地址。其通常使用十六进制表示法，如：50-5B-C2-FF-B7-AF</p>
+<p>对于源地址来说，其永远是一个单播地址（一个帧只能从一个站点发送出去）。但是对于目的地址来说，其有可能是单播，多播，广播三种情况。当地址的最后一位为0时，这个地址是目的地址。当地址的最后一位为1时，这个地址是多播地址，当地址全1时，这个地址是广播地址。</p>
+<p>标准以太网的时隙=网络最大长度的往返时间+发送干扰序列的时间。其以位定义，为一个站点发送512位所需要的时间，也就是$512\div10^5=51.2\mu s$。因为在之前，我们定义了MAC帧的最短长度是64字节（512位），因此根据CSMA/CD的实现原理，站点必须在整个分组发出之前确定是否发生冲突，所以其必须保证站点发送数据的时间要大于一个时隙。</p>
+<p>时隙与最大网络长度（冲突域）之间有关联，这取决于在一个特定介质的传播速度，同时，考虑到中继器和接口的延迟，这一长度最终为2500m。</p>
+<p>标准以太网的通用实现：10Base5，10Base2，10Base-T，10Base-F，其全部采取曼彻斯特编码。</p>
+<h3 id="13-3-以太网的迭代更新"><a href="#13-3-以太网的迭代更新" class="headerlink" title="13.3 以太网的迭代更新"></a>13.3 以太网的迭代更新</h3><p>10mbps以太网增加了一些变化，如桥接以太网，交换以太网，全双工以太网。</p>
+<p>桥接以太网使用**网桥(bridge)**，网桥将一个网络分隔开来，使得冲突域与网络能力相互隔离。这提升了网络的效率。</p>
+<p>交换以太网使用**交换机(switch)**将每个$N$个设备划分成$N$个网络，同样的，其使冲突域与网络能力相互隔离。</p>
+<p>全双工以太网使得站点可以同时发送和接受数据。同时，全双工与交换结合形成的全双工交换以太网中，不再使用CSMA/CD方法。因为此时每个站点与交换机单独相连，同时全双工链路保证了两者之间可以不干扰的互相发送信息。这就建立了站点与交换机之间的点到点专用链路。也就无需CSMA/CD提供的载波检测和冲突检测了。</p>
+<p>10mbps以太网为了在全双工交换以太网中提供流量控制和差错控制，在LLC子层和MAC子层间引入了MAC控制层。</p>
+<p>快速以太网增加了自动协商能力，使得站点之间可以协商运行模式与传输速率。其设计出于以下的目的：兼容旧设备。增加设备的功能。使站点具有检查集线器的能力。</p>
+<p>快速以太网的物理层，采用两线5类UTP或2线光纤，或兼容旧设备采用4线3类UTP。三者编码方案分别为，MLT-3+4B/5B，NRZ-I+4B/5B，8B/6T。</p>
+<p>千兆以太网。因为速度更快，所以时隙不变的情况下，网络的距离会很短。因此在千兆以太网中，引入了载波扩展方法，其定义帧长度的最小值为512字节。同时引入了帧突发方法来将多个较短的帧和并成一个满足要求的较长的帧来提升效率。</p>
+<p>10mbps的物理拓扑结构有总线型和星型拓扑，10mbps以后的以太网只有星型拓扑。</p>
+<h2 id="第十四章：无线局域网"><a href="#第十四章：无线局域网" class="headerlink" title="第十四章：无线局域网"></a>第十四章：无线局域网</h2><h3 id="IEEE-802-11"><a href="#IEEE-802-11" class="headerlink" title="IEEE 802.11"></a>IEEE 802.11</h3><p>IEEE定义的无线局域网规范是802.11，其涵盖了物理层和数据链路层。</p>
+<p>标准定义了两种基本类型的服务：<strong>基本数据集(basic service set, BSS)**，</strong>扩展服务集(extended service set)<strong>。同时，我们有</strong>访问点(access point, AP)**的概念。AP就像是一座连接各个BSS的桥梁，通过分布式系统(如有线局域网)对AP的连接，将众多BSS连接成ESS。没有AP的BSS，我们称之为特别网络。有AP的BSS我们称之为基础设施网络。当两个位于同一个BSS内的站点通信时，其无需经过AP。而当位于不同的BSS内的站点通信时，其需要通过AP完成BSS的跨越。</p>
+<p>根据站点在BSS网络内的移动性，我们将站点的类型划分为三类：<strong>不迁移(no-transition)**，</strong>BSS迁移(BSS-transition)<strong>，</strong>ESS迁移(ESS-transition)**。顾名思义，不迁移的站点只在自己的BSS网络内移动，BSS迁移的站点可以在多个BSS之间移动，ESS迁移的站点可以在不同的ESS之间移动。但是IEEE 802.11本身不保证通信在移动中的过程中是连续的。</p>
+<p>IEEE 802.11定义了两个MAC子层，<strong>分布式协调功能(distributed coordination function, DCF)**，</strong>点协调功能(point coordination function, PCF)**。两种协调功能各自实现了不同的访问链路的方式。</p>
+<p>DCF层采用了CSMA/CA作为访问方式。之所以不像以太网一样使用CSMA/CD，是因为：1、无线传输中的损耗很大，网络的两端难以侦测冲突。2、无线传输存在隐藏站点的问题。3、为了实现冲突检测，站点需要具有同时发送和接收信号的能力，提高了成本，并且这增加了网络的带宽需求。</p>
+<p>此时CSMA/CA的工作流程为：</p>
+<ol>
+<li>侦听介质，使用带补偿的持续策略进行侦听。当发现通道空闲时，等待一个<strong>分布式帧间间隔(distributed interframe space, DIFS)**，然后发送一个</strong>请求发送(require to send, RTS)**的帧。</li>
+<li>目的站点接收到RTS后，等待一个<strong>短帧间间隔(short interframe space, SIFS)**后，发送</strong>清除发送(clear to send, CTS)**的帧表示自己准备接收数据。</li>
+<li>源站点等待一个SIFS后发送数据。</li>
+<li>目的站点在接收数据后等待一个SIFS的时间后，向源站点发送一个ACK帧。</li>
+</ol>
+<p>RTS帧中包含了站点占据通道的时间，在这个RTS帧影响范围内的站点将会建立一个叫做**网络分配矢量(network allocation vector, NAV)**的定时器。在NAV的影响范围内，所有站点将停止对链路的侦听。</p>
+<p>RTS帧与CTS帧发送的一段时间被称为**握手周期(handshaking period)**，在这段时间内，如果发生冲突，就会采取补偿策略，等待重新发送。</p>
+<p><strong>隐藏站点与暴露站点问题</strong>。问题的直观理解如下图。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/hidden_station_problem.png" alt="hidden_station"></p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/exposed_station_problem.png" alt="exposed_station"></p>
+<p>RTS与CTS的握手只能解决隐藏站点问题，其不能解决暴露站点问题。对于隐藏站点来说，假定BC互为隐藏站点，此时BC都向A发送数据。在A接收到来自其中一个站点的RTS帧以后，A向该站点（假定为B）发出CTS帧，同时这个CTS帧同样会被C接受到。C接收到A向B发出的CTS帧后，C意识到在隐藏范围内有另一个站点正在与A通信，于是C限制自己的传输，直到AB传输结束。</p>
+<p>对于暴露站点问题则无法解决，因为C的通信会被A的通信所干扰，导致其无法正常进行。</p>
+<p>**点协调功能(point coordination function, PCF)**，是一种可以在基础设施网络中实现的可选访问方式，它在DCF的上层实现，用于对时间敏感的传输。PCF是集中式、无竞争的轮询访问方式，因为我们需要将AP作为主站，所以其不能在特别网络中实现。</p>
+<p>为了让PCF的优先级高于DCF，PCF重新定义了另外的帧间间隔，其将DCF中的DIFS定义为PIFS，通过缩短PIFS的长度来提高PCF的优先级。</p>
+<p><strong>重复间隔(repetition interval)**。在重复间隔的模式下，轮流采用DCF与PCF进行传输。PCF开始于一个</strong>信号帧(beacon frame)<strong>，结束于</strong>CF(contention-free)**帧。站点接收到信号帧以后，开始自己的NAV计数，停止对链路的侦听。</p>
+<p>因为无线环境的噪声很大，所以建议对帧进行分段以提高传输的效率。</p>
+<p>MAC层包含9个字段，见下图：</p>
+<p>帧控制FC：2字节，定义了帧类型和控制信息。</p>
+<p>D字段：2字节，在控制帧中定义帧的ID，在控制帧以外定义NAV的时间。</p>
+<p>地址：四个地址字段，每个6字节，用来定义地址。</p>
+<p>序列控制：定义帧的序列号，实现流量控制。</p>
+<p>帧主体：0~2312字节之间，包含根据FC字段中定义的信息。</p>
+<p>FCS：4字节，CRC32差错检测。</p>
+<p>无线局域网的帧有3个类型：管理帧，控制帧，数据帧。管理帧用来初始化通信，控制帧则是RTS，CTS，ACK一类的帧，用来访问通道和确认，数据帧用于携带数据和控制信息。</p>
+<p>寻址机制。在此解释需要四个地址时的情况，其余情况如下表所示。鉴于数据会在BSS之间通过AP来跨越，当我们从一个AP到达另一个AP再到达最后一个目的地址时，在其中一个AP向另外一个AP传递数据的过程中，我们需要最多四个地址：源地址，发送方(AP)的地址，接受方(AP）的地址，目的地址(最终收到信息的站点)。</p>
+<p><img src="https://github.com/akemihomura0105/blog_photos/raw/master/%E8%AE%A1%E7%BD%91/MAC_address.png" alt="mac_addressing"></p>
+<h2 id="第十五章：连接局域网、主干网和虚拟局域网"><a href="#第十五章：连接局域网、主干网和虚拟局域网" class="headerlink" title="第十五章：连接局域网、主干网和虚拟局域网"></a>第十五章：连接局域网、主干网和虚拟局域网</h2><h3 id="15-1-连接设备"><a href="#15-1-连接设备" class="headerlink" title="15.1 连接设备"></a>15.1 连接设备</h3><p>根据连接设备在网络中工作的层级，我们将其分为五类：</p>
+<ol>
+<li>物理层以下的设备，无源集线器。</li>
+<li>物理层的设备，中继器或有源集线器。</li>
+<li>物理层和数据链路层的设备，网桥或二层交换机。</li>
+<li>物理层和数据链路层以及网络层的设备，路由器或三层交换机。</li>
+<li>工作在所有五层的设备，网关。</li>
+</ol>
+<p><strong>无源集线器</strong>。仅连接不同分支的线路，是一个来自不同站点的信号冲突点。</p>
+<p>**中继器(repeater)**，接收信号，重新生成信号并去除噪声，增大信号传输的距离。</p>
+<p><strong>有源中继器</strong>，多端口的中继器。</p>
+<p>**网桥(bridge)**，在物理层时其重新生成信号并传输。在数据链路层时，其具有过滤功能，可以将某个端口传来的帧发送给特定的端口，起到划分网络的作用。其有一个过滤表来帮助其划分网络。</p>
+<p>**透明网桥(transparent bridge)**。与透明网桥连接的站点感受不到其存在，因此称为透明。增加或删除透明网桥不需要重新配置网络。透明网桥有三点要求：1、能够转发帧。2、可以自动学习网络中帧的传输，建立转发表。3、避免系统内循环。</p>
+<p>透明网桥的学习过程。当透明网桥的转发表没有目的地址时，其只能将帧广播至整个网络。同时，如果透明网桥从一个不在转发表里的地址接受到一个帧时，透明网桥将会在转发表里建立该地址与接收端口的映射关系。这样， 在下次接收到发往该地址的帧时，就可以使用这个映射来转发至正确的端口。</p>
+<p>循环问题。将网络抽象为图，当网络中存在着一个环，使得环上存在两个以上的透明网桥时，未学习的网桥在广播信息时，该信息的副本将会在两个网桥内循环震荡。为了解决这一问题，我们需要断环。那么我们只需要求网桥之间的最小生成树即可（可以使用prim算法）。基于得到的生成树，我们把属于生成树的端口标记为<strong>转发端口(forwarding port)**，其会正常转发收到的帧。不属于生成树的端口则被标记为</strong>阻塞端口<strong>，其会直接舍弃接收到的帧。网桥之间会发送叫做</strong>网桥协议数据单元(bridge protocol data units, BPDU)**的特定信息来更新生成树。</p>
+<p>若要使用网桥来连接不同的局域网，需要注意很多问题，如：帧的格式，对加密的要求，传输的速率，最大数据长度，传送信息的位顺序，安全设置，多媒体支持等。</p>
+<p><strong>两层交换机</strong>和网桥类似，可以看作一个有许多端口且有着更好性能的网桥。两层交换机有交换组件可以更快速的转发帧。</p>
+<p>**路由器(router)**路由器是三层设备，其基于分组的逻辑地址路由分组。路由器经常用来连接LAN和WAN。路由器通过路由表决策路由，通常使用路由协议进行动态更新。</p>
+<p><strong>三层交换机</strong>，本书中看作路由器。</p>
+<p>**网关(gateway)**，连接两个网络的设备。路由器就是一类常见的网关。</p>
+<h3 id="15-2-主干网"><a href="#15-2-主干网" class="headerlink" title="15.2 主干网"></a>15.2 主干网</h3><p>各个LAN需要连接到一个网络上实现相互的交流，这个网络就被称为主干网。</p>
+<p>主干网具有总线拓扑，星型拓扑等结构。</p>
+<h3 id="15-3-虚拟局域网"><a href="#15-3-虚拟局域网" class="headerlink" title="15.3 虚拟局域网"></a>15.3 虚拟局域网</h3><p>之前的LAN都是通过物理上直接划分的。实际上，我们可以在逻辑上划分各个站点。这样形成的局域网我们称之为**虚拟局域网(virtual local area network, VLAN)**。VLAN支持将一个交换机或多个交换机上连接的站点在逻辑上进行划分，创建各自的广播域，来达到划分VLAN的效果。交换机可以依据交换机的端口，MAC地址，IP地址，多播IP地址来划分VLAN。</p>
+<p>VLAN可以手工/自动/半自动配置。</p>
+<p>多个交换机形成的VLAN网络中，每个交换机不仅要知道自己的成员，还要知道其他交换机上的成员，这就需要交换机互相发送消息来通知对方。可以通过表维护或帧标记来维护信息。在这种情况下，交换机连接的主干线路使用TDM划分通道。发往不同VLAN的信息被将通过不同的通道，通过检查帧是从哪一个通道到达的，就可以知道该帧要被发往何处。</p>
+<h2 id="第十六章，第十七章，第十八章暂无"><a href="#第十六章，第十七章，第十八章暂无" class="headerlink" title="第十六章，第十七章，第十八章暂无"></a>第十六章，第十七章，第十八章暂无</h2><h2 id="第十九章：逻辑寻址"><a href="#第十九章：逻辑寻址" class="headerlink" title="第十九章：逻辑寻址"></a>第十九章：逻辑寻址</h2><p>为了实现网络层之间的全球通信，我们需要一个全球寻址的方案。我们称其为逻辑寻址，目前的逻辑选址使用的是TCP/IP协议栈中的IP地址</p>
+<h3 id="19-1-IPv4"><a href="#19-1-IPv4" class="headerlink" title="19.1 IPv4"></a>19.1 IPv4</h3><p>IPv4地址是一个32位地址，其唯一与通用的定义了任何连接在因特网上的设备。其中唯一指的是连接在因特网上的设备不存在两个相同的IP地址，通用指的是任意一个设备都要承认连接在因特网上的设备的地址。</p>
+<p>所有IPv4地址定义了IPv4的地址空间。因IPv4有32位，所以其地址空间的大小为$2^{32}$。</p>
+<p>IPv4有两种标记法，一种是直接以二进制形式表示，每隔8位空一格。另一种是以十进制形式表示，每8位为一组，总共有4组，称为**点分十进制标记法(dotted-decimal notation)**。</p>
+<p>最初IPv4寻址有类的概念，这种体系结构称为**分类寻址(classful addressing)**，其将地址空间分为5类。然而因为当初分类错误的预估了形式，该种分类在实践中并不优。对于A类地址来说，大型组织机构并不能使用那么多地址，B类地址对于中型组织来说太多，C类地址对于中型组织来说又太少，D类多播地址太多，E类处于保留状态。为了缓解这一问题，引入了子网化和超网化（分别是将A、B网络拆开，将C类网络合并的操作）。</p>
+<p>为了克服地址耗尽的问题，设计者们引入了**无类寻址(classless addressing)**。在这个寻址方式里，不再有类的概念。取而代之的，是地址块。ISP根据用户需求提供不同大小的地址块。地址块的分配有三个要求：1、地址块必须连续。2、地址块的大小必须是2的幂次。3、块的起始地址必须能被块的个数整除。</p>
+<p><strong>掩码(mask)**，掩码是一个32位的数。掩码是一个开头全1，末尾全0的数。因此我们可以用1的个数来方便的定义掩码，这种标记法称为斜杠标记格式或</strong>无类域间路由选择(Classless Interdomain Routing, CIDR)**</p>
+<p>设某个块中地址为变量ip，掩码为变量mask。则有</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//块起始地址</span></span><br><span class="line">start = ip &amp; mask;</span><br><span class="line"><span class="comment">//块结束地址</span></span><br><span class="line">end = ip &amp; (~mask);</span><br><span class="line"><span class="comment">//块大小</span></span><br><span class="line">(~mask)+<span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>**网络地址(network address)**，地址块的第一个地址通常被用作一个特殊地址，称为网络地址。网络地址用做向世界上其他部分表示该组织的网络地址。</p>
+<p>可以通过掩码来划分网络地址，来得到地址的层级结构。</p>
+<p>**网络地址转换(network address translation, NAT)**。连接到因特网的设备数目不断增加，然而IP地址的可用量却十分匮乏。通过使用NAT，可以使得网络内部（专用网络）有大量地址，而面向网络的部分只有少量地址。通过使用NAT路由器，内部的设备以路由器的地址访问整个网络。内部的网络对于因特网的其他部分是透明的。其他部分只能看见该网络的NAT路由器。内部网络的设备通过NAT路由器上特定的端口访问外部地址。而外部设备通过发送目的地址和端口号，便可唯一确定内部网络设备。显然，NAT必须由网络内部向网络外部发起，否则外部将无法确定内部的设备（因为没有建立连接，没有端口号）。实际中，NAT技术主要由ISP向众多用户提供。</p>
+<h3 id="19-2-IPv6-暂无"><a href="#19-2-IPv6-暂无" class="headerlink" title="19.2 IPv6 暂无"></a>19.2 IPv6 暂无</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag"># 计算机网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/31/ACM/CF/Edu%20Round%2084/" rel="prev" title="Educational Codeforces Round 84">
+      <i class="fa fa-chevron-left"></i> Educational Codeforces Round 84
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/07/hello-world/" rel="next" title="Hello World">
+      Hello World <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E5%BC%95%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">第一章：引论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%95%B0%E6%8D%AE%E9%80%9A%E4%BF%A1"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 数据通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%BD%91%E7%BB%9C"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%9B%A0%E7%89%B9%E7%BD%91"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 因特网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E5%8D%8F%E8%AE%AE%E4%B8%8E%E6%A0%87%E5%87%86"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 协议与标准</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">第二章：网络模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%88%9D%E8%AF%86%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 初识网络模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-OSI%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 OSI网络模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-OSI%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E5%90%84%E5%B1%82%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 OSI网络模型各层的功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-TCP-IP-%E5%8D%8F%E8%AE%AE%E6%97%8F"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 TCP&#x2F;IP 协议族</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%AF%BB%E5%9D%80"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 寻址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E4%B8%8E%E4%BF%A1%E5%8F%B7"><span class="nav-number">3.</span> <span class="nav-text">第三章：数据与信号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%A8%A1%E6%8B%9F%E4%B8%8E%E6%95%B0%E5%AD%97"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 模拟与数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%91%A8%E6%9C%9F%E6%A8%A1%E6%8B%9F%E4%BF%A1%E5%8F%B7"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 周期模拟信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 数字信号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E4%BC%A0%E8%BE%93%E5%87%8F%E6%8D%9F"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 传输减损</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E4%BF%A1%E5%8F%B7%E4%BC%A0%E8%BE%93%E9%80%9F%E7%8E%87"><span class="nav-number">3.5.</span> <span class="nav-text">3.5  信号传输速率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-%E8%A1%A1%E9%87%8F%E7%BD%91%E7%BB%9C%E6%80%A7%E8%83%BD%E7%9A%84%E5%8F%82%E6%95%B0"><span class="nav-number">3.6.</span> <span class="nav-text">3.6 衡量网络性能的参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0%EF%BC%9A-%E6%95%B0%E5%AD%97%E4%BC%A0%E8%BE%93"><span class="nav-number">4.</span> <span class="nav-text">第四章： 数字传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%95%B0%E5%AD%97%E5%88%B0%E6%95%B0%E5%AD%97"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 数字到数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%A8%A1%E6%8B%9F%E5%88%B0%E6%95%B0%E5%AD%97"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 模拟到数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 传输模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E6%A8%A1%E6%8B%9F%E4%BC%A0%E8%BE%93"><span class="nav-number">5.</span> <span class="nav-text">第五章：模拟传输</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E6%95%B0%E5%AD%97%E5%88%B0%E6%A8%A1%E6%8B%9F%E8%BD%AC%E6%8D%A2"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 数字到模拟转换</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%B8%A6%E5%AE%BD%E5%88%A9%E7%94%A8"><span class="nav-number">6.</span> <span class="nav-text">第六章：带宽利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%B8%A6%E5%AE%BD%E5%A4%8D%E7%94%A8"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 带宽复用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E6%89%A9%E9%A2%91"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 扩频</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%EF%BC%9A%E4%BC%A0%E8%BE%93%E4%BB%8B%E8%B4%A8"><span class="nav-number">7.</span> <span class="nav-text">第七章 ：传输介质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E6%9C%89%E5%90%91%E4%BB%8B%E8%B4%A8"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 有向介质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-%E6%97%A0%E7%BA%BF%E9%80%9A%E4%BF%A1"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 无线通信</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0%EF%BC%9A%E4%BA%A4%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">第八章：交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B9%9D%E7%AB%A0%EF%BC%9A-%E4%BD%BF%E7%94%A8%E7%94%B5%E8%AF%9D%E7%BD%91%E5%92%8C%E6%9C%89%E7%BA%BF%E7%94%B5%E8%A7%86%E7%BD%91%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="nav-number">9.</span> <span class="nav-text">第九章： 使用电话网和有线电视网进行数据传输</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E7%AB%A0%EF%BC%9A%E6%A3%80%E9%94%99%E4%B8%8E%E7%BA%A0%E9%94%99"><span class="nav-number">10.</span> <span class="nav-text">第十章：检错与纠错</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#10-1-%E5%BC%95%E8%A8%80"><span class="nav-number">10.1.</span> <span class="nav-text">10.1 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-2-%E5%9D%97%E7%BC%96%E7%A0%81"><span class="nav-number">10.2.</span> <span class="nav-text">10.2 块编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-3-%E7%BA%BF%E6%80%A7%E5%9D%97%E7%BC%96%E7%A0%81"><span class="nav-number">10.3.</span> <span class="nav-text">10.3 线性块编码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E6%8E%A7%E5%88%B6"><span class="nav-number">11.</span> <span class="nav-text">第十一章：数据链路控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-%E6%88%90%E5%B8%A7"><span class="nav-number">11.1.</span> <span class="nav-text">11.1 成帧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-2-%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6%E5%92%8C%E5%B7%AE%E9%94%99%E6%8E%A7%E5%88%B6"><span class="nav-number">11.2.</span> <span class="nav-text">11.2 流量控制和差错控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-%E5%8D%8F%E8%AE%AE"><span class="nav-number">11.3.</span> <span class="nav-text">11.3 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-4-%E6%97%A0%E5%99%AA%E5%A3%B0%E9%80%9A%E9%81%93"><span class="nav-number">11.4.</span> <span class="nav-text">11.4 无噪声通道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-5-%E6%9C%89%E5%99%AA%E5%A3%B0%E9%80%9A%E9%81%93"><span class="nav-number">11.5.</span> <span class="nav-text">11.5 有噪声通道</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-6-%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E6%8E%A7%E5%88%B6"><span class="nav-number">11.6.</span> <span class="nav-text">11.6 高级数据链路控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-7-%E7%82%B9%E5%88%B0%E7%82%B9%E5%8D%8F%E8%AE%AE"><span class="nav-number">11.7.</span> <span class="nav-text">11.7 点到点协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%8C%E7%AB%A0%EF%BC%9A-%E5%A4%9A%E8%B7%AF%E8%AE%BF%E9%97%AE"><span class="nav-number">12.</span> <span class="nav-text">第十二章： 多路访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1-%E9%9A%8F%E6%9C%BA%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="nav-number">12.1.</span> <span class="nav-text">12.1 随机访问协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-2-%E5%8F%97%E6%8E%A7%E8%AE%BF%E9%97%AE"><span class="nav-number">12.2.</span> <span class="nav-text">12.2 受控访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-3-%E9%80%9A%E9%81%93%E5%8C%96"><span class="nav-number">12.3.</span> <span class="nav-text">12.3 通道化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B8%89%E7%AB%A0%EF%BC%9A%E6%9C%89%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%EF%BC%88%E4%BB%A5%E5%A4%AA%E7%BD%91%EF%BC%89"><span class="nav-number">13.</span> <span class="nav-text">第十三章：有线局域网（以太网）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#13-1-IEEE%E6%A0%87%E5%87%86"><span class="nav-number">13.1.</span> <span class="nav-text">13.1 IEEE标准</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-2-%E6%A0%87%E5%87%86%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="nav-number">13.2.</span> <span class="nav-text">13.2 标准以太网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-3-%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%9A%84%E8%BF%AD%E4%BB%A3%E6%9B%B4%E6%96%B0"><span class="nav-number">13.3.</span> <span class="nav-text">13.3 以太网的迭代更新</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E5%9B%9B%E7%AB%A0%EF%BC%9A%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="nav-number">14.</span> <span class="nav-text">第十四章：无线局域网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IEEE-802-11"><span class="nav-number">14.1.</span> <span class="nav-text">IEEE 802.11</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%BA%94%E7%AB%A0%EF%BC%9A%E8%BF%9E%E6%8E%A5%E5%B1%80%E5%9F%9F%E7%BD%91%E3%80%81%E4%B8%BB%E5%B9%B2%E7%BD%91%E5%92%8C%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="nav-number">15.</span> <span class="nav-text">第十五章：连接局域网、主干网和虚拟局域网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#15-1-%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87"><span class="nav-number">15.1.</span> <span class="nav-text">15.1 连接设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-2-%E4%B8%BB%E5%B9%B2%E7%BD%91"><span class="nav-number">15.2.</span> <span class="nav-text">15.2 主干网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#15-3-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="nav-number">15.3.</span> <span class="nav-text">15.3 虚拟局域网</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E5%85%AD%E7%AB%A0%EF%BC%8C%E7%AC%AC%E5%8D%81%E4%B8%83%E7%AB%A0%EF%BC%8C%E7%AC%AC%E5%8D%81%E5%85%AB%E7%AB%A0%E6%9A%82%E6%97%A0"><span class="nav-number">16.</span> <span class="nav-text">第十六章，第十七章，第十八章暂无</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%8D%81%E4%B9%9D%E7%AB%A0%EF%BC%9A%E9%80%BB%E8%BE%91%E5%AF%BB%E5%9D%80"><span class="nav-number">17.</span> <span class="nav-text">第十九章：逻辑寻址</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#19-1-IPv4"><span class="nav-number">17.1.</span> <span class="nav-text">19.1 IPv4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#19-2-IPv6-%E6%9A%82%E6%97%A0"><span class="nav-number">17.2.</span> <span class="nav-text">19.2 IPv6 暂无</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="akemihomura"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+    </div>
+</body>
+</html>

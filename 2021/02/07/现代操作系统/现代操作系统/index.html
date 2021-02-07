@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"akemihomura0105.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="现代操作系统自学笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现代操作系统第一章学习笔记">
+<meta property="og:url" content="http://akemihomura0105.github.io/2021/02/07/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="现代操作系统自学笔记">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-07T05:23:08.159Z">
+<meta property="article:modified_time" content="2020-07-29T14:38:02.798Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://akemihomura0105.github.io/2021/02/07/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>现代操作系统第一章学习笔记 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://akemihomura0105.github.io/2021/02/07/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E7%8E%B0%E4%BB%A3%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          现代操作系统第一章学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-02-07 13:23:08" itemprop="dateCreated datePublished" datetime="2021-02-07T13:23:08+08:00">2021-02-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-07-29 22:38:02" itemprop="dateModified" datetime="2020-07-29T22:38:02+08:00">2020-07-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>现代操作系统自学笔记</p>
+<a id="more"></a>
+
+<h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><ol>
+<li><p>操作系统是一个软件。有别于其他软件，操作系统运行在系统中的<strong>内核态（管态）</strong>。在内核态下，操作系统可以获得对硬件的全部使用权限，并且可以执行机器能执行的任意指令。而其余的软件则运行在用户态下，只能执行一部分操作。</p>
+</li>
+<li><p>有些操作系统当中存在运行在用户态的程序，这些程序用来辅助内核态的程序来满足用户的一些需求。如，修改系统密码。在这样的系统里，很难确定这些程序到底是不是操作系统的一部分。</p>
+</li>
+<li><p>操作系统与运行在用户态的程序的一个区别就是，它们是常驻的。操作系统有着复杂且巨量的代码。这让操作系统很难编写，且编写结束以后也难以维护，重写的成本也会很高。</p>
+</li>
+<li><p>简单的描述操作系统：一个运行在内核态的程序。</p>
+</li>
+<li><p>操作系统是机器的扩展。在机器层面上的计算机架构（指令集，内存管理，I/O等），其构成是非常基础且复杂的。这让其余应用程序在操作它们时所编写的代码变得很复杂。所以操作系统的一个作用就是把对这些复杂的东西进行封装，向应用程序提供简易明了的接口。</p>
+</li>
+<li><p>操作系统作为资源管理器。多个应用程序可能会尝试使用相同的设备，如同时在屏幕打印信息。操作系统作为资源管理器来分配资源。通过合理的调度使得各项工作得以正常运行。资源的分配调度有两种不同的方法：按时间调度，按空间调度。顾名思义，按时间调度就是使应用程序在运行上的时间使分割的，一段时间运行这个程序，一段时间运行另一个程序。按空间调度则是在主存储器上进行划分，使得多个程序可以同时运行在不同的主存储器空间上。</p>
+</li>
+<li><p>操作系统的历史：</p>
+<p>· 真空管时期：这个时期的电脑没有操作系统，也没有汇编语言，编程直接使用机器码。其代表电脑有Z3，ENIAC。</p>
+<p>· 晶体管时期：这个时期出现了批处理系统。批处理出现之前，如果想要执行一个作业（一个或一组程序），程序员首先要把它们用FORTRAN或汇编语言写在纸上，之后用打孔机打成带孔的纸带。之后把它送进输入处理器等待其运算完毕，再将得到的纸带运送到另一个处理器，再等待运送完毕后，将运算得到的信息运送到输出处理器。在这个过程中，纸带的运输使得系统的效率变慢。于是批处理系统诞生，机器将一切自动化完成，无需人为干预。因为任务是成批进行，因此成为批处理。此时的批处理仍然是单道批处理系统，即系统依次只能处理一个程序，在系统进行缓慢的I/O操作时，CPU就会闲置，资源会被浪费。</p>
+<p>· 集成计算机时期：OS/360引入了多道程序设计。其将内存分为多个部分，使得每一个作业都有自己的一个内存。当其中一个作业进行I/O操作时，CPU可以转而去执行另一个作业。为了实现这一功能，需要在硬件层面上能做到防止某个作业读取或恶意操作其他作业的内存。360计算机的硬件具备这样的功能。同时，这一时期的系统还具有<strong>spooling(Simultaneous Peripheral Operation On Line)**功能。spooling技术可以将I/O设备虚拟化，使得多个用户共享同一I/O设备。最初的上一代系统为了解决I/O速度缓慢的问题，将I/O用的机器与计算的机器分离开，通过Input用的机器将数据读入到高速磁盘中，之后与计算用的机器进行快速I/O操作，并得到存有输出信息的磁盘。随后再将该磁盘放入Ouput用的机器得到信息。而引入spooling技术与多道程序设计，就可以在一台计算机上完成此操作。spooling技术的建立需要高速随机存储设备以及支持多道程序的操作系统。spooling系统主要分为三部分：</strong>输入输出井<strong>，</strong>输入输出缓冲区<strong>，</strong>输入输出进程**。输入井，输出井是开辟在磁盘中的存储空间，用来模拟I/O操作中的硬盘。输入输出缓冲区则是为了解决磁盘I/O速度缓慢的问题，在内存上开辟的一块空间。输入输出进程模拟脱机设备中的外围控制器。以输入过程举例，信息首先被传输到输入井中，随后被传入输入缓冲区。当CPU需要从输入设备中读取信息时，输入进程控制输入缓冲区的数据进入CPU。</p>
+<p>为了解决在一些任务较小，需要与人进行交互的任务，<strong>CTSS（compatible Time Sharing System）</strong>时间共享操作系统出现了。随着时间共享操作系统的成功，贝尔实验室决定制造一个可以供上百人同时使用的时间共享计算机MULTICS（MULTiplexed Information and Computing Service），就像曾经Babbage的模拟计算机一样，MULTICS抱着同样的雄心壮志，却因为各种原因在商业上失败了。但是其对后来操作系统有着深远的影响，其技术与设计理念传承到了日后的操作系统中。</p>
+<p>随后贝尔实验室中，曾经在MULTICS计划中工作的Ken Thompson，在一台废弃的PDP-7计算机上写出了供一个用户使用的MULTICS，这个操作系统随后发展成了众所周知的UNIX操作系统。IEEE为UNIX制定了一个标准，叫做POSIX。现在绝大多数UNIX系统都遵循着这个标注。随后本书的作者根据Unix系统写出了MINIX系统。随后其学生因不满MINIX不能商用的规定，写出了Linux操作系统，现今，其已成为占有率第二的操作系统。</p>
+<p>· 个人电脑时期：随着大规模集成电路技术的发展，芯片已经可以在很小的面积上集成大量的电路，这让微型计算机的诞生成为可能。其可以放置在公司，家庭之中。1974年，英特尔发明第一代8bitCPU，8080。二十世纪八十年代早期，IBM公司邀请比尔盖茨为其的PC电脑写一个操作系统，于是DOS（Disk Operating System）系统诞生了。随后比尔盖茨成立公司，开发了MS-DOS系统。1999年苹果公司开始舍弃其原本采用的BSD UNIX内核的操作系统。微软公司在开发MS-DOS系统后，将下一个目标转到windows系列。1985年只1995年的windows系统只是一个具有图形环境的MS-DOS系统，在windows95版本时，旧有的MS-DOS系统仅仅用于引导Windows系统。随后的事情略。</p>
+</li>
+<li><p><strong>CPU</strong>。</p>
+<p>· CPU是计算机的大脑。CPU的基本周期是从存储器中取得指令，将其解码后执行。重复上述操作，直到程序结束。现代的CPU除了具有上述三个操作外，还具有访存与回写的功能。</p>
+<p>· 因为内存的I/O速度较慢，CPU内部配有寄存器，CPU直接与寄存器进行交流。有的寄存器具有特定的功能。</p>
+<p>如<strong>程序计数器</strong>，<strong>栈指针</strong>，<strong>PSW（Program Status Word）</strong>程序状态字。程序计数器用来标识CPU下一个获取的指令位置，栈指针用来指示当前栈顶部的内存地址，PSW包括很多状态码，其由比较指令，系统优先级，系统的运行状态（内核态/管态）以及其他控制信息来决定。</p>
+<p>· 每一个CPU都有着自己特定的指令集，这就是为什么一个x86架构的处理器不能执行ARM架构的程序，反之亦然。</p>
+<p>· <strong>管道技术</strong>。事实上，现代的CPU不会每次只执行取指，解码，执行中的一步，通过将负责这三个任务的单元分离，在执行n号任务的时候，进行n+1号的解码，同时进行n+2号的取指。其使原来串行工作的任务得以并行进行，减少了CPU中部分模组的闲置率，提高了CPU的吞吐率与主频，从而提高了运行效率。但是管道技术也有缺点，如果任务n+1依赖于任务n产生的结果，程序就会出现问题。这种情况称之为CPU的冒险，详情见其他书籍。</p>
+<p>· <strong>超标量技术</strong>。在同一个时间周期内吗，CPU的部件乱序执行多次不同的任务。其要求这一周期内运算的指令不应有冲突，不存在跳转指令。详情见其他书籍。</p>
+<p>· 大多数CPU都具有用户态和内核态，在用户态下，类似于I/O，存储器访问，更改PSW的值等都是被禁止的。用户程序想要获取这些权限，需要从操作系统处获取。用户程序必须发出<strong>系统调用（system call）</strong>。这将使其陷入内核态，并将控制权转移至操作系统。<strong>陷阱</strong>指令使计算机从用户态切换至内核态，并启动操作系统的相关功能。当操作系统完成任务时，控制权回再次转移会用户程序，系统再次变为用户态。陷阱发生的时间是固定的，其取决于用户程序何时发出陷阱指令。类似的能使操作系统改变状态的还有<strong>中断</strong>以及<strong>异常</strong>。</p>
+<p>· 多核CPU，CPU具有多个处理器，可以同时处理多个任务。</p>
+</li>
+<li><p><strong>存储器</strong>。</p>
+<p>· 因为物理原因，存储器无法做到速度，容量，成本三方面均优。因此为了节约成本以及提高CPU的效率，计算机内有着不同的存储器来满足需要。其中速度由快到慢依次是：<strong>寄存器（Registers）</strong>，<strong>高速缓存（Cache）</strong>，<strong>主存储器（Main memory）</strong>，<strong>磁盘（Magnetic disk）</strong></p>
+<p>· 寄存器与CPU的材料相同，其与CPU一样快，因此CPU与寄存器的访问没有延迟。32位CPU寄存器的容量通常为32*32bits，64位的则是64*64bits，程序在软件中必须自行管理寄存器的使用。</p>
+<p>·　高速缓存。高速缓存主要由硬件操控，其内部又设置了L1，L2，L3三级缓存。当CPU发送来从主存储器中读取数据的请求时，会首先寻找高速缓存中是否有其需要的信息。如果有，则从高速缓存中读取并传回给CPU。在高速缓存中寻找到所需信息的这一结果称为<strong>高速缓存命中 （cache hit）</strong>。在计算机运行中产生的一些信息，如：URL解析生成的IP地址）会被存储到cache中，以备以后的需要。</p>
+<p>· <strong>内存 RAM（Random Access Memory）</strong>CPU如果从cache中找不到需要的信息时，就会去RAM中寻找。</p>
+<p>· <strong>ROM（Read Only Memory）</strong>只读存储器。</p>
+<p>· EEPROM，闪存，CMOS，机械硬盘，固态硬盘等相关信息略。</p>
+<p>· <strong>虚拟内存 virtual memory</strong>。通过把一部分物理内存映射到磁盘上，把内存做为磁盘的cache，其可以允许计算机运行大于物理内存的程序。负责处理这部分的CPU部件叫做<strong>MMU（Memory Management Unit）</strong></p>
+</li>
+<li><p><strong>I/O设备</strong></p>
+<p>· I/O设备包括两个部分，I/O设备本身与控制器。控制器是I/O设备中的一个或一组芯片。其功能是控制I/O设备，提供对操作系统的接口，使得操作系统可以通过控制器来使用I/O设备。控制器存在的原因是因为对I/O设备的操作会很复杂，直接操作不易使用。</p>
+<p>· 因为同一类型的I/O设备会有不同的控制器，而操作系统要求对任意I/O设备都能正常使用，于是操作系统通过一个软件来实现对I/O设备的操作。这个软件就被叫做驱动。</p>
+<p>· 通常来说，操作系统若想使用驱动，需要将驱动置入操作系统的内核。少部分操作系统，如MINIX3，其将驱动在用户层下运行。为了将驱动置入操作系统，有如下三种方法可以进行操作：1、将驱动链接到操作系统内核，随后重启操作系统，这是曾经的UNIX系统所采用的方法。2、告诉操作系统其需要链接一个驱动以及那个驱动的位置，之后对操作系统重启，操作系统找到驱动，将其置入。Windows系统采用的就是这样的方法。3、在设备运行的过程中安装驱动。这通常应用于热插拔设备如U盘。在其插入电脑后，操作系统从U盘中获取驱动并安装。</p>
+<p>· 每一个控制器都含有很少的寄存器。其用于外界对其进行操作。所有I/O设备的控制器的寄存器组成了**I/O端口空间(I/O port space)**。在有的电脑上，这段空间被映射到操作系统的内存上，使得操作系统可以直接操作它们，在这类电脑上，其不需要特殊的I/O指令。在有的电脑上，这段空间被放在I/O端口空间中，每一个寄存器都有一个端口地址。在这类机器上，操作系统需要在内核态下发出特殊的I/O指令来修改寄存器的值。</p>
+<p>· I/O设备的输入输出方式。I/O设备有三种输入输出方式：</p>
+<p>1、最简单的方式。CPU向控制器提出I/O请求，控制器控制设备进行操作，此时CPU处于一个循环中，其不断查看I/O操作是否结束。这种方式叫做**忙等待(busy waiting)**。其缺点是CPU在I/O操作的过程中会有大量的时间被闲置在查看I/O操作是否结束这一件事情上。</p>
+<p>2、利用**中断(interrupt)**。CPU对控制器提出I/O请求，随后操作系统阻塞这个请求去处理其他可做的事情。之后控制器控制设备进行I/O操作。当I/O操作结束时，控制器向操作系统提出中断，唤醒之前被阻塞的请求。</p>
+<p>关于中断。如上例子中，控制器在任务结束后提出中断。此时中断信号会通过特定的总线被发送至<strong>中断控制器(interrupt controller)**。如果中断控制器决定接受这个中断（不接受的原因可能是CPU正在处理其他任务或者当前中断的优先级不够高），其会将信息发送给CPU。随后将中断号发送至总线，这样CPU可以知道是哪一个设备结束了运行。一旦CPU接受了中断，程序计数器与PSW的内容通常会被压入栈中，同时CPU进入内核态。之前发送的设备标号可以用于在特定的内存中找到对应这个设备的</strong>中断处理器interrupt handler)<strong>。这段内存叫做</strong>中断向量(interrupt vector)**。当中断处理器开始运行时，其会清空程序计数器与PSW的内容，此时CPU会进行中断内容的处理。当中断处理器完成任务时，程序计数器与PSW的内容出栈，CPU继续执行之前的任务。</p>
+<p>3、使用<strong>DMA芯片(Direct Memory Access</strong>。DMA芯片是一种特别的芯片，其可以使得部分I/O控制器与内存的交互不用通过CPU的介入来进行，提升了CPU的效率。完整的DMA传输过程需要经过DMA请求，DMA响应，DMA传输，DMA结束四个过程。</p>
+<p>DMA请求：CPU首先对DMA进行设置，告诉其相关信息（处理的设备，相关的内存地址，传输的方向，传输信息的大小），随后CPU向I/O接口发出操作指令，I/O接口发出DMA请求。</p>
+<p>DMA响应：DMA控制器按照优先级响应DMA请求，随后DMA向总线提出使用请求。当总线控制权被释放时，DMA通知I/O设备开始DMA传输。</p>
+<p>DMA传输：DMA获得总线控制权后，CPU即刻挂起或执行内部操作，由DMA直接控制RAM与I/O接口进行DMA传输。</p>
+<p>DMA结束：数据传送结束后DMA释放总线控制权，并向I/O接口发出结束信号，随后I/O设备向CPU发出中断信号。</p>
+</li>
+<li><p>**总线(Buses)**。系统中有很多总线用来传输信息。如：cache, memory, PCIe, PCI, USB, SATA and DMI 每一种总线都有着不同的传输速率与功能。</p>
+</li>
+<li><p>计算机的启动。在主板上有一个叫做<strong>BIOS(Basic Input Output System</strong>的程序。BIOS包括低级的I/O软件，包括从键盘获取信息，向屏幕传输信息，进行磁盘I/O，其通常存储在**闪存(flash RAM)**中。当计算机启动时，BIOS首先被启动。其首先检测计算机上有多少可用的RAM以及键盘等其他基本设备是否被正确的接入及正常响应。它通过扫描PCIe与PCI总线去获得所有连接到计算机的设备。如果现有的设备与上一次启动计算机时的设备不同，新的设备会首先被确认。随后BIOS通过访问CMOS内存来决定如何启动。其从存储设备的第一个扇区读取信息，随后运行这段程序，启动操作系统。</p>
+</li>
+<li><p>进程：进程是运行中的程序。其中与每一个进程相关联的一个概念叫做<strong>地址空间(address space)**。进程可以对地址空间进行读写操作，地址空间包括进程的程序代码，数据，栈。地址空间也与一些寄存器（程序计数器，栈指针），一些已经打开的文件，相关的进程等相关联。通过进程这一概念，CPU可以通过轮流处理不同的进程来实现并发。在很多操作系统中，进程的所有相关信息全部被存储在操作系统的一个叫做</strong>进程表(process table)<strong>中。进程及其的地址空间通常被称为</strong>核快照(core image)**。</p>
+<p>进程管理中关键的系统调用是进程的创建与终止调用。如果一个进程可以创建多个进程，我们就可以得到一个进程的树形结构。其中被创建的进程称为创建它的那个进程的子进程。</p>
+<p>当一个进程需要与其他不同计算机上的进程进行通信时，为了防止发送出去的信息丢失，此时进程可能会要求操作系统每隔一段时间去确认对方是否收到信息。在设定完这个计时器后，程序可以去做其他的事情。当一段时间过去后，操作系统对进程发送一个<strong>alarm signal</strong>。这个信号会使进程暂时停下其现在的工作，使进程将其信息存储在栈中，然后执行信号处理程序。</p>
+<p>每一个使用操作系统的人都有一个由系统分发的<strong>UID(User Identification)**。每一个进程也有UID，其用来表明是哪一个用户创建了这个进程。每一个子进程，都有着和其父亲一样的UID。用户也可以是按照组来进行划分，每一个组都有</strong>GID(Group Identification)<strong>。其中一类特别的UID，在UNIX中叫做</strong>超级用户(superuser)<strong>，在Windows中叫做</strong>管理员(Administrator)**。其拥有着特别的权限，其可能无视一些保护规则。通常只有系统的管理员知道密码。</p>
+</li>
+<li><p>地址空间。简单操作系统只允许一个程序运行在内存中。如果要运行另一个程序，你首先必须清空内存。而现代的操作系统允许多个程序同时运行在内存中。为了防止不同的进程之间互相修改/窥探对方的信息，在计算机相应的硬件上有对应的保护机制，这一机制必须在硬件层面上实现，随后由操作系统控制。32位计算机的地址由32个bit进行表示，而64位计算机的地址则由64个bit进行表示，这就决定了两种计算机的最大地址空间。</p>
+</li>
+<li><p>文件。操作系统的特性之一就是隐藏磁盘及其他I/O设备的特性，为用户提供一个简单清晰的模型。在创建，删除，读或写的过程中，需要发起系统调用。因为我们为了读一个文件，我们必须知道它在磁盘上的位置，并且打开它，再打开它后我们还要关闭它，这一系列操作都需要系统调用来进行。</p>
+<p>大多数操作系统都有着<strong>目录directory</strong>这一概念，这一模型使得我们可以对文件进行清晰的管理。文件之间会形成一个树结构。进程与文件都有着相似的树结构，但这也仅仅是它们唯一相似的地方。每一个文件都有其再目录中对应的层级结构。为了指定某一文件，我们有两种方式。1、绝对路径。它是一串从文件层级中最顶层（<strong>根目录(root directory)）</strong>，一直到该文件所在层级的一串路径。2、相对路径。它是以当前工作的位置（<strong>工作路径(working directory)</strong>)为起点，一直到文件所在层级的一串路径。</p>
+<p>在文件打开时，这一任务会被确认。如果我们允许这一访问，系统会返回一个很小的整数。这个整数被叫做**文件描述符(file descriptor)**，其在接下来对文件的一系列操作中会起到作用。</p>
+<p>在UNIX系统中，因为UNIX系统不允许路径以驱动器作为前缀，因此在我们插入CD，USB等设备时，因为我们没有访问文件的路径，所以我们无法直接使用它们。因此UNIX系统中具有一个特定的系统调用<strong>mount</strong>。通过mount，UNIX可以将这些设备的目录连接到根目录下。</p>
+<p>UNIX系统中绝大部分资源都被抽象为文件。UNIX系统中文件类型包括以下几种：</p>
+<p>1、**普通文件(regular file)**：最常见的文件类型，这种文件包括了某种类型的数据，如文本文件，二进制文件等。</p>
+<p>2、**目录文件(directory file)**：UNIX把包含其他文件或者目录的目录也视为文件，其数据就是包含文件的文件名以及指向这些具体信息的指针。</p>
+<p>3、**块设备文件(block special file)**：这类文件用来描述一个磁盘一类的硬件设备。如，/dev/sda代表第一块SATA接口的IDE硬件。之所以被成为块设备，是因为系统读取这些文件的时候是成块而不是一个一个字节进行读取。</p>
+<p>4、**字符特殊文件(character special file)**：提供不带缓冲的访问，每次访问长度可变。系统中所有设备要么是块设备文件要么是字符特殊文件。</p>
+<p>5、**FIFO(first in first out)**：先进先出，用于进程通信，又名管道。</p>
+<p>6、**套接字(sockedrt)**：用于进程间的网络通信。</p>
+<p>7、**符号链接(symbolic link)**：指向另一个文件的文件。</p>
+</li>
+<li><p>操作系统向用户提供了抽象的接口，用户可以通过调用这些接口来实现一系列操作（比如读写文件）。而这一接口就是系统调用。系统调用由程序发起，其必须执行陷阱指令来使操作系统陷入内核态，随后操作系统将系统调用取出，通过系统调用的参数完成任务，随后返回。系统调用就像是一个特殊的程序调用，区别就是系统调用需要进入系统的内核态。</p>
+</li>
+<li><p>以UNIX中的一个系统调用read为例。在c语言中，系统调用的实现可能如下所示：</p>
+<p>count = read(fd,buffer,nbytes);</p>
+<p>这个系统调用，或者说库函数，返回实际读取的比特数。返回值通常与nbytes，但是当read函数读到文件末尾，没有足够的信息供其读取时，其返回值就会小于nbytes。</p>
+<p>操作系统首先将nbytes，buffer，fd依次入栈（c语言中参数入栈顺序反向），随后进入到库函数的调用。库程序通常用汇编编写。其将对应的系统调用号，放置在特定的寄存器中。随后其执行陷阱指令切换到内核态。内核程序随后在系统调用表中根据系统调用号找到相应的内核函数入口地址，然后调用该函数。返回后做一些检查，之后返回到进程。</p>
+</li>
+<li><p>**POSIX(Portable Operating System Interface)**，可移植操作系统接口，是IEEE为要在各种UNIX系统运行软件，而定义的一系列互相关联的API的总称。</p>
+</li>
+<li><p>与进程管理有关的系统调用</p>
+<p>· <strong>Fork</strong>。在POSIX中，唯一的创建新进程的方法就是调用Fork。Fork会将创建者所有的信息全部复制到新创建的进程中。因为现在两者的变量各自独立，两者间对各自变量的修改不会影响到对方的变量。在父进程执行fork语句前，只有一个进程在运行这段代码。而在父进程执行fork语句后，就有两个进程在执行这段代码了。同时fork有一个奇妙的特性，它只会在父进程中被调用一次，却可以在父进程与子进程中给出不同的返回值。在子进程中，其返回值为0。在父进程中，其返回子进程的**进程标识符(Process IDentifier, PID)**。当fork出现错误时，其返回一个负数。通过返回值，我们可以知道当前运行的进程是父进程还是子进程。</p>
+<p>· <strong>Waitpid</strong>。考虑以下情形，用户在cmd中输入了一串指令，此时cmd用fork创建了一个子进程，之后这个子进程处理完毕以后，cmd才会继续读入用户的指令。等待子程序处理完毕这个行为，需要用waitpid这个系统调用。当第一个参数$pid&gt;0$时，其等待一个PID为pid的进程结束。当$pid=-1$时，其等待任何一个子进程结束。当$pid=0$时，其等待同一个进程组的任何子进程退出。当$pid&lt;-1$时，其等待特定进程组的任何子进程退出，特定进程组的编号为pid 的绝对值。Waitpid的第二个参数时一个地址，当等待的进程结束时，这个地址上的值会被设为结束进程的返回值。第三个参数用于实现Waitpid的一些不同的功能，如没有子进程退出也会立即返回。</p>
+<p>·<strong>Execve</strong>。一个进程在其最初被fork时，其内容与父进程相同。为了执行与父进程不同的功能，我们需要使用execve来替换掉这个进程的核快照。第一个参数name表明要载入当前进程核快照的新程序的路径名，第二个参数表明传入新进程的命令行参数，对应于c语言main函数中的argv数组，最后一个参数指定了新程序的环境列表。</p>
+<p>关于c语言main函数中可选的三个参数:main(argc, argv, envp)</p>
+<p>举这样的一个例子，当你在命令行中输入命令    cp file1 file2时，程序cp的main函数中的argc = 3，argv[0] = “cp”,argv[1] = “file1”,argv[2] = “file2”。envp保存的是一个指针，指向环境变量。</p>
+<p>下面是一个极简化的shell实现代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TRUE 1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(TRUE)&#123;</span><br><span class="line">    type_prompt();</span><br><span class="line">    read_command(command, parameters);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span>(fork()!=<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">/* Parent code. */</span></span><br><span class="line">        waitpid(<span class="number">-1</span>, &amp;status, <span class="number">0</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">/* Child code. */</span></span><br><span class="line">        execve(command, parameters, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>与文件相关的系统调用。</p>
+<p>· read与write，在前文第17条已经描述过read，而write与之类似。</p>
+<p>· <strong>open</strong>与<strong>close</strong>，一个文件要想被读写，首先必须经过打开操作，打开的类型有多种，如：只可读，只可写，可读又可写等。一个打开的文件可以被close指令关闭，这样使得文件描述符得以接受另一个open打开的文件。</p>
+<p>· <strong>lseek</strong>，read与write指令每次都按照内存中的顺序对文件进行处理。lseek则可以将目前的指针进行移动，从而不必依次访问内存中的内容。</p>
+<p>· <strong>stat</strong>，UNIX系统会保存文件的类型，使用stat可以使我们获得这个文件当前的类型。第一个参数指定询问的文件，第二个参数是一个指针，指向将要填充信息的内存。fstat与stat的作用相同，fstat作用于一个打开的文件。</p>
+</li>
+<li><p>与目录管理相关的系统调用</p>
+<p>· <strong>mkdir</strong>，<strong>rmdir</strong>，前者创建一个目录，后者移除一个目录。</p>
+<p>· <strong>link</strong>，使得同一个文件可以以不同的名字出现在不同的目录里。这些文件共享信息，任何人对任意一个文件的修改都同时会在另外的文件上得到体现。类似一种指针的感觉。link的简单原理如下：在UNIX系统中，每个文件都有一个独一无二的数字——文件的<strong>索引编号(i-number)**。这个编号是</strong>索引节点(i-nodes)<strong>表的索引。其用来指示是谁拥有这个文件。目录条目由索引编号与ACSCII名构成。而link操作事实上就是创建了一个索引编号与原文件相同而名称不同的一个目录条目。两个文件拥有着同样的索引编号，所以它们实际上指向同一个文件。我们可以通过</strong>unlink**指令来取消link的文件。如果此时这个文件本身没有索引编号指向它，那么这个文件就失去了意义，系统会自动将其从磁盘中删除（类似各类编程语言的内存自动管理，如果没有人能访问到这片内存，这段内存就会自动销毁）。</p>
+<p>· <strong>mount</strong>，之前提到，在UNIX系统中，因为系统不支持以驱动器为前缀的目录寻址。因此在接入驱动器后，若想访问它们，则需要通过mount将其接入到根目录下。mount的第一个参数是设备对应的块设备文件，第二个参数是其将要被安装到的目录，第三个参数表明设备是以只读/可读写的状态接入文件系统。我们可以通过<strong>unmount</strong>将其解除安装。</p>
+</li>
+</ol>
+<p><strong>UNIX简单系统调用的总结</strong></p>
+<p>与进程相关的一些文件调用</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pid = fork()</td>
+<td>创建一个与父进程一样的子进程</td>
+</tr>
+<tr>
+<td>pid = waitpid(pid, &amp;statloc, options)</td>
+<td>等待一个子进程结束</td>
+</tr>
+<tr>
+<td>s = execve(name, argv, environp)</td>
+<td>替换掉一个进程的核快照</td>
+</tr>
+<tr>
+<td>exit(status)</td>
+<td>终止进程并返回状态</td>
+</tr>
+</tbody></table>
+<p>与文件相关的一些系统调用</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fd = open(file, how, …)</td>
+<td>打开一个用于读/写/读写的文件</td>
+</tr>
+<tr>
+<td>s = close(fd)</td>
+<td>关闭一个打开的文件</td>
+</tr>
+<tr>
+<td>n = read(fd, buffer, nbytes)</td>
+<td>从某个文件读取数据至缓冲区</td>
+</tr>
+<tr>
+<td>n = write(fd, buffer, nbytes)</td>
+<td>从缓冲区将数据写入某个文件</td>
+</tr>
+<tr>
+<td>position = lseek(fd, offset whence)</td>
+<td>移动文件指针</td>
+</tr>
+<tr>
+<td>s = stat(name, &amp;buf)</td>
+<td>获得一个文件的状态信息</td>
+</tr>
+</tbody></table>
+<p>与目录和文件系统的有关的一些系统调用</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s = mkdir(name, mode)</td>
+<td>创建一个新的目录</td>
+</tr>
+<tr>
+<td>s = rmdir(name)</td>
+<td>移除一个空的目录</td>
+</tr>
+<tr>
+<td>s = link(name1, name2)</td>
+<td>创建一个叫做name2的目录项，指向name1文件</td>
+</tr>
+<tr>
+<td>s = unlink(name)</td>
+<td>移除一个目录项</td>
+</tr>
+<tr>
+<td>s = mount(special, name, flag)</td>
+<td>链接一个文件系统</td>
+</tr>
+<tr>
+<td>s = unmount(special)</td>
+<td>解除一个文件系统的链接</td>
+</tr>
+</tbody></table>
+<p>杂项</p>
+<table>
+<thead>
+<tr>
+<th>Call</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>s = chdir(dirname)</td>
+<td>改变工作路径</td>
+</tr>
+<tr>
+<td>s = chmod(name, mode)</td>
+<td>改变文件的保护位</td>
+</tr>
+<tr>
+<td>s = kill(pid, signal)</td>
+<td>向进程发送一个信号</td>
+</tr>
+<tr>
+<td>seconds = time(&amp;seconds)</td>
+<td>得到从1970年1月1日到现在经过的时间</td>
+</tr>
+</tbody></table>
+<ol start="22">
+<li><strong>WIN32API</strong>。Windows系统与UNIX系统有着很大的区别。WIndows是事件驱动。当你移动鼠标，敲击键盘，点击按钮，你触发了这样的事件，随后这样的时间调用了一个程序去处理它。并把信息更新在屏幕上。而UNIX中，一个程序直接包括了执行某件事情的代码。Windows中有着大量的库函数与系统调用，微软将其定义为**Win32 API(Application Programming Interface)**。因为版本迭代需要向下兼容等原因，有些API在有些版本属于系统调用而有些则不属于(根据是否陷入内核态决定)。自然WIN与UNIX的系统调用也有很大区别，在此不做举例，详情移步搜索引擎。</li>
+<li>各种操作系统的结构，如：单片机系统，分层系统，微处理器系统等略。详细信息见搜索引擎。</li>
+</ol>
+<h1 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h1><p>本章CPU若无特指均指单核CPU</p>
+<h3 id="第一节：进程"><a href="#第一节：进程" class="headerlink" title="第一节：进程"></a>第一节：进程</h3><ol>
+<li><p>进程是运行中的程序。一个CPU在同一时间内只能运行一个进程。CPU可以在进程间快速切换从而实现**伪并行(pseudo parallelism)**。在多核处理器上，多个核心同时工作，可以处理多个程序。</p>
+</li>
+<li><p>在计算机中，所有运行的软件全部被抽象为一系列进程。进程就是一个实例化的程序。其包含当前程序计数器，寄存器，变量等的值。理论上，进程都拥有着自己的虚拟CPU，真实的CPU在进程间快速切换，以满足每个进程的运算需求。这种快速切换CPU的方式被称为**多道程序设计(multiprogramming)**。在这种CPU快速切换的条件下，在一段时间内，每个进程都会被处理，在这一段时间的角度来看，每个程序实现了(伪)并行。但是它们在CPU当中依然是串行处理的。</p>
+</li>
+<li><p>因为事实上进程的并行是由实际CPU的快速切换实现的。因此在进程中，不能使用类似于循环$n$次这种方式来计时。因为每个进程的CPU是虚拟的，进程有可能在进入计时循环后，真正的CPU就去处理其他进程，这时计时循环是无法正常计时的。</p>
+</li>
+<li><p>进程与程序的差别。程序仅仅是在计算机中以文件形式存储的一串代码。而进程则是一个实例化的程序，有着输入输出，有着运算过程，有着其自己的寄存器与程序计数器的值。</p>
+</li>
+<li><p>进程的创建。进程的创建有4种典型的情况：</p>
+<p>· 系统初始化。在电脑启动时，大量的进程被创建。有的在前台直接与用户进行交互，也有些在后台等待事件（如通讯软件来消息时，后台进程就会被唤醒执行对应操作。当发出打印请求时，与打印有关的进程就会唤醒进行打印操作）。在后台的这些进程被称为<strong>守护进程(daemon)</strong></p>
+<p>· 由一个正在运行的进程通过系统调用创造的进程。有的时候应用程序通过创建进程来实现一个相对独立的任务。比如当程序需要大量读取磁盘的数据时，此时这个程序就可以分出一个进程来处理这个操作。使得多个操作同时进行。多个进程也有利于在多核处理器上提升CPU的利用率。</p>
+<p>· 由用户发出请求创建进程。与用户进行交互的系统经常需要执行这一操作。当你在Windows操作系统上双击打开一个应用程序的时候，与之相关的进程就会被创建。</p>
+<p>· 批处理作业初始化。当批处理系统完成某一个任务以后，它就会创建一个新的进程去执行另一个任务。</p>
+</li>
+<li><p>在UNIX系统中，创建进程的唯一方式是调用fork语句。一般来说，在fork完一个新进程后，通常会使用execve来替换掉子进程的内存映像，从而使得子进程执行与父进程不同的任务。而在windows中，一个Win32函数调用，<strong>CreateProcess</strong>自己完成创建子进程并将新的程序填充至这个进程的整个操作。</p>
+</li>
+<li><p>不论是在UNIX系统，还是在Windows系统，对于可修改的空间，子进程与父进程完全不同。这意味着你在子进程内修改任何信息都不会导致父进程的信息被修改。有的时候子进程与父进程共享空间，但此时这种情况是**写时拷贝(copy-on-write)**。这意味着无论当父进程或者子进程修改这段空间内的信息时，这段空间会首先被复制到另外的空间，以此确保对这段空间的修改发生在另外的空间中。</p>
+</li>
+<li><p>进程的退出。进程的退出通常有以下4种情况：</p>
+<p>· 进程自行退出（自愿的）。如：当一个进程完成其对应的任务，或者由用户通过点击退出按钮等类似的方式退出等。</p>
+<p>· 进程因为错误退出（自愿的）。如：当在shell内输入错误的参数，导致命令无法正常工作的退出等。</p>
+<p>· 进程因为严重错误退出（非自愿的）。如：访问到不能访问的内存，发生除0错误等。</p>
+<p>· 进程被其他进程终止（非自愿的）。如：有足够权限的人使用kill(Win中为<strong>TerminateProcess</strong>)指令来中断某个进程。</p>
+</li>
+<li><p>进程的结构。</p>
+<p>在UNIX中，进程被父进程创建后，两者之间的父子关系不得改变。进程之间就像是一棵树一样被连接在一起。某个进程及其子进程以及更深的子进程构成了进程组，当用户在键盘上输入时，信息会被发送到所有的正在接受键盘指令的进程中，进程可以选择忽略它们或者处理它们。在UNIX系统启动时，一个存在于引导的特殊进程<strong>init</strong>将会被启动，这个进程会获取系统终端的个数，随后其会对每一个终端都进行依次fork，这些进程等待用户登录。如果登录成功，登录进程就会执行一个shell来供用户输入指令，随后根据指令创建相关的进程。</p>
+<p>而在Windows中，子进程与父进程之间并无很大的联系。子进程相对于父进程独立，在创建子进程的时候父进程可以获得一个叫做<strong>handle</strong>的专用记号，进程可以使用这个记号来控制子进程。但是这个记号可以被转移给其他的进程，这意味着父进程与子进程并没有实质上的父子关系，两者相互独立。   </p>
+</li>
+<li><p>进程的状态。进程之间会进行通信。如在UNIX系统中执行下列语句</p>
+<p>cat chapter1 chapter2 chapter3|grep tree</p>
+<p>这段语句的意义是，检索并输出chapter1 chapter2 chapter3这3个文件，通过|（管道），输出被转交给grep命令。grep是一条检索命令，在上述代码中搜索tree这一个词。执行这段命令的过程中有可能发生grep进程已经启动，但是前三个文件的数据还没有通过管道运输过来的状况，这个时候其必须等待输入到来才能正常执行语句。进程此时处于的状态称为阻塞态。</p>
+<p>进程的三种状态：<strong>运行态(running)**，</strong>就绪态(ready)<strong>，</strong>阻塞态(blocked)**。运行态下的进程正在使用系统，就绪态下的进程满足运行条件，等待分配CPU，阻塞态下的进程等待输入或某个信号，条件满足后转变为就绪态。其中从运行态与就绪态之间的相互转换与CPU的调度有关。</p>
+</li>
+<li><p>进程的实现。操作系统中有一个存放每个进程相关信息的表，我们称之为**process table **or **PCB(process control blocks)**。这个表中包含着进程运行所需要的全部信息。具体信息随根据特定操作系统的实现来决定。其可能包含的信息有：</p>
+<p>与进程管理有关的：寄存器，程序计数器，程序状态字，栈指针，进程状态，优先级，调度参数，进程ID，父进程，进程组，信号，进程启动时间，CPU使用时间，子进程的CPU时间等。</p>
+<p>与内存管理有关的：正文段数据指针，数据段信息指针，堆栈段数据指针。</p>
+<p>与文件管理有关的：根目录，工作目录，文件标识符，用户ID，所在组ID。</p>
+<p>有了这张表，我们可以对多道程序设计进行更深入的理解。与每一个I/O类相关联的是一个叫做**中断向量(interrupt vector)**的位置。它包含着中断程序的地址。当程序提出中断时，会通过中断有关的硬件将寄存器内的值压入栈中，随后计算机的运行地址跳入中断向量。到目前为止的实现是靠硬件实现的，CPU不可能无时无刻去查看中断向量。随后的工作是软件层面的了，CPU根据中断向量来执行对应的中断程序。在中断执行完毕后，再恢复现场，从栈中弹出之前原有的进程信息。</p>
+</li>
+<li><p>多道程序设计的简单建模。多道程序设计可以提升CPU的利用效率，最简单粗暴的来想，如果一个程序在内存中有20%的时间被用来运算，那么5个程序就可以让CPU满载。（当然这个情况不可能发生）但是从此我们可以看到多道程序对CPU的效率的提升方式。建立一个理想模型，假设每个程序等待I/O的时间概率是$p$，那么$n$个程序全部等待I/O的概率就是$p^n$，CPU的利用率就是$1-p^n$。基于这样的理想模型，我们可以发现，如果$n$值越大，$p$值越小，CPU利用率越高。此时我们可以从一定程度上解释为什么内存对计算机的运行速度有影响了。当内存越大时，意味着同时位于内存中的程序会更多，也就是$n$值越大，而这就可以提升我们运行效率。</p>
+</li>
+</ol>
+<h3 id="第二节、线程"><a href="#第二节、线程" class="headerlink" title="第二节、线程"></a>第二节、线程</h3><ol>
+<li><p>线程就像是进程中的“进程”。线程是进程之下的一个单位，有人将之称为轻量级的进程。线程之间互相共享进程的全局变量，地址空间。每一个线程都有其自己的栈，寄存器等。那么我们为什么要引入线程这一概念？其中的原因有很多。在此举出4条。</p>
+<p>· 在很多应用中，多个活动都在同时进行，有些活动会经常阻塞导致整个进程的停滞。使用线程来实现伪并行可以使得编程的模型更加简单。关于伪并行的思想，线程与进程类似。唯一的区别就是线程之间互相共享地址空间和所有的信息。</p>
+<p>· 线程和进程相比更加轻量，创造一个线程比创造一个进程需要花费的资源更少，创造与销毁一个线程更加简单。当要大量的动态快速的完成各种任务时，线程比进程更优。</p>
+<p>· 类似于进程，线程可以使多个任务重叠进行，将类似I/O操作与其他任务重叠，提高CPU利用率。</p>
+<p>· 在多核CPU上，多线程可以使得多个CPU核心同时进行同一样工作。</p>
+</li>
+<li><p>从一个实例来理解线程。考虑一个Web服务器，服务器接受某个页面的请求，之后将这个页面发送过去。绝大多数的网站都会有那么几个使用率特别高的网页（比如说主页），为了提高效率，服务器会将这个页面放在缓存中，以避免去硬盘中进行I/O读写。在这个服务器上，有一个线程叫做<strong>调度程序(dispatcher)**，其负责从互联网获得请求，之后选择一个空闲的</strong>工作线程(worker thread)<strong>，由工作线程来解决这一请求。当工作线程被唤醒后，它查看请求的页面是否位于缓存中。如果位于缓存中，则立即发送。如果不在，其会调用read指令，同时进入阻塞态。这时其他的线程就可以继续它们的工作。而如果不使用线程模型，如果直接使用一个进程，其在调用read系统调用时，进程就会被闲置，造成资源的浪费。而如果系统具有非阻塞的read函数，我们还有第三种实现方法。我们在服务器中构建一个状态表，当一个请求到来时，如果这个请求的页面在缓存中，直接发送它。如果在硬盘中，其会进行read调用，当read函数完成I/O操作后，其会被加入状态表。每次我们从状态表中获得一个事件，这个事件可能是一个新的请求，也可能是一个之前完成I/O操作的一个任务。我们根据结果的不同，进行对应的操作。像这样在有限个状态进行状态转移并进行操作的模型，我们称之为</strong>有限状态自动机(finite-state machine)**</p>
+</li>
+<li><p>进程模型有两个独立的概念，资源分配与执行。如果我们将这两个概念分开，进程保留原有的资源分配，而线程负责执行。我们就有了线程的模型。此时，进程是计算机资源分配的最小单位，线程是计算机执行的最小单位。</p>
+</li>
+<li><p>与进程类似，线程也会被分配虚拟的CPU，意味着线程自己也有独立的程序计数器，寄存器，栈，运行状态（运行，阻塞，就绪）等。但线程之间共享地址空间，全局变量，打开的文件，子进程，信号与信号处理器等。在这里，程序计数器，寄存器，运行状态与进程相似。关于为什么线程需要栈这一问题，因为线程也要调用函数，这当中可能包括递归调用的函数，在调用函数的过程中自然要用到栈来保存信息。</p>
+</li>
+<li><p>进程之间各自之间存在保护，进程之间不能互相更改，或窥探对方的信息。而线程则不然，同一个进程下的线程之间没有保护。其原因有两点：1、保护这一行为本身在软硬件层面无法实现。2、因为线程来源于同一个进程，而这往往都来自于同一个用户。因此线程之间本身没有必要实现保护。（都是一家人，那么见外干什么）。</p>
+</li>
+<li><p>在多线程程序中，进程通常从一个单线程开始（类似main函数最开始就是一个线程），由这个单线程调用thread_create函数来创建新的线程。其会返回一个线程指示器来表示新创建的线程。</p>
+<p>当一个线程完成了它的工作时，可以通过thread_exit来销毁一个进程。</p>
+<p>thread_join使得线程可以等待某一个特定的线程结束后再进行对应的操作。</p>
+<p>thread_yield使得线程可以主动放弃当前CPU的占用，这样可以将CPU的资源分配给其他更需要的线程。</p>
+</li>
+<li><p>值得思考的一些问题。线程的确给我们带来了方便，但同时也有一些问题。比如，当我们用fork语句fork出一个新的进程时，这个进程到底应不应该保留原有的线程。如果保留，那么当父进程中发生阻塞，如等待从键盘上输入数据。此时父进程与子进程应该一同阻塞，还是有其他的处理方式？当有信息输入时，到底是父进程应该获得它还是子进程应该获得它？如果不保留，那么子进程有可能因为缺少线程而不能正常运行。类似的，因为线程之间有着很多共享的信息，如果当两个线程同时对某个信息进行操作，程序是否还能正常运行？这些都是值得我们思考的问题。（都是坑啊QAQ）</p>
+</li>
+<li><p>为了实现可移植的多线程编程，IEEE协会定义了关于线程的标准<strong>POSIX</strong>，标准定义了超过60种函数调用，在此简单的选取一些函数来用作示例。</p>
+<p>Pthread_create：用于创造一个新线程，其用法与fork类似，其返回线程的标识符。</p>
+<p>Pthread_exit：用于终止销毁一个线程。</p>
+<p>Pthread_join：用于等待某一个线程结束。</p>
+<p>Pthread_yield：用于停止当前线程，将CPU资源让出。</p>
+<p>Pthread_attr_init：创建并初始化线程的属性结构（内部存放着类似线程的优先级，这样类似的东西）。</p>
+<p>Pthread_attr_destory：移除线程的属性结构。</p>
+<p>下面是一个使用c++11 thread的代码（Win上不想跑POSIX）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> kNumberOfThread = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span> id)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Launched by thread&quot;</span> &lt;&lt; id &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::thread&gt;vec;</span><br><span class="line">	<span class="comment">//Launch a group of threads.</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kNumberOfThread; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		vec.push_back(<span class="built_in">std</span>::thread(func, i));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;Lanunched from the main\n&quot;</span>;</span><br><span class="line">	<span class="comment">//Join the threads with the main thread</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; kNumberOfThread; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		vec[i].join();<span class="comment">//防止在其他线程未完成任务时，main函数的线程结束任务导致其他线程任务无法正常完成。</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果运行上述代码，你会发现，这个东西的输出不是按照顺序输出的。这是因为不同线程共用一个缓冲区。某个线程可能尚未完成对缓冲区的写入，此时调度程序切换到其他的线程导致的。为了避免这一情况，我们将在后面引入互斥的概念。</p>
+</li>
+<li><p>线程的用户层实现。有两种主要的线程实现方式：实现在用户层与实现在内核层。有的实现方式也将它们两个结合在一起。两者各有优缺点。如果我们将线程实现在用户层，此时内核并不知道进程之中有多少个线程，内核会将进程全部按照单线程来处理。</p>
+<p>实现在用户层的一个很明显的优点是，用户层实现的线程可以运行在不支持线程的操作系统中。早期的计算机都是采用这样的实现。为了满足这样的实现，每一个进程都有其自己的<strong>线程表(thread table)**。这个表类似于进程概念中的PCB，其同样保存了线程的程序计数器，寄存器。同时，为了实现对线程的管理，进程中还有一个</strong>运行时系统(run-time system)**。其负责对进程中的线程进行调度管理。其与进程调度的一个很大的区别是，在线程切换的时候，我们无需像进程切换一样陷入内核态，刷新所有空间。这使得在用户层线程调度比内核态调度速度更快。用户层实现线程也可以让开发者自定义自己的线程调度程序，同时线程的创建也不用受到内核态空间的限制。这使得我们可以创建大量的线程。</p>
+<p>但是在用户层实现也有很多问题。如果一个线程调用了一个会产生阻塞的系统调用，整个进程会被阻塞掉，此时其他所有线程就会都无法正常工作。为了解决这一问题，我们只能在进行产生阻塞的系统调用前（如read），进行一次<strong>select</strong>调用，这个调用可以查询接下来的这个系统调用是否安全（比如询问调用read是否会发生阻塞）。如果安全，我们才能正常使用这个系统调用。这种方式需要修改系统调用的库函数，这非常低效并且并不优雅，但是我们没有别的办法。放在系统调用附近用来进行检查的这串代码我们称之为**包装器(jacket or wrapper)**。</p>
+<p>另外的一个问题是页错误。具体内容将在第三章呈现，计算机中有的时候并不是所有的程序都位于主存中。如果线程在主存中访问不到所需要的程序，就会发生页错误。其会被迫在磁盘进行I/O操作。并不会意识到有线程的内核发现一个发生页错误的进程，于是内核使进程进入阻塞的状态。即使其他线程仍能工作，其也要被迫阻塞。</p>
+<p>并且，对于用户层实现的线程来说，若想让一个线程放弃CPU，我们只能手动的通过yield来实现。因为用户层实现的线程位于进程中，而进程中不存在时钟中断（时钟中断是计时器工作的基础），因此无法进行基于时间片的RR调度算法（后面调度小节会具体描述）。</p>
+<p>最重要的一点是，使用线程的很大一部分原因是因为任务本身含有会产生阻塞的系统调用。设计者希望通过线程来使得某个线程进入阻塞时，其他线程可以正常使用CPU（如之前举的Web服务器的例子）。而这与用户层实现线程的缺点相互冲突。</p>
+</li>
+<li><p>线程的内核层实现。与在用户层类似，其区别是将用户层中负责调度管理的运行时系统的任务转交给内核来处理。此时原本在每一个进程中都有的线程表被转移到内核中，由内核负责线程的调度管理。</p>
+<p>当线程发出阻塞的调用时，相当于在内核进行系统调用，这将大大降低运行的效率。但是因为线程实现在内核中，所以内核在该线程被阻塞后得以查看是否还有其他可用的线程。如果有，则由内核负责给这些线程分配CPU，从而保证CPU的利用率。</p>
+<p>因为线程实现在内核中，所以创建与删除线程的效率都要低于在用户态下实现的线程。为了解决这一问题，有些系统在线程被删除时，并不直接释放掉其所有的信息。系统对这些线程打上标记，标明它们已经不可运行，但是它们的数据结构此时仍然被保留了下来。当有新的线程被创建时，新的线程就可以利用这些不可运行的线程，从而加快速度。而在用户层实现的线程因为创建和删除速度都很快，所以没有必要进行这一操作。</p>
+<p>在内核中实现线程使得内核能意识到线程的存在，从而在线程阻塞或者发生页错误的时候可以去运行其他的线程。但是其缺点因此而生。在内核中实现的线程进行任何操作都属于系统调用，而系统调用比在用户层面调用函数要消耗更多的时间和资源，这使得内核层实现要慢于用户层实现。同时之前在第7条中提出的那些问题仍然没有得到彻底解决。</p>
+</li>
+<li><p>综合用户层实现与内核层实现，我们有一种新的实现方式。在内核层中有线程，在用户层中也有线程。一些用户层中的线程与一个内核层的线程相关。程序员可以自己决定两者之间的数量关系。此时在用户层的线程的创建与删除就与在用户层中实现线程一样。在内核看来，这些事件都是一个在内核层实现的线程在处理。而当这个内核层手下的线程发生如阻塞这样的状态，内核会将这个在内核层的线程阻塞，同时将CPU转交给其他未被阻塞的线程。这个方法综合了用户层实现与内核层实现的优点。</p>
+</li>
+<li><p><strong>调度程序激活机制(scheduler Activations)**，是一种吸收了用户层实现与内核层实现线程的优点的一种机制。机制的一个重点在于，操作系统的内核可以向上层（用户层）传递信息。通常的设计上，往往是顶层调用底层，而个机制中，有一个方法叫做</strong>上行调用(upcall)**。它将调用过程反了过来。在这种设计中，线程实际上还是在用户层实现。首先，内核对每个进程分配一个初始的虚拟CPU，进程若有需要可以申请更多的CPU，内核可以通过回收CPU来把它们分配给其他需要CPU的进程。进程通过它的运行时系统将虚拟CPU分配至其管理的线程中。 当阻塞或页错误发生时，内核发出上行调用调用运行时系统，其将相关信息传递给运行时系统后，运行时系统被唤醒。运行时系统将这个被阻塞的线程标记为阻塞，随后根据其自己的调度算法选择一个其他的可用线程运行。当这个阻塞结束时，内核再次通过上行调用告知运行时系统，运行时系统再次根据自己的调度算法来处理这个事件。而当中断发生时，如果这个中断与当前运行的线程无关，当中断结束的时候会继续运行之前的线程。如果这个中断与当前运行的线程有关，当前的线程会被挂起，随后由运行时系统来决定接下来的操作。</p>
+</li>
+<li><p>**弹出式线程(pop-up thread)**。线程在分布式系统中经常被使用。其中一个重要的例子就是系统接受信息的这一过程。传统的方式是创建一个处于阻塞态的进程，当信息传来的时候进程被唤醒，之后去处理信息。如果在处理信息的时候，又有新的信息进来的话，此时那些信息就会排队等待。而如果使用线程来处理的话，每当有信息进来的时候，系统就会创建一个线程来处理这个信息，这个进程就叫做弹出线程。弹出线程得优点是其没有历史信息，可以被快速的创建和删除。应用弹出线程可以降低信息处理的延迟，使得信息被及时的处理。因为弹出式线程需要进行大量在内核下的操作，所以将线程实现在内核可以更快，并且实现更简单。但是相对的，一旦线程在内核中发生错误，其产生的影响也要比在用户态下的线程要大。</p>
+</li>
+<li><p>单线程转换为多线程。单线程程序重写为多线程程序会面临许多问题。</p>
+<p>比如同一个变量，当某个线程对其进行操作，但操作还未完成时，线程被切换。此时其他线程运行，其他线程对这个变量进行更改，此时原来的线程再次运行时就有可能出现问题。这是对全局变量的应用所出现的问题。在某些情况下，可以通过把全局变量全部拷贝一份，使得每个线程都单独拥有一个这一的变量来解决。</p>
+<p>有的系统库函数不支持多线程。比如有的库函数在设计上只能同时有一个副本在运行，其不允许多个线程同时使用它。</p>
+<p>在分配内存的时候多个线程的运行会导致堆栈内存分配的错误。</p>
+<p>如果线程在用户层实现，从内核传来的信号可能无法正确传递到线程。因为此时内核看不到具体的线程。同时当线程发生堆栈溢出时，因为内核意识不到线程及线程的栈，其也无法正常处理这一问题。</p>
+<p>尽管这些问题不是不可逾越的，但是要克服它们需要花费大量的精力。设计一个多线程程序比设计一个单线程程序再将其转换至多线程程序要更简单。</p>
+</li>
+</ol>
+<h3 id="第三节、进程间通信"><a href="#第三节、进程间通信" class="headerlink" title="第三节、进程间通信"></a>第三节、进程间通信</h3><ol>
+<li><p>**进程通信(InterProcess Communication IPC)**，进程通信大致由三个问题组成：1、如何实现进程之间的通信。2、如何确保两个进程的运行不互相影响。3、如何确保两个进程之间以能正常工作的顺序运行。对于线程来说，因为线程之间共享同一个地址空间，所以第一个问题可以很容易的被解决。而对于后两个问题，解决进程间通信的方法同样可以被应用到线程中。</p>
+</li>
+<li><p> **竞态条件(race condition)**，当多个进程共享同时读写某个共享的数据，并且最后程序运行的结果取决于进程之间运行的精确顺序时，这种条件我们称之为竞态条件。当发生竞态条件时，进程可能会因为CPU的调度问题，导致运行结果不确定，从而产生严重的后果。应该避免竞态条件的出现。</p>
+</li>
+<li><p>**互斥(mutual exclusion)**，指某个进程在使用共享的变量数据时，其他的进程将不能对这些数据进行操作</p>
+</li>
+<li><p>**临界区(critical region/critical section)**，导致竞态条件发生的这些变量所处的内存空间称为临界区。</p>
+</li>
+<li><p>为了很好的解决竞态的发生，我们需要达成四个条件：1、临界区内不能同时有多个进程。2、解决方案不能依赖于CPU的速度或数量。3、在临界区外运行的进程不能阻塞任何进程。4、不能存在无限等待进入临界区的进程。 </p>
+</li>
+<li><p>实现互斥中简单粗暴的方式之一：关闭中断。对于单核CPU来说，如果我们关闭了中断功能，那么时钟中断就不会发生。进程也不会从一个进程被切换到另一个进程了。但是这样做的问题很明显，给进程以关闭中断功能的能力风险太大，比如进程关闭中断后却没有打开中断，那整个操作系统都要完蛋。并且对于多核CPU来说，关闭一个CPU的中断功能并不能阻止其他的CPU访问临界区。但是对于内核来说，在其执行一些仅需一些较少指令就可以完成的变量更新时，关闭中断是一种很方便的做法。但是这种操作并不能解决所有问题，同时也不适合用用户进程中。</p>
+</li>
+<li><p>实现互斥的第二种方法：<strong>锁变量</strong>。我们定义一个共享的变量，并把它初始化为$0$。当一个进程进入临界区时，就将这个变量置1，当进程进入临界区前，需要确认这个变量的值。如果值为$1$，则说明此时临界区有进程，此时进程等待锁变量变为$0$时再进入临界区。这种思想非常有意义，但是如果我们不进行其他的操作的话，仅仅这样程序依然会出现问题。想象一下，A进程进入临界区，但是在其修改锁变量之前，CPU转而运行进程B。此时B发现锁变量依然为$0$，进入临界区。如此一来，临界区便有了两个进程。</p>
+</li>
+<li><p>实现互斥的第三种方法：严格轮换法。代码如下。我们设置一个变量$turn$，其初始值为$0$。假设现在只有两个进程A与B，当$turn$的值为$0$时，进程A可以进入临界区。当$turn$的值为$1$时，进程B可以进入临界区。在进程A结束完临界区的工作后，将$turn$设置为$1$，同理，当进程B结束完在进程区的工作时，进程B将$turn$设为0。每个进程使用一个while循环来检验$turn$的值。这个过程中，重复测试某个变量的值是否符合要求的行为称为<strong>忙等(busy waiting)**。这种利用忙等的锁我们称之为</strong>自锁(spin lock)**。使用这种方法，我们可以实现互斥行为。但是这种方法的使用要求非常苛刻。其要求进程之间必须按照特定的顺序依次执行。并且，在忙等的过程中，CPU实际上没有进行有效的工作。这违背了很好解决竞态的四个条件中的第三条，其他的程序因为这个锁变量而进入阻塞了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Process1:</span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">while</span>(turn != <span class="number">0</span>);</span><br><span class="line">    critical_region();</span><br><span class="line">    turn = <span class="number">1</span>;</span><br><span class="line">    noncritical_region();</span><br><span class="line">&#125;</span><br><span class="line">Process2:</span><br><span class="line"><span class="keyword">while</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">while</span>(turn != <span class="number">1</span>);</span><br><span class="line">    critical_region();</span><br><span class="line">    turn = <span class="number">1</span>;</span><br><span class="line">    noncritical_region();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>实现互斥的第四种方法：在1981年，G.L.Peterson发现了一种方法来实现两个进程之间的互斥。代码如下。在每次进程要进入临界区以前，首先调用enter_region来请求进入临界区。Peterson的方法结合了严格轮换法与预警变量。interest数组的存在使得进程不必遵循严格轮换的要求。具体的原因请读者动手模拟实际的各种情况，模拟以后自然会明白。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FALSE 0</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TRUE 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> turn;</span><br><span class="line"><span class="keyword">int</span> interested[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enter_region</span><span class="params">(<span class="keyword">int</span> process)</span><span class="comment">//process is 0 or 1</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> other;</span><br><span class="line"></span><br><span class="line">	other = <span class="number">1</span> - process;</span><br><span class="line">	interested[other] = TRUE;</span><br><span class="line">	turn = process;</span><br><span class="line">	<span class="keyword">while</span> (turn == process &amp;&amp; interested[other] == TRUE);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">leave_region</span><span class="params">(<span class="keyword">int</span> process)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	interested[process] = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>**TSL(test and lock)**指令常常出现在为多核操作系统设计的计算机上。它有着如下的形式</p>
+<p>TSL RX,LOCK</p>
+<p>TSL指令总共分为三步。首先，其从名为lock的内存地址中读取数据。之后其将数据复制到名为RX的寄存器中。最后在给lock赋上一个非0的值。这三个操作构成一个不可拆分的原子操作。CPU在执行TSL指令时会锁死内存总线，这样就可以实现原子操作。需要注意的时，与锁死中断不同，锁死中断只能防止当前CPU对临界量的操作。而如果时锁死内存，则可以防止其他所有的CPU对临界量进行操作。有了TSL，我们之前提到的第二种实现互斥的方法，锁变量法便可以正常的实现了。同时，与TSL类似的一种指令<strong>XCHG</strong>也是通过相同的原理完成和TSL一样的任务。代码如下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">enter_region:</span><br><span class="line">	TSL REGISTER,LOCK			;copy lock to register and set lock to 1</span><br><span class="line">	CMP REGISTER,#0				;was lock zero?</span><br><span class="line">	JNE enter_region			;if it was not zero,lock was set,so loop</span><br><span class="line">	RET							;return to caller;critical region entered</span><br><span class="line">	</span><br><span class="line">leave_region:</span><br><span class="line">	MOVE LOCK,#0				;store a 0 in lock</span><br><span class="line">	RET							;return to caller</span><br></pre></td></tr></table></figure></li>
+<li><p>Perterson与TSL解法都是正确的，但是它们都存在着一些相同的问题。这一问题就是忙等。当程序陷入忙等时，此时CPU的资源会被浪费。并且再某些情况下的调度时，会出现意想不到的问题。比如说两个进程，分别叫做H与L，H有着更高的优先级。假设调度算法规定当H进入就绪态时，不运行L而运行H。但是如果此时H的运行需要等待L离开临界区时，问题就出现了。因为忙等的H进程仍然属于就绪态，因为优先级的缘故，L进程没有机会被运行，因而H进程也没办法结束忙等，这陷入了一个死循环。这种情形也被称为**优先反转问题(priority inversion problem)**。</p>
+</li>
+<li><p><strong>sleep</strong>与<strong>wakeup</strong>。sleep与wakeup是两个系统调用，sleep使得进程挂起进入阻塞状态，此时的进程等待其他进程对其使用wakeup唤醒这个进程。这两个系统调用都只有一个参数。两者通常与内存地址相配合使用。</p>
+</li>
+<li><p><strong>生产者消费者问题(producer-consumer problem)**。这个问题的其中一个简化版本是，两个进程共享一个固定大小的缓冲区。其中一个进程叫做生产者，其负责向缓冲区内填充数据。另外一个进程叫做消费者，其负责从缓冲区中取出数据。这个问题的核心在于，再缓冲区数据满了的时候，生产者不能向其填充数据。再缓冲区为空时，消费者也不能向其填充数据。于是结合第12条中的sleep与wakeup两个系统调用，我们很自然而然的可以想到，使用一个变量来保存缓冲区内目前的数据的个数。当生产者想要放入数据时，判断缓冲区是否装满。如果没有装满，则正常装填。如果装满，则对其使用sleep，等待消费者取走数据后再将其awkeup，同理消费者也可以使用类似的方法来处理。下面是上述思想的代码实现。然而如果这样做，将会满足竞态条件，出现致命的问题。假定现在生产者将缓冲区填满并即将执行sleep，但是却被挂起时，此时切换到了消费者，因为此时生产者还没有执行sleep指令，所以此时消费者的wakeup指令对生产者不起作用。当消费者拿空缓冲区后调用sleep被挂起后，生产者随后执行了之前未执行完毕的sleep指令。此时两个进程全部被挂起，没有人能唤醒它们。此时这种因多个线程再执行过程中因为竞争资源或彼此通信而造成的阻塞现象叫做</strong>死锁(deadlock)<strong>。为了解决这个问题，我们可以通过添加一个</strong>唤醒等待位(wakeup waiting bit)**来解决问题。当执行wakeup操作时，如果被唤醒的进程没有被挂起，我们就把唤醒等待位置$1$。当某个进程要执行sleep时，如果其唤醒等待位为$1$，则不进行挂起的操作。唤醒等待位就像是一个储蓄罐一样，用来储存当前用不上的wakeup指令。如此一来程序就可以正常运行了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100<span class="comment">//number of slots in the buffer</span></span></span><br><span class="line"><span class="keyword">int</span> count = <span class="number">0</span>;<span class="comment">//number of item in the buffer</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> item;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (TRUE) &#123;</span><br><span class="line">		item = produce_item();<span class="comment">//generate next item</span></span><br><span class="line">		<span class="keyword">if</span> (count == N)sleep();<span class="comment">//if buffer is full, go to sleep</span></span><br><span class="line">		insert_item(item);<span class="comment">//put item in buffer</span></span><br><span class="line">		count = count + <span class="number">1</span>;<span class="comment">//increment count of items in buffer</span></span><br><span class="line">		<span class="keyword">if</span> (count == <span class="number">1</span>)wakeup(consumer);<span class="comment">//was buffer empty?</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> item;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (TRUE) &#123;</span><br><span class="line">		<span class="keyword">if</span> (count == <span class="number">0</span>)sleep();<span class="comment">//if buffer is empty, go to sleep</span></span><br><span class="line">		item = remove_item();<span class="comment">//take item out of buffer</span></span><br><span class="line">		count = count - <span class="number">1</span>;<span class="comment">//decrement count of items in buffer</span></span><br><span class="line">		<span class="keyword">if</span> (count == N - <span class="number">1</span>)wakeup(producer);<span class="comment">//was buffer full?</span></span><br><span class="line">		consume_item(item);<span class="comment">//print item</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>**原语(atomic action)**原语是一系列不可被分割的操作。</p>
+</li>
+<li><p><strong>信号量(Semaphores)**信号量是Dijkstra在1965年提出的将整型变量作为保存wakeup可调用次数的一个概念。Dijkstra提出，对信号量应有两个操作，分别是P与V（PV操作的简称源于荷兰语）。P操作检查信号量，如果信号量大于$0$，就将信号量减一，并继续程序。如果信号量等于$0$，则挂起当前进程，此时这个程序的down语句仍没有执行完毕。V操作检查信号量，如果当前有因为该信号量而被挂起的进程，就会从被挂起的进程中唤醒一个。如果没有被挂起的进程，就会将这个信号量加$1$。PV操作通常以系统调用的形式被实现，因为PV操作本身语句简单，禁止PV操作过程中的中断不会有什么影响。同时，如果在一台多核CPU的计算机上，改变信号量的过程需要由TSL或XCHG语句来防止多个CPU访问信号量。有了信号量这一工具，我们可以用它来实现互斥与</strong>同步(synchronization)**。同步是指进程以一定的顺序运行的一个状态。对于生产者消费者问题，我们可以用PV操作来进行解决。我们需要设置$3$个信号量，$mutex,empty,full$。其中后两个信号量分别用来表示当前缓冲区中空位的个数和缓冲区中所剩余数据的个数。因为这两个信号量属于临界资源，所以对它们的操作必须互斥，因而我们引入了第一个信号量$mutex$。这里的$mutex$是一个二进制信号量，其状态有$0,1$两种，初始值为1。为了实现互斥，在进入临界区时对其执行一次P操作，此时$mutex$值为0，其他进程在访问临界区前执行P($mutex$)时会被挂起，在离开临界区时对其执行一次V操作，使得其他进程得以进入临界区。生产者消费者的PV代码如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> semaphore;</span><br><span class="line">semaphore mutex = <span class="number">1</span>;</span><br><span class="line">semaphore empty = N;</span><br><span class="line">semaphore full = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">producer</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> item;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (TRUE) &#123;</span><br><span class="line">		item = produce_item();</span><br><span class="line">		P(&amp;empty);</span><br><span class="line">		P(&amp;mutex);</span><br><span class="line">		insert_item(item);</span><br><span class="line">		V(&amp;mutex);</span><br><span class="line">		V(&amp;full);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">consumer</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> item;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (TRUE) &#123;</span><br><span class="line">		P(&amp;full);</span><br><span class="line">		P(&amp;mutex);</span><br><span class="line">		item = remove_item();</span><br><span class="line">		V(&amp;mutex);</span><br><span class="line">		V(&amp;empty);</span><br><span class="line">		consume_item(item);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>关于mutex与二进制信号量。mutex与二进制信号量有着细微的差别。首先mutex表示的是互斥锁，而信号量用来在进程间传达信息。尽管二进制信号量可以实现mutex的任务，但是在具体实现中两者仍可能会有差别。其中mutex只允许创建它的进程对它进行释放，而信号量则可被任何进程进行释放。根据这一点，使用mutex可以让调度系统得以安全的提升优先级，以避免出现优先级反转的现象。</p>
+<p>mutex实现的互斥与使用TSL的互斥有着很大的不同，TSL的互斥是使用忙等来实现互斥，而mutex则是使用sleep或thread_yield来暂时放弃CPU。同时为了满足更多需求，封装后的mutex还往往提供很多功能，如mutex_trylock，这个调用用来测验接下来如果尝试对mutex进行上锁会发生的结果。返回值分别为上锁和返回错误代码两种情况。这个功能可以让程序更加灵活。</p>
+</li>
+<li><p><strong>管程(monitor)**。在生产者消费者的例子里面，看起来使用mutex与信号量足够让我们解决问题。但是，一旦问题变得更加复杂，大量的PV操作散落在不同线程的不同位置，而PV操作的顺序经常有着严格的要求。稍有不慎，程序便会陷入死锁或者其他的错误。这给我们的使用带来不便。为了解决这一问题，管程应运而生。管程是一种抽象的封装好的一种结构。管程内部有函数，变量，数据结构等。管程具有一个良好的性质：管程内部在同一时间只能有一个程序运行。因为管程通常由编译器或第三方来实现，这使得管程的设计本身不容易出错，从而避免了使用mutex与信号量带来的可能差错。为了完全实现mutex与信号量的功能，仅仅有这样的一个性质还不够。观察生产者消费者问题，我们使用$full$与$empty$来表示缓冲区的状态。为了实现这一功能，我们引入了</strong>条件变量(condition variables)<strong>，与</strong>wait<strong>和</strong>singal**方法。当我们运行生产者进程并发现缓冲区已满时，我们可以定义一个条件变量$full$，使用wait(full)来使程序阻塞，从而运行消费者程序。而消费者可以通过singal(full)来唤醒生产者。不同的设计会有不同的效果。在Hoare的设计中，发出singal后，被唤醒的程序立即运行，同时原有的程序被挂起。而在Hansen的设计中，原有的程序会立刻退出管程。需要注意的是，环境变量不是计数器。它不会像信号量一样发生累加。这意味着发出一个singal后，如果没有程序wait这个环境变量，这个singal就是一个无效的。此时我们会发现，wait与singal和sleep与wakeup十分相似。但是考虑到在管程中不会有两个同时运行的程序。这使得我们不会出现像第13条中使用sleep与wakeup引发的那个问题。同时，程序可以在执行singal前先访问响应的条件变量，根据条件变量的状态灵活的进行处理。下面是用伪代码写成的生产者消费者问题。（因为c与c++并没有原生支持管程，因此使用了伪代码）</p>
+<figure class="highlight pascal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">monitor ProducerConsumer</span><br><span class="line">	condition full,empty;</span><br><span class="line">	integer count;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">procedure</span> <span class="title">insert</span><span class="params">(item: integer)</span>;</span></span><br><span class="line">	<span class="keyword">begin</span></span><br><span class="line">		<span class="keyword">if</span> count = N <span class="keyword">then</span> wait(full);</span><br><span class="line">		insert_item(item);</span><br><span class="line">		count := count +<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> count = <span class="number">1</span> <span class="keyword">then</span> signal(empty)</span><br><span class="line">	<span class="keyword">end</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">remove</span>:</span> integer</span><br><span class="line">	<span class="keyword">begin</span></span><br><span class="line">		<span class="keyword">if</span> count = <span class="number">0</span> <span class="keyword">then</span> wait(empty);</span><br><span class="line">		remove = remove_item;</span><br><span class="line">		count := count + <span class="number">1</span>；</span><br><span class="line">		<span class="keyword">if</span> count = N - <span class="number">1</span> <span class="keyword">then</span> signal(full)</span><br><span class="line">	<span class="keyword">end</span>;</span><br><span class="line">	</span><br><span class="line">	count := <span class="number">0</span>;</span><br><span class="line"><span class="keyword">end</span> monitor;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">procedure</span> <span class="title">producer</span>;</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">while</span> true <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">begin</span></span><br><span class="line">		item = produce_item;</span><br><span class="line">		ProducerConsumer.insert(item)</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">procedure</span> <span class="title">consumer</span>;</span></span><br><span class="line"><span class="keyword">begin</span></span><br><span class="line">	<span class="keyword">while</span> true <span class="keyword">do</span></span><br><span class="line">	<span class="keyword">begin</span> </span><br><span class="line">		item = ProducerConsumer.remove;</span><br><span class="line">		consume_item(item)</span><br><span class="line">	<span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span>;</span><br></pre></td></tr></table></figure></li>
+<li><p>消息传递。略，详见计算机网络。</p>
+</li>
+<li><p><strong>RCU(Read-Copy-Update</strong>。在Linux系统中，存在着RCU技术。RCU技术应用于无锁编程，不使用锁有利于提高系统的性能。但是随之而来的问题是，如果没有锁，我们该如何解决竞态条件。RCU的思想是，增加写者的开销，以达到使读者可以几乎无开销的一种方式。不同读者访问数据的时间不一样，不同写者访问数据的时间也不一样。正常使用锁的思路是对数据上锁，按照时间线依次处理。而RCU则是将数据进行一次复制，得到副本。写者对数据的更改起初全部在副本数据中进行。假设现在在时刻T以前的所有读者全部完成访问了，那么此时，我们就可以将实际的数据替换为副本数据，实现合并。这实际上是写者的写数据延迟。所有的读者在访问临界数据时不能被阻塞或者挂起，这样我们就可以通过判断CPU切换的次数来判断是否T时刻前的读者都已经完成了访问。从写者修改到完成替换这一段时间称为**宽限期(grace period)**。下面是一个具体的使用RCU来完成链表修改的一个例子。其中，p与q分别为指向链表某一元素的指针。第一行与第二行将p中元素复制到q中。第三行第四行对副本q进行修改。随后调用list_replace_rcu函数，从此时刻以后所有读者看到的链表中的这个元素的内容不再是p中的内容，而是q中的内容，此时刻以前的读者看到的依然是p中的旧版本。随后调用synchronize函数，进行宽限期的等待。在等待结束后，使用kfree释放掉原有的p指针，完成替换。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">q = kmalloc(<span class="keyword">sizeof</span>(*p), GFP_KERNEL);</span><br><span class="line">*q = *p;</span><br><span class="line">q-&gt;b = <span class="number">2</span>;</span><br><span class="line">q-&gt;c = <span class="number">3</span>;</span><br><span class="line">list_replace_rcu(&amp;p-&gt;<span class="built_in">list</span>, &amp;q-&gt;<span class="built_in">list</span>);</span><br><span class="line">synchronize_rcu();</span><br><span class="line">kfree(p);</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="第四节、调度"><a href="#第四节、调度" class="headerlink" title="第四节、调度"></a>第四节、调度</h3><ol>
+<li><p>在多道程序设计中，多个程序同时运行。然而单个CPU核心实际上只能串行工作，不能并行工作。为了能够实现多道程序，我们使用并发的方式来处理。因此，我们需要合理给各个程序分配CPU。在操作系统中，执行分配决定的部分叫做<strong>调度器(scheduler)**，调度器执行的算法叫做</strong>调度算法(scheduling algorithm)**。过多的进行进程或线程的切换会浪费大量的CPU资源，因为我们需要保留原程序运行的环境，变量信息等，因此我们应该谨慎的来设计调度算法。适用于进程的一些调度算法同样适用于线程。</p>
+</li>
+<li><p>进程在运行的时段内会在计算与I/O两个状态之间来回切换。有的程序计算量比较大，其运行的时间主要受限于CPU，我们称这个是<strong>CPU受限的(compute-bound/CPU-bound)**。同样的有的程序I/O量比较大，其运行的主要时间主要首先于I/O，那么我们称其为</strong>I/O受限的(I/O-bound)**。随着科技的发展，CPU的运行速度越来越快，CPU受限的程序在逐渐转为I/O受限的。因此在未来，对I/O受限的程序进行调度将会变得非常重要。</p>
+</li>
+<li><p>引发CPU调度的原因有很多，包括但不限于以下四种：1、子进程的创建，中断的产生，进程或线程的阻塞，进程或线程的退出。调度算法可以被分为两类：<strong>抢占式(preemptive)**与</strong>非抢占式(nonpreemptive)**。前者在进程运行一段时间后，保存其运行的信息并切换到其他的进程，这是进程被迫交出CPU。而后者就是让这个程序一直运行，直到其阻塞或者运行结束，这是由进程主动交出CPU。</p>
+</li>
+<li><p>从不同类别的操作系统来看调度：</p>
+<p>· 批处理系统(Batch)。通常来说使用批处理系统时，用户不要求及时的快速得到操作的响应。因此，在批处理系统中，往往不需要进行大量的调度。CPU可以节省下在频繁切换中所消耗的时间，提升效率。因此有着长时间周期的抢占式算法或非抢占式算法都是适合批处理系统的。同时批处理系统的调度算法在很多场合都有应用，因此比较重要。</p>
+<p>· 交互式系统(Interactive)。相对于批处理系统而言，交互式系统要求系统在人可接受的时间范围内完成响应。系统为多个用户服务，系统调度需要考虑到不同用户之间的需求。</p>
+<p>· 实时操作系统(real)。相对于交互式系统而言，实时操作系统对响应有着更强的需求。实时操作系统用于类似火箭发射，工业控制等对时间要求极为严格的平台。系统上运行的程序只服务于当下的任务。系统采用抢占式或甚至无需采取调度算法，系统永远为了最快完成当下任务而运行。</p>
+</li>
+<li><p>调度算法所要达成的目标与衡量指标：</p>
+<p>· 对于所有的操作系统。1、公平性–给所有进程一个相对公平的CPU使用时间。2、规则执行–所有事件都要能按照规则严格执行。3、平衡性–让系统的每一部分都尽量处于工作状态。</p>
+<p>· 批处理系统。1、<strong>吞吐量(Throughput)</strong>–每小时执行的作业数。2、<strong>周转时间(Turnaround Time)</strong>–作业从提交到完成的时间。3、CPU利用率–CPU在使用的时间。</p>
+<p>· 交互式系统。1、响应时间。2、相称性–满足用户的需求。</p>
+<p>· 实时操作系统。1、任务有效期。2、可预测性–防止多媒体相关的部分因没有连续处理发生严重恶化。 </p>
+</li>
+<li><p>常见的一些调度算法：</p>
+<p>· 用于批处理系统中：</p>
+<p>1、**先进先出FIFO(first in first out)**。系统将按照作业进入的顺序依次完成每一个作业。这种调度算法的优点是简单明了，并且适用于一些本身就满足FIFO性质的业务，如排队。算法的问题是，假设作业A是CPU受限的，其使用1sCPU后会经历一个短暂的IO过程。同时，一起在等待的算法还有许多IO受限的作业，我们将其称为B，每一次作业运行都要读写很长时间的IO。那么我们就会发现，根据FIFO原理，当A作业使用CPU时，IO设备此时被B所占用。A作业将会被迫等待许多B程序完成IO操作。使得A程序有着很长的周转时间。</p>
+<p>2、**短作业优先(Shortest Job First)**。系统运行完当前作业后，系统将从其他众多的作业中，选择一个运行时间最短的进行运行。这种调度算法可以减少作业的平均周转时间，但是可能会使需要较长时间来运行的作业带来饥饿效应(长作业迟迟得不到处理)。</p>
+<p>3、**短剩余时间优先算法(Shortest Remaining Time Next)**。当有新作业将要到达时，系统会从所有作业中（包括正在运行的作业）选择一个最早完成的作业来执行。如果选择的时新作业，系统会将原先正在处理的作业暂停。</p>
+<p>· 用于交互式操作系统中：</p>
+<p>1、<strong>时间片调度(Round-Robin)**，每个进程执行一段时间，我们称其为</strong>时间片(quantum)**。当时间片用尽后，调度系统就会将其插入至等待队列的最后，随后执行下一个进程。RR调度的问题是，如果我们给每个进程分配较小的时间片，CPU就会在切换进程上花费大量的时间。如果我们分配较长的时间片，我们又会降低交互系统的交互功能。</p>
+<p>2、**优先级调度(priority scheduling)**，因为不同任务的重要程度不同，有些任务需要更快的处理，有些则没有立即处理，因此我们引入了优先级。如当一个CPU受限的程序运行时，其使用硬盘的优先级就应该是较高的。这样可以让这个程序尽早的完成IO处理从而使用CPU。系统将根据规则选择优先级较高的程序运行。系统可以静态或动态的分配给每个进程优先级。同时为了防止高优先级的任务无休止的运行下去，系统还可能会随着其运行时间的增加消减其优先级。优先级调度可以与RR算法很好的结合，比如我们在优先级页中的按照优先级依次执行，每一次执行，我们都对页中某一行（任务的优先级都相同）执行RR算法，直到该行处理完毕。随后系统转而运行下一行（较低的优先级）。</p>
+<p>3、**多级队列(Multiple Queues)**，系统中存在着多个队列，每个队列采取不同的调度算法。这使得不同类型的任务可以被分别置入不同的队列中来得到更适合的调度。有可能每个队列之间都采取RR算法但是时间片不同，有可能一个队列采取FIFO来处理队列任务另一个队列使用RR算法来实现交互。此时系统将每个队列看做任务，按照一定规则去决定现在运行哪一个队列，随后按照该队列的规则执行任务。</p>
+<p>４、短进程优先，类似于短作业优先的调度算法，不再赘述。</p>
+<p>５、**保证调度(Guaranteed Scheduling)**。系统保证对每一个任务分配相同的CPU时间，当一个进程执行时，系统会记录下这个进程使用CPU的总时间。在下次调度时，系统会选择使用CPU时间最小的进程。</p>
+<p>6、**彩票调度(Lottery Scheduling)**。系统对每个进程发放ticket，每次调度时系统根据进程的ticket来确定每个进程被分配到CPU的概率。进程拥有的ticket越多，便越容易获得CPU。协同工作的进程之间可以互相交换彩票以提高效率。 </p>
+<p>· 实时操作系统的相关信息：</p>
+<p>实时操作系统对时间有着严格的要求，其任务都有一个截止时间，任务必须在规定的时间内完成。如一个音频解码器，如果处理器没能在规定时间内处理某个声音信号，那么这个声音信号就会失真。根据任务是否必须在截止时间以前完成，我们将实时操作系统分为<strong>硬实时(hard real time)**和</strong>软实时(soft real time)<strong>。根据实时操作系统的作业到达规律，我们将其分为</strong>周期(periodic)<strong>与</strong>非周期(aperiodic)<strong>。前者意味着调度算法可以预先知道未来的作业从而进行调度规划。可以实现所有任务都成功完成的情况我们称之为</strong>可规划的shecdulable)**。实时操作系统的规划算法可以是动态的也可以是静态的。静态的规划算法要求我们实现知道任务的到达时间与需要的CPU时间。</p>
+</li>
+<li><p>调度的政策与机制(Policy Versus Mechanism我不知道对应的中文是啥了)。在之前举的例子中，操作系统对每个进程进行调度。但事实上，每个进程都可能会有很多受其管理的子进程。在这种情况下，父进程往往更加清楚子进程的情况。如果将调度完全交由内核来处理，调度程序就无法利用这些信息得到更优的规划。因此我们可以将调度机制的一部分从内核中分离开来，其允许进程向调度机制中添加参数，改变调度的情况。此时内核仍然决定着核心的调度算法，区别仅仅是一些参数可以由用户态下的进程来决定。</p>
+</li>
+<li><p>线程的调度。在用户层的线程没有时钟中断，其调度依赖于运行时系统与自身的yield释放CPU。并且在用户层的线程允许用户自定义运行时系统来自行高效调度线程。在内核层的线程在每次调度切换时会消耗大量的资源，使得线程的调度需要更加谨慎。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"># 操作系统</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/07/ACM/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95%E6%A8%A1%E6%9D%BF/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0"><span class="nav-number">2.</span> <span class="nav-text">第二章</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%EF%BC%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.0.1.</span> <span class="nav-text">第一节：进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.0.2.</span> <span class="nav-text">第二节、线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">2.0.3.</span> <span class="nav-text">第三节、进程间通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E8%B0%83%E5%BA%A6"><span class="nav-number">2.0.4.</span> <span class="nav-text">第四节、调度</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="akemihomura"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+    </div>
+</body>
+</html>

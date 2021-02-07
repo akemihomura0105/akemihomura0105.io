@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"akemihomura0105.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="此章节默认为x86-64指令集">
+<meta property="og:type" content="article">
+<meta property="og:title" content="csapp第三章学习笔记">
+<meta property="og:url" content="http://akemihomura0105.github.io/2020/03/07/CSAPP/CSAPP%E7%AC%AC%E4%B8%89%E7%AB%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="此章节默认为x86-64指令集">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-03-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-10-08T06:06:59.817Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CSAPP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://akemihomura0105.github.io/2020/03/07/CSAPP/CSAPP%E7%AC%AC%E4%B8%89%E7%AB%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>csapp第三章学习笔记 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://akemihomura0105.github.io/2020/03/07/CSAPP/CSAPP%E7%AC%AC%E4%B8%89%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          csapp第三章学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-03-07 00:00:00" itemprop="dateCreated datePublished" datetime="2020-03-07T00:00:00+08:00">2020-03-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-10-08 14:06:59" itemprop="dateModified" datetime="2020-10-08T14:06:59+08:00">2020-10-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><strong>此章节默认为x86-64指令集</strong></p>
+<a id="more"></a>
+
+<ol>
+<li><p>机器码的格式和行为由机器指令集（instructions set architecture, or ISA）定义，其定义了处理器的状态，指令的格式，以及不同指令在不同状态下的效果。绝大多数的指令集（包括x86-64），认为所有的程序指令都是顺序执行的。</p>
+</li>
+<li><p>机器级程序使b的地址是虚拟地址，假设内存表示为一个很大的数组。</p>
+</li>
+<li><p>相对于机器码来说，c语言中处理器的很多状态被隐藏了。如</p>
+<p>· 程序计数器（program counter），在x86-64中被称为%rip</p>
+<p>· 整数寄存器（integer register file)。其总数有16个，每一个有一个对应名称，并且每一个都可以存放一个 64位的值。这些寄存器可以用来存放整数，也可以用来存放地址（就像是c语言里的指针一样）。有些寄存器被用来保存程序运行时的关键信息，有些则是用来保存程序运行时的临时变量等。</p>
+<p>· 条件码寄存器（condition code register）。条件码寄存器用来存储最近的算术运算以及逻辑运算所产生的状态信息，它们用来实现在控制中控制状态的改变，或者实现数据流的改变。如if或while语句就需要这个寄存器的参与。</p>
+<p>· 向量寄存器（vector register）。向量寄存器可以用来存储一组整数或者浮点数。</p>
+</li>
+<li><p>在c语言中，有各种各样的类型，可以声明出各种大小的内存。而对于机器码而言，没有类型的区分，所有的内存地址全部是像一整块大数组一样的虚拟地址。</p>
+</li>
+<li><p>机器码的寻址有一定的有效范围，超过这个范围即为无效寻址。如x86-64的虚拟地址是由一个64位的字来进行寻址。在目前的实现里，其最高的16位必须是0。因此实际上，其目前的最高有效寻址是$2^{48}$比特，或者说256TB。操作系统将虚拟地址转换为对应到处理器上的物理真实地址。</p>
+</li>
+<li><p>机器码的指令集只包含少量最基本的指令。</p>
+</li>
+<li><p>通常汇编代码中，一条完整的语句由操作数和操作符组成。</p>
+<p><strong>举一个实际例子</strong></p>
+<p>如下是代码mstore.c</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">mult2</span><span class="params">(<span class="keyword">long</span>, <span class="keyword">long</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">multstore</span><span class="params">(<span class="keyword">long</span> x, <span class="keyword">long</span> y, <span class="keyword">long</span> *dest)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> t = mult2(x, y);</span><br><span class="line">    *dest = t;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如下是代码的机器码以及其根据反汇编程序生成的汇编形式。</p>
+<p>反汇编，即从机器码反过来生成汇编代码。</p>
+<p>在linux下执行以下命令</p>
+<p>objdump -d mstore.o</p>
+<p>（对mstore.o进行反汇编）</p>
+</li>
+</ol>
+<p>Disassembly of function multstore in binary file mstore.o</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>0000000000000000<multstore></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>offset</td>
+<td>bytes</td>
+<td>Equivalent assembly language</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>53</td>
+<td>push %rbx</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>48 89 d3</td>
+<td>mov %rdx,%rbx</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>e8 00 00 00 00</td>
+<td>callq 9 &lt;multstore+0x9&gt;</td>
+</tr>
+<tr>
+<td>4</td>
+<td>9</td>
+<td>48 89 03</td>
+<td>mov %rax,(%rax)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>c</td>
+<td>5b</td>
+<td>pop %rbx</td>
+</tr>
+<tr>
+<td>6</td>
+<td>d</td>
+<td>c3</td>
+<td>retq</td>
+</tr>
+</tbody></table>
+<ol start="8">
+<li><p>offset是一个相对偏移量，表明内存地址相对于基准值的偏移，在编译阶段由编译器进行计算。bytes是机器代码，equivalent assembly language是等价的汇编代码。</p>
+</li>
+<li><p>上述bytes一列是十六进制的值，每一行为一组，每组为1-5个字节。每一组都对应着一个指令，在上述表格中用汇编语言表示出来。设计成1-5个字节而不是一刀切全部默认为5个字节的原因是很多指令无需5个字节就可以表示，更多的字节会造成资源的浪费。</p>
+</li>
+<li><p>指令集被设计成状态给定的情况下结果唯一的形式，如对于机器代码53而言，其只能表示pushq %rbx指令（push是pushq的略写）。</p>
+</li>
+<li><p>反汇编程序生成汇编代码仅仅根据机器码，不依赖于代码的源程序及其生成的汇编码。</p>
+</li>
+<li><p>反汇编程序生成的汇编码与源代码正常过程生成的汇编码可能有所不同，其体现在一些后缀的省略上。这些省略对最终的结果没有影响。</p>
+</li>
+</ol>
+<p><strong>链接带来的影响</strong></p>
+<p>生成一个可执行文件需要经过链接的过程。链接器将多个二进制文件合并，得到可执行程序。</p>
+<p>现在，完整的代码如下</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">multstore</span><span class="params">(<span class="keyword">long</span>, <span class="keyword">long</span>, <span class="keyword">long</span>*)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">long</span> d;</span><br><span class="line">	multstore(<span class="number">2</span>, <span class="number">3</span>, &amp;d);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;2 * 3 --&gt; %ld\n&quot;</span>, d);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">mult2</span><span class="params">(<span class="keyword">long</span> a, <span class="keyword">long</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">long</span> s = a * b;</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在linux下执行以下命令即可进行链接</p>
+<p>lgcc -Og -o prog main.c mstore.c</p>
+<p>（只需要知道这里将main函数与mstore函数进行了链接后，生成了prog即可）</p>
+<p>此时prog增长到了8655字节，它除了包括程序的机器码以外，还包括如何启动以及结束函数，如何与操作系统进行交互的代码。</p>
+<p>此时对prog执行反汇编。</p>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>0000000000400540<multstore></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>offset</td>
+<td>bytes</td>
+<td>Equivalent assembly language</td>
+</tr>
+<tr>
+<td>2</td>
+<td>400540</td>
+<td>53</td>
+<td>push %rbx</td>
+</tr>
+<tr>
+<td>3</td>
+<td>400541</td>
+<td>48 89 d3</td>
+<td>mov %rdx,%rbx</td>
+</tr>
+<tr>
+<td>4</td>
+<td>400544</td>
+<td>e8 42 00 00 00</td>
+<td>callq 40058b<mult2></td>
+</tr>
+<tr>
+<td>5</td>
+<td>400549</td>
+<td>48 89 03</td>
+<td>mov %rax,(%rax)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>40054c</td>
+<td>5b</td>
+<td>pop %rbx</td>
+</tr>
+<tr>
+<td>7</td>
+<td>40054d</td>
+<td>c3</td>
+<td>retq</td>
+</tr>
+<tr>
+<td>8</td>
+<td>40054e</td>
+<td>90</td>
+<td>nop</td>
+</tr>
+<tr>
+<td>9</td>
+<td>40054f</td>
+<td>90</td>
+<td>nop</td>
+</tr>
+</tbody></table>
+<ol start="13">
+<li>对比观察链接前后的变化。第一个区别是我们发现左侧的地址相对于原先有了一段变化。第二个区别是汇编代码中的第4行中原本的<multstore>被替换成了<mult2>，链接器会把对应得函数链接起来，构建一个可以运行得程序。最后一个区别是在最后多了两行，这两行没有实际意义，仅仅起到占位得作用。观察发现，去掉这两行以后，所有机器码加起来总共14个字节，补充两行占位使得总字节数达到16字节，这可以使下一个代码块在内存系统上运行得效率得到提高。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">	.file	&quot;010-mstore.c&quot;</span><br><span class="line">	.text</span><br><span class="line">	.globl	multstore</span><br><span class="line">	.type	multstore, @function</span><br><span class="line">multstore:</span><br><span class="line">	pushq	%rbx</span><br><span class="line">	movq	%rdx, %rbx</span><br><span class="line">	call	mult2</span><br><span class="line">	movq	%rax, (%rbx)</span><br><span class="line">	popq	%rbx</span><br><span class="line">	ret</span><br><span class="line">	.size	multstore, .-multstore</span><br><span class="line">	.ident	&quot;GCC: *Ubuntu 4.8.1-2ubuntu1~12.04)4.9.1&quot;</span><br><span class="line">	.section		.note.GNU-stack,&quot;&quot;,@progbits</span><br></pre></td></tr></table></figure>
+<ol start="14">
+<li><p>由编译器直接生成得汇编代码难以阅读，其包含了大量的无用信息。上述汇编代码中，以’.’开始得每行代码用于引导汇编器和链接器，我们可以忽略掉它们。另一方面，这些汇编代码没有简单的解释与行号，这让阅读变得困难。</p>
+</li>
+<li><p>ATT形式与Intel形式，ATT形式源于贝尔实验室，GCC，OBJDUMP等工具生成的汇编代码皆为这种形式。其他的工具，像微软家的工具，生成的汇编代码为Intel形式。两者都可以正常的进行工作，区别在于一些记号的不同。类似mov 的参数在intel与ATT中是相反的。如move a to b与move b to a这样的区别。csapp采用ATT形式来介绍。</p>
+</li>
+<li><p>数据形式。最初的架构为16位，intel公司使用字（word）来指代16位的数据类型.基于此，双字（double words）用来指代32位类型，四字（quad words）用来指代64位类型。如标准的c语言程序中，int是以双字存储的，在64位操作系统中，指针是以四字存储的（用来寻找64位内的地址）。这些数据类型对应到汇编语言中有以下后缀：Byte-b，Word-w，Double word-l，Quad word-q，Single precision-s，Double precision-l。其中Double precision与Double word这两个类型的汇编后缀虽然相同，但是因为两者的机器指令与寄存器位置完全不同，所以不会引起混淆。</p>
+</li>
+<li><p>整数寄存器，从低到高，依次可以被byte，word，double word， quad word访问</p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>63</th>
+<th></th>
+<th></th>
+<th></th>
+<th>31</th>
+<th></th>
+<th>15</th>
+<th>7</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%rax</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%eax</td>
+<td></td>
+<td>%ax</td>
+<td>%al</td>
+<td>return value</td>
+</tr>
+<tr>
+<td>%rbx</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%ebx</td>
+<td></td>
+<td>%bx</td>
+<td>%bl</td>
+<td>callee saved</td>
+</tr>
+<tr>
+<td>%rcx</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%ecx</td>
+<td></td>
+<td>%cx</td>
+<td>%cl</td>
+<td>4th argument</td>
+</tr>
+<tr>
+<td>%rdx</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%edx</td>
+<td></td>
+<td>%dx</td>
+<td>%dl</td>
+<td>3rd argument</td>
+</tr>
+<tr>
+<td>%rsi</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%esi</td>
+<td></td>
+<td>%si</td>
+<td>%sil</td>
+<td>2nd argument</td>
+</tr>
+<tr>
+<td>%rdi</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%edi</td>
+<td></td>
+<td>%di</td>
+<td>%dil</td>
+<td>1st argument</td>
+</tr>
+<tr>
+<td>%rbp</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%ebp</td>
+<td></td>
+<td>%bp</td>
+<td>%bpl</td>
+<td>callee saved</td>
+</tr>
+<tr>
+<td>%rsp</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%esp</td>
+<td></td>
+<td>%sp</td>
+<td>%spl</td>
+<td>stack pointer</td>
+</tr>
+<tr>
+<td>%r8</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%r8d</td>
+<td></td>
+<td>%r8w</td>
+<td>%r8b</td>
+<td>5th argument</td>
+</tr>
+<tr>
+<td>%r9</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%r9d</td>
+<td></td>
+<td>%r9w</td>
+<td>%r9b</td>
+<td>6th argument</td>
+</tr>
+<tr>
+<td>%r10</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%r10d</td>
+<td></td>
+<td>%r10w</td>
+<td>%r10b</td>
+<td>caller saved</td>
+</tr>
+<tr>
+<td>%r11</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%r11d</td>
+<td></td>
+<td>%r11w</td>
+<td>%r11b</td>
+<td>caller saved</td>
+</tr>
+<tr>
+<td>%r12</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%r12d</td>
+<td></td>
+<td>%r12w</td>
+<td>%r12b</td>
+<td>caller saved</td>
+</tr>
+<tr>
+<td>%r13</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%r13d</td>
+<td></td>
+<td>%r13w</td>
+<td>%r13b</td>
+<td>caller saved</td>
+</tr>
+<tr>
+<td>%r14</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%r14d</td>
+<td></td>
+<td>%r14w</td>
+<td>%r14b</td>
+<td>caller saved</td>
+</tr>
+<tr>
+<td>%r15</td>
+<td></td>
+<td></td>
+<td></td>
+<td>%r15d</td>
+<td></td>
+<td>%r15w</td>
+<td>%r15b</td>
+<td>caller saved</td>
+</tr>
+</tbody></table>
+<ol start="18">
+<li><p>不同的寄存器在程序中有着不同的用处，其中最特别的寄存器是%rsp，栈指针。其用来指示运行时栈尾地址。其他15个寄存器的用处弹性较大。</p>
+</li>
+<li><p>操作数指示符，用于得到操作数，与操作符结合形成完整的一条语句。</p>
+<p>·第一种类型，立即数（Immediate）， 形如\$0x1F这样的被定义为立即数。其特点是操作数直接从编码的二进制指令中得到，无需进行寻址。是一种常量值。我们使用$Imm$这样的记号来表示立即数。其在汇编语言中的写法为$\$Imm$</p>
+<p>·第二种类型，寄存器操作数（Rigister），我们使用$r_a$来表示任意一个寄存器，其返回的值是当前该寄存器中存储的值，记作$R[r_a]$。其在汇编语言中的写法为$ r_a $</p>
+<p>·第三种类型，内存操作数（Memory），其值由对应内存中所存储的值决定。因为虚拟内存可以看作一个超级大的数组，因此对其寻址的结果表示形式我们可以用类似数组的方式表示，如$M[Addr]$ （Addr-address 内存地址）。我们使用以下几种写法得到地址：</p>
+<p>1：$Imm$，其值为$M[Imm]$。</p>
+<p>2：$(r_a)$，其值为$M[R[r_a]]$。</p>
+<p>3：$Imm(r_b)$，其值为$M[Imm+R[r_b]]$。</p>
+<p>4：$(r_b,r_1)$，其值为$M[R[r_b]+r[r_1]]$。</p>
+<p>5：$Imm(r_b,r_1)$，其值为$M[R[r_b]]+R[r_1]]$</p>
+<p>6: $ (,r_i,s)$，其值为$M[R[r_i]*s]$</p>
+<p>7：$Imm(,r_i,s)$，其值为$M[Imm+R[r_i]*s]$</p>
+<p>8：$(r_b,r_i,s)$，其值为$M[R[r_b]+R[r_i]*s]$</p>
+<p>9：$Imm(r_b,r_i,s)$其值为$M[Imm+R[r_b]+R[r_i]*s]$</p>
+</li>
+<li><p>数据移动指令，用于将数据从一个源搬迁至目标地点。源和目的既可以是寄存器，也可以是一块内存。但是在x86-64架构下，源和目的不能同时为内存。该架构不允许在一条指令内访问两次内存。</p>
+<p>部分mov指令如下</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Effect</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MOV    $S,D$</td>
+<td>$D$ $\leftarrow$ $S$</td>
+<td>Move</td>
+</tr>
+<tr>
+<td>movb</td>
+<td></td>
+<td>Move byte</td>
+</tr>
+<tr>
+<td>movw</td>
+<td></td>
+<td>Move word</td>
+</tr>
+<tr>
+<td>movl</td>
+<td></td>
+<td>Move double word</td>
+</tr>
+<tr>
+<td>movq</td>
+<td></td>
+<td>Move quad word</td>
+</tr>
+<tr>
+<td>movabsq    $I,R$</td>
+<td>$R$ $\leftarrow$ $I$</td>
+<td>Move absolute quad word</td>
+</tr>
+</tbody></table>
+<p>在每个mov指令后有4种后缀$b,w,l,q$，分别对应$byte,word,long,quad$，即分别为$8,16,32,64$位。mov指令会精确的将源中对应位移动至目标的对应位置。对于movl指令，如果其目标为一寄存器，即$D=R$时，该指令还会将寄存器的高32位置为$0$。</p>
+<p>有时，我们需要在执行mov以后对寄存器的高位进行扩展。扩展的方式有两种：1、按零扩展，即高位全部置$0$；2、按符号位扩展，即高位全部置为当前数字的符号位。当我们需要按零扩展的mov指令时，我们有如下指令：movzbw, movzbl, movzbq ,movzwl, movzwq。当我们需要按符号位扩展时，我们有：movsbw, movsbl, movsbq, movswl, movswq, movslq, cltq。以上指令除cltq外，均以寄存器或内存作为源，以一寄存器作为目标，按照后缀执行mov指令及扩展。如movzbl S, R 就是从S中取$8$位($b$)移动至寄存器R上的$0$~$7$位，随后对寄存器的第$8$~$31$位置0。cltq指令则是会将%eax寄存器按符号扩展至%rax。</p>
+</li>
+<li><p>栈指令。栈是先进后出的数据结构，对于栈我们只有两种操作：1、push入栈。2、pop出栈。两者的格式如下</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Effect</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pushq S</td>
+<td>R[%rsp] $\leftarrow$ R[%rsp]$-8$</td>
+<td>Push quad word</td>
+</tr>
+<tr>
+<td></td>
+<td>M[R[%rsp]] $\leftarrow$ S</td>
+<td></td>
+</tr>
+<tr>
+<td>popq D</td>
+<td>D $\leftarrow$ M[R[%rsp]]</td>
+<td>Pop quad word</td>
+</tr>
+<tr>
+<td></td>
+<td>R[%rsp] $\leftarrow$ R[%rsp]$+8$</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>在x86-64架构中，栈向地址减小的方向增长，栈指针寄存器%rsp永远指向栈首元素的地址。当我们push一个元素时，首先将%rsp的指针加8（8字节64位），随后将该元素存入%rsp所指向的内存空间中。当pop一个元素时则正好相反。</p>
+</li>
+<li><p>算数逻辑指令</p>
+<p>算数逻辑指令大体上可分为有效地址加载，一元运算，二元运算，位运算这四组。其中的很大一部分指令都具有$b,w,l,r$这样用于指定运算大小的后缀。</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Effect</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>leaq $S$, $R$</td>
+<td>$R \leftarrow &amp;S$</td>
+<td>Load effective address</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>INC $D$</td>
+<td>$D \leftarrow D+1$</td>
+<td>Increment</td>
+</tr>
+<tr>
+<td>DEC $D$</td>
+<td>$D\leftarrow D+1$</td>
+<td>Decrement</td>
+</tr>
+<tr>
+<td>NEG D</td>
+<td>$D\leftarrow -D$</td>
+<td>Negate</td>
+</tr>
+<tr>
+<td>NOT D</td>
+<td>$D\leftarrow ~D$</td>
+<td>Complement</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ADD $S,D$</td>
+<td>$D=D+S$</td>
+<td>Add</td>
+</tr>
+<tr>
+<td>SUB $S,D$</td>
+<td>$D=D-S$</td>
+<td>Subtract</td>
+</tr>
+<tr>
+<td>IMUL $S,D$</td>
+<td>$D=D*S$</td>
+<td>Multiply</td>
+</tr>
+<tr>
+<td>XOR $S,D$</td>
+<td>$D=D\oplus S$</td>
+<td>Exclusive-or</td>
+</tr>
+<tr>
+<td>OR $S,D$</td>
+<td>$D=D,</td>
+<td>,S$</td>
+</tr>
+<tr>
+<td>AND $S,D$</td>
+<td>$D=D&amp;S$</td>
+<td>And</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>SAL $k,D$</td>
+<td>$D\leftarrow D\ll k$</td>
+<td>Left shift</td>
+</tr>
+<tr>
+<td>SHL $k,D$</td>
+<td>$D\leftarrow D\ll k$</td>
+<td>Left shift(equal to SAL)</td>
+</tr>
+<tr>
+<td>SAR $k,D$</td>
+<td>$D\leftarrow D\gg k$</td>
+<td>Arithmetic right shift</td>
+</tr>
+<tr>
+<td>SHR $k,D$</td>
+<td>$D\leftarrow D\gg k$</td>
+<td>Logical right shift</td>
+</tr>
+</tbody></table>
+<p>leaq指令的源是一个地址标识符，其直接将地址运算的结果移动到寄存器中。该指令最初被用来设计计算有效地址。现在常常被用于进行一些简单的计算。同时，leaq指令的运算不会修改标志位。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSAPP/" rel="tag"># CSAPP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/04/CSAPP/CSAPP%E7%AC%AC%E4%B8%80%E7%AB%A0/" rel="prev" title="csapp第一章学习笔记">
+      <i class="fa fa-chevron-left"></i> csapp第一章学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/09/ACM/CF/CF%20Round%20625%20div2/" rel="next" title="Codeforces Round 625 div2">
+      Codeforces Round 625 div2 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="John Doe"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="akemihomura"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+    </div>
+</body>
+</html>
