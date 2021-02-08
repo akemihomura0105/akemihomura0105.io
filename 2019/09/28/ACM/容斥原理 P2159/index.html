@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"akemihomura0105.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="容斥原理容斥原理可用来解决多个集合之间的交集关系，简单的容斥公式已经学过了比如$$A\cup B\cup C&#x3D;A+B+C-A\cap B-B\cap C-A\cap C+A\cap B\cap C$$对于错排列而言，我们可以使用容斥定理来进行求解。 如果我们任意投信那么我们所有可能为$ n! $ 如果我们投对了一个信箱，那么我们当前所有的可能为$ 1 * (n-1)! $ 如果我们投对了两个信箱，">
+  <meta name="description" content="容斥原理容斥原理可用来解决多个集合之间的交集关系，简单的容斥公式已经学过了比如  A\cup B\cup C&#x3D;A+B+C-A\cap B-B\cap C-A\cap C+A\cap B\cap C对于错排列而言，我们可以使用容斥定理来进行求解。 如果我们任意投信那么我们所有可能为$ n! $ 如果我们投对了一个信箱，那么我们当前所有的可能为$ 1 * (n-1)! $ 如果我们投对了两个信箱，那么">
 <meta property="og:type" content="article">
 <meta property="og:title" content="容斥原理">
 <meta property="og:url" content="http://akemihomura0105.github.io/2019/09/28/ACM/%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86%20P2159/index.html">
 <meta property="og:site_name" content="Akemihomura&#39;s blog">
-<meta property="og:description" content="容斥原理容斥原理可用来解决多个集合之间的交集关系，简单的容斥公式已经学过了比如$$A\cup B\cup C&#x3D;A+B+C-A\cap B-B\cap C-A\cap C+A\cap B\cap C$$对于错排列而言，我们可以使用容斥定理来进行求解。 如果我们任意投信那么我们所有可能为$ n! $ 如果我们投对了一个信箱，那么我们当前所有的可能为$ 1 * (n-1)! $ 如果我们投对了两个信箱，">
+<meta property="og:description" content="容斥原理容斥原理可用来解决多个集合之间的交集关系，简单的容斥公式已经学过了比如  A\cup B\cup C&#x3D;A+B+C-A\cap B-B\cap C-A\cap C+A\cap B\cap C对于错排列而言，我们可以使用容斥定理来进行求解。 如果我们任意投信那么我们所有可能为$ n! $ 如果我们投对了一个信箱，那么我们当前所有的可能为$ 1 * (n-1)! $ 如果我们投对了两个信箱，那么">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-09-27T16:00:00.000Z">
 <meta property="article:modified_time" content="2020-03-11T11:55:14.787Z">
@@ -226,22 +226,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="容斥原理"><a href="#容斥原理" class="headerlink" title="容斥原理"></a>容斥原理</h2><p>容斥原理可用来解决多个集合之间的交集关系，简单的容斥公式已经学过了<br>比如<br>$$<br>A\cup B\cup C=A+B+C-A\cap B-B\cap C-A\cap C+A\cap B\cap C<br>$$<br>对于错排列而言，我们可以使用容斥定理来进行求解。</p>
+        <h2 id="容斥原理"><a href="#容斥原理" class="headerlink" title="容斥原理"></a>容斥原理</h2><p>容斥原理可用来解决多个集合之间的交集关系，简单的容斥公式已经学过了<br>比如</p>
+<script type="math/tex; mode=display">
+A\cup B\cup C=A+B+C-A\cap B-B\cap C-A\cap C+A\cap B\cap C</script><p>对于错排列而言，我们可以使用容斥定理来进行求解。</p>
 <p>如果我们任意投信那么我们所有可能为$ n! $</p>
 <p>如果我们投对了一个信箱，那么我们当前所有的可能为$ 1 * (n-1)! $</p>
 <p>如果我们投对了两个信箱，那么我们当前所有的可能为$ \binom{n}{2}*(n-2)! $</p>
 <p>如果我们投对了$k$个信箱，那么我们当前所有可能为$ \binom{n}{k}*(n-k)! $</p>
 <p>若我们设投对第$i$个信箱的所有可能为集合$A_i$，那么原命题等价于$ \bigcap_{i=1}^n \bar{A_i} $</p>
 <p>那么我们可以用容斥原理来求解这个问题，可以得到如下的式子</p>
-<p>$$ n!-\binom{n}{1}<em>(n-1)!+\binom{n}{2}</em>(n-2)!-\binom{n}{3}*(n-3)!…=\sum_{i=0}^{n}(-1)^i * \binom{n}{i}*(n-i)!=n!*\sum_{i=0}^n (-1)^i /i!$$</p>
-<p>如果我们从全集中减去投一个信箱的所有可能，那么我们就会多减去两个信箱的情况，之后会3个信箱的可能又会被多加，以此类推。我们用容斥原理来化简，就可以得到最后的式子。</p>
+<script type="math/tex; mode=display">n!-\binom{n}{1}*(n-1)!+\binom{n}{2}*(n-2)!-\binom{n}{3}*(n-3)!...=\sum_{i=0}^{n}(-1)^i * \binom{n}{i}*(n-i)!=n!*\sum_{i=0}^n (-1)^i /i!</script><p>如果我们从全集中减去投一个信箱的所有可能，那么我们就会多减去两个信箱的情况，之后会3个信箱的可能又会被多加，以此类推。我们用容斥原理来化简，就可以得到最后的式子。</p>
 <h2 id="P2159"><a href="#P2159" class="headerlink" title="P2159"></a>P2159</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>OItown要举办了一年一度的超级舞会了，作为主办方的Constantine为了使今年的舞会规模空前，他邀请了许多他的好友和同学去。舞会那天，恰好来了n个男生n个女生。Constantine发现，一般情况下，舞伴之间，总是男伴总是比女伴长得高，不过，偶尔也是有特殊情况的。所以，Constantine现在想知道，如果把这2n个人恰好配成n对舞伴，有多少种搭配方法，而且他要求最多只有k对舞伴之间女伴比男伴高。现在，Constantine需要参加SHTSC的你帮助他算出这个答案，当然啦，他会先告诉你这2n个同学的身高。</p>
 <h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><p>一道dp题。需要用到容斥定理与高精度。对女生与男生进行排序，设变量t表示当前前$i$个女生最多有多少个比男生高。设状态为前$i$个女生中，至少有$j$个女生比男生高的方案数。由此得到状态转移方程</p>
 <p>$ dp[i][j]=dp[i-1][j]+dp[i-1][j-1]*(t-(j-1)) $</p>
 <p>计算完dp以后，需要对$i=n$的每一个方案乘上一个$ (n-j)! $ 因为我们剩下$ n-j $个女生还没有被安排，需要乘以他们的方案数。然后我们通过容斥原理来得到k个女生比男生高时的情况数。回顾容斥定理，我们每一次之所以又减又加，是因为我们计算的有重复。如果我们减/加的值不是重复的，就没有必要补充上去。而这道题我们恰好要求从1到k方案数的总和，我们就可以倒着推。当 $ k=n $ 时，此时无重复。当 $ k=n-1 $ 时，我们把多余的$ n=k $的情况减掉。</p>
 <p>即 $dp[n][n-1]=dp[n][n-1]-\binom{n-1}{n}dp[n][n]$。</p>
 <p>当$k=n-2$时，此时$dp[n][n-1]$已经被更新，我们用这个无重复的$dp[n][n-1]$与$dp[n][n]$来更新$dp[n][n-2]$。</p>
-<p>即$ dp[n][n-2]=dp[n][n-2] - \binom{n-1}{n-2} * dp[n][n-1] - \binom{n}{n-1} * dp[n][n] $</p>
+<p>即$ dp[n][n-2]=dp[n][n-2] - \binom{n-1}{n-2} <em> dp[n][n-1] - \binom{n}{n-1} </em> dp[n][n] $</p>
 <p>以此类推，我们得到了这样的式子</p>
 <p>$dp[n][j]=dp[n][j]-\sum_{j+1}^{n} \binom{j+1}{j}*dp[n][j+1]$</p>
 <p><strong>注意此处&gt;j的dp值都已经被更新，其表达的含义为n个女生中恰好有j个比男生高的方案数。</strong></p>
@@ -250,7 +251,7 @@
 <h2 id="Codeforces-Round-589-Div2-E"><a href="#Codeforces-Round-589-Div2-E" class="headerlink" title="Codeforces Round # 589(Div2) E"></a>Codeforces Round # 589(Div2) E</h2><p>题目大意，给你一个n*n的方格，每个方格你可以填1~k的数字，要求每一行每一列都至少有一个1。</p>
 <p>此题我们可以使用dp在$O(n^3)$的复杂度解决这个问题</p>
 <p>但是如果我们使用容斥原理，只需要$O(n^2)$的复杂度就可以解决。</p>
-<p>我们设$S_{ij}={n^2的格子内有i行j列没有1}$</p>
+<p>我们设$S_{ij}=\{n^2的格子内有i行j列没有1\}$</p>
 <p>那么则有$ans=U-\sum_{i=1}^{N}$</p>
 
     </div>

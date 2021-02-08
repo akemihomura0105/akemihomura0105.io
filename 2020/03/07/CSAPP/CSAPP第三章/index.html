@@ -228,7 +228,6 @@
       
         <p><strong>此章节默认为x86-64指令集</strong></p>
 <a id="more"></a>
-
 <ol>
 <li><p>机器码的格式和行为由机器指令集（instructions set architecture, or ISA）定义，其定义了处理器的状态，指令的格式，以及不同指令在不同状态下的效果。绝大多数的指令集（包括x86-64），认为所有的程序指令都是顺序执行的。</p>
 </li>
@@ -258,6 +257,7 @@
 </li>
 </ol>
 <p>Disassembly of function multstore in binary file mstore.o</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -267,7 +267,8 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td></td>
 <td>offset</td>
 <td>bytes</td>
@@ -289,7 +290,7 @@
 <td>3</td>
 <td>4</td>
 <td>e8 00 00 00 00</td>
-<td>callq 9 &lt;multstore+0x9&gt;</td>
+<td>callq 9 <multstore+0x9></td>
 </tr>
 <tr>
 <td>4</td>
@@ -309,8 +310,10 @@
 <td>c3</td>
 <td>retq</td>
 </tr>
-</tbody></table>
-<ol start="8">
+</tbody>
+</table>
+</div>
+<ol>
 <li><p>offset是一个相对偏移量，表明内存地址相对于基准值的偏移，在编译阶段由编译器进行计算。bytes是机器代码，equivalent assembly language是等价的汇编代码。</p>
 </li>
 <li><p>上述bytes一列是十六进制的值，每一行为一组，每组为1-5个字节。每一组都对应着一个指令，在上述表格中用汇编语言表示出来。设计成1-5个字节而不是一刀切全部默认为5个字节的原因是很多指令无需5个字节就可以表示，更多的字节会造成资源的浪费。</p>
@@ -331,6 +334,7 @@
 <p>（只需要知道这里将main函数与mstore函数进行了链接后，生成了prog即可）</p>
 <p>此时prog增长到了8655字节，它除了包括程序的机器码以外，还包括如何启动以及结束函数，如何与操作系统进行交互的代码。</p>
 <p>此时对prog执行反汇编。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -340,7 +344,8 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td></td>
 <td>offset</td>
 <td>bytes</td>
@@ -394,12 +399,14 @@
 <td>90</td>
 <td>nop</td>
 </tr>
-</tbody></table>
-<ol start="13">
+</tbody>
+</table>
+</div>
+<ol>
 <li>对比观察链接前后的变化。第一个区别是我们发现左侧的地址相对于原先有了一段变化。第二个区别是汇编代码中的第4行中原本的<multstore>被替换成了<mult2>，链接器会把对应得函数链接起来，构建一个可以运行得程序。最后一个区别是在最后多了两行，这两行没有实际意义，仅仅起到占位得作用。观察发现，去掉这两行以后，所有机器码加起来总共14个字节，补充两行占位使得总字节数达到16字节，这可以使下一个代码块在内存系统上运行得效率得到提高。</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">	.file	&quot;010-mstore.c&quot;</span><br><span class="line">	.text</span><br><span class="line">	.globl	multstore</span><br><span class="line">	.type	multstore, @function</span><br><span class="line">multstore:</span><br><span class="line">	pushq	%rbx</span><br><span class="line">	movq	%rdx, %rbx</span><br><span class="line">	call	mult2</span><br><span class="line">	movq	%rax, (%rbx)</span><br><span class="line">	popq	%rbx</span><br><span class="line">	ret</span><br><span class="line">	.size	multstore, .-multstore</span><br><span class="line">	.ident	&quot;GCC: *Ubuntu 4.8.1-2ubuntu1~12.04)4.9.1&quot;</span><br><span class="line">	.section		.note.GNU-stack,&quot;&quot;,@progbits</span><br></pre></td></tr></table></figure>
-<ol start="14">
+<ol>
 <li><p>由编译器直接生成得汇编代码难以阅读，其包含了大量的无用信息。上述汇编代码中，以’.’开始得每行代码用于引导汇编器和链接器，我们可以忽略掉它们。另一方面，这些汇编代码没有简单的解释与行号，这让阅读变得困难。</p>
 </li>
 <li><p>ATT形式与Intel形式，ATT形式源于贝尔实验室，GCC，OBJDUMP等工具生成的汇编代码皆为这种形式。其他的工具，像微软家的工具，生成的汇编代码为Intel形式。两者都可以正常的进行工作，区别在于一些记号的不同。类似mov 的参数在intel与ATT中是相反的。如move a to b与move b to a这样的区别。csapp采用ATT形式来介绍。</p>
@@ -409,6 +416,7 @@
 <li><p>整数寄存器，从低到高，依次可以被byte，word，double word， quad word访问</p>
 </li>
 </ol>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -423,7 +431,8 @@
 <th></th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>%rax</td>
 <td></td>
 <td></td>
@@ -599,12 +608,14 @@
 <td>%r15b</td>
 <td>caller saved</td>
 </tr>
-</tbody></table>
-<ol start="18">
+</tbody>
+</table>
+</div>
+<ol>
 <li><p>不同的寄存器在程序中有着不同的用处，其中最特别的寄存器是%rsp，栈指针。其用来指示运行时栈尾地址。其他15个寄存器的用处弹性较大。</p>
 </li>
 <li><p>操作数指示符，用于得到操作数，与操作符结合形成完整的一条语句。</p>
-<p>·第一种类型，立即数（Immediate）， 形如\$0x1F这样的被定义为立即数。其特点是操作数直接从编码的二进制指令中得到，无需进行寻址。是一种常量值。我们使用$Imm$这样的记号来表示立即数。其在汇编语言中的写法为$\$Imm$</p>
+<p>·第一种类型，立即数（Immediate）， 形如\\$0x1F这样的被定义为立即数。其特点是操作数直接从编码的二进制指令中得到，无需进行寻址。是一种常量值。我们使用$Imm$这样的记号来表示立即数。其在汇编语言中的写法为$\\$Imm$</p>
 <p>·第二种类型，寄存器操作数（Rigister），我们使用$r_a$来表示任意一个寄存器，其返回的值是当前该寄存器中存储的值，记作$R[r_a]$。其在汇编语言中的写法为$ r_a $</p>
 <p>·第三种类型，内存操作数（Memory），其值由对应内存中所存储的值决定。因为虚拟内存可以看作一个超级大的数组，因此对其寻址的结果表示形式我们可以用类似数组的方式表示，如$M[Addr]$ （Addr-address 内存地址）。我们使用以下几种写法得到地址：</p>
 <p>1：$Imm$，其值为$M[Imm]$。</p>
@@ -619,181 +630,22 @@
 </li>
 <li><p>数据移动指令，用于将数据从一个源搬迁至目标地点。源和目的既可以是寄存器，也可以是一块内存。但是在x86-64架构下，源和目的不能同时为内存。该架构不允许在一条指令内访问两次内存。</p>
 <p>部分mov指令如下</p>
-<table>
-<thead>
-<tr>
-<th>Instruction</th>
-<th>Effect</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>MOV    $S,D$</td>
-<td>$D$ $\leftarrow$ $S$</td>
-<td>Move</td>
-</tr>
-<tr>
-<td>movb</td>
-<td></td>
-<td>Move byte</td>
-</tr>
-<tr>
-<td>movw</td>
-<td></td>
-<td>Move word</td>
-</tr>
-<tr>
-<td>movl</td>
-<td></td>
-<td>Move double word</td>
-</tr>
-<tr>
-<td>movq</td>
-<td></td>
-<td>Move quad word</td>
-</tr>
-<tr>
-<td>movabsq    $I,R$</td>
-<td>$R$ $\leftarrow$ $I$</td>
-<td>Move absolute quad word</td>
-</tr>
-</tbody></table>
-<p>在每个mov指令后有4种后缀$b,w,l,q$，分别对应$byte,word,long,quad$，即分别为$8,16,32,64$位。mov指令会精确的将源中对应位移动至目标的对应位置。对于movl指令，如果其目标为一寄存器，即$D=R$时，该指令还会将寄存器的高32位置为$0$。</p>
-<p>有时，我们需要在执行mov以后对寄存器的高位进行扩展。扩展的方式有两种：1、按零扩展，即高位全部置$0$；2、按符号位扩展，即高位全部置为当前数字的符号位。当我们需要按零扩展的mov指令时，我们有如下指令：movzbw, movzbl, movzbq ,movzwl, movzwq。当我们需要按符号位扩展时，我们有：movsbw, movsbl, movsbq, movswl, movswq, movslq, cltq。以上指令除cltq外，均以寄存器或内存作为源，以一寄存器作为目标，按照后缀执行mov指令及扩展。如movzbl S, R 就是从S中取$8$位($b$)移动至寄存器R上的$0$~$7$位，随后对寄存器的第$8$~$31$位置0。cltq指令则是会将%eax寄存器按符号扩展至%rax。</p>
+<p>| Instruction      | Effect               | Description             |<br>| ———————— | —————————— | ———————————- |<br>| MOV    $S,D$     | $D$ $\leftarrow$ $S$ | Move                    |<br>| movb             |                      | Move byte               |<br>| movw             |                      | Move word               |<br>| movl             |                      | Move double word        |<br>| movq             |                      | Move quad word          |<br>| movabsq    $I,R$ | $R$ $\leftarrow$ $I$ | Move absolute quad word |</p>
 </li>
+</ol>
+<pre><code>在每个mov指令后有4种后缀$b,w,l,q$，分别对应$byte,word,long,quad$，即分别为$8,16,32,64$位。mov指令会精确的将源中对应位移动至目标的对应位置。对于movl指令，如果其目标为一寄存器，即$D=R$时，该指令还会将寄存器的高32位置为$0$。
+
+有时，我们需要在执行mov以后对寄存器的高位进行扩展。扩展的方式有两种：1、按零扩展，即高位全部置$0$；2、按符号位扩展，即高位全部置为当前数字的符号位。当我们需要按零扩展的mov指令时，我们有如下指令：movzbw, movzbl, movzbq ,movzwl, movzwq。当我们需要按符号位扩展时，我们有：movsbw, movsbl, movsbq, movswl, movswq, movslq, cltq。以上指令除cltq外，均以寄存器或内存作为源，以一寄存器作为目标，按照后缀执行mov指令及扩展。如movzbl S, R 就是从S中取$8$位($b$)移动至寄存器R上的$0$\~$7$位，随后对寄存器的第$8$\~$31$位置0。cltq指令则是会将%eax寄存器按符号扩展至%rax。
+</code></pre><ol>
 <li><p>栈指令。栈是先进后出的数据结构，对于栈我们只有两种操作：1、push入栈。2、pop出栈。两者的格式如下</p>
-<table>
-<thead>
-<tr>
-<th>Instruction</th>
-<th>Effect</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>pushq S</td>
-<td>R[%rsp] $\leftarrow$ R[%rsp]$-8$</td>
-<td>Push quad word</td>
-</tr>
-<tr>
-<td></td>
-<td>M[R[%rsp]] $\leftarrow$ S</td>
-<td></td>
-</tr>
-<tr>
-<td>popq D</td>
-<td>D $\leftarrow$ M[R[%rsp]]</td>
-<td>Pop quad word</td>
-</tr>
-<tr>
-<td></td>
-<td>R[%rsp] $\leftarrow$ R[%rsp]$+8$</td>
-<td></td>
-</tr>
-</tbody></table>
-<p>在x86-64架构中，栈向地址减小的方向增长，栈指针寄存器%rsp永远指向栈首元素的地址。当我们push一个元素时，首先将%rsp的指针加8（8字节64位），随后将该元素存入%rsp所指向的内存空间中。当pop一个元素时则正好相反。</p>
+<p>| Instruction | Effect                           | Description    |<br>| —————- | ———————————————— | ——————— |<br>| pushq S     | R[%rsp] $\leftarrow$ R[%rsp]$-8$ | Push quad word |<br>|             | M[R[%rsp]] $\leftarrow$ S        |                |<br>| popq D      | D $\leftarrow$ M[R[%rsp]]        | Pop quad word  |<br>|             | R[%rsp] $\leftarrow$ R[%rsp]$+8$ |                |</p>
 </li>
+</ol>
+<pre><code>在x86-64架构中，栈向地址减小的方向增长，栈指针寄存器%rsp永远指向栈首元素的地址。当我们push一个元素时，首先将%rsp的指针加8（8字节64位），随后将该元素存入%rsp所指向的内存空间中。当pop一个元素时则正好相反。
+</code></pre><ol>
 <li><p>算数逻辑指令</p>
 <p>算数逻辑指令大体上可分为有效地址加载，一元运算，二元运算，位运算这四组。其中的很大一部分指令都具有$b,w,l,r$这样用于指定运算大小的后缀。</p>
-<table>
-<thead>
-<tr>
-<th>Instruction</th>
-<th>Effect</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>leaq $S$, $R$</td>
-<td>$R \leftarrow &amp;S$</td>
-<td>Load effective address</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>INC $D$</td>
-<td>$D \leftarrow D+1$</td>
-<td>Increment</td>
-</tr>
-<tr>
-<td>DEC $D$</td>
-<td>$D\leftarrow D+1$</td>
-<td>Decrement</td>
-</tr>
-<tr>
-<td>NEG D</td>
-<td>$D\leftarrow -D$</td>
-<td>Negate</td>
-</tr>
-<tr>
-<td>NOT D</td>
-<td>$D\leftarrow ~D$</td>
-<td>Complement</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>ADD $S,D$</td>
-<td>$D=D+S$</td>
-<td>Add</td>
-</tr>
-<tr>
-<td>SUB $S,D$</td>
-<td>$D=D-S$</td>
-<td>Subtract</td>
-</tr>
-<tr>
-<td>IMUL $S,D$</td>
-<td>$D=D*S$</td>
-<td>Multiply</td>
-</tr>
-<tr>
-<td>XOR $S,D$</td>
-<td>$D=D\oplus S$</td>
-<td>Exclusive-or</td>
-</tr>
-<tr>
-<td>OR $S,D$</td>
-<td>$D=D,</td>
-<td>,S$</td>
-</tr>
-<tr>
-<td>AND $S,D$</td>
-<td>$D=D&amp;S$</td>
-<td>And</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>SAL $k,D$</td>
-<td>$D\leftarrow D\ll k$</td>
-<td>Left shift</td>
-</tr>
-<tr>
-<td>SHL $k,D$</td>
-<td>$D\leftarrow D\ll k$</td>
-<td>Left shift(equal to SAL)</td>
-</tr>
-<tr>
-<td>SAR $k,D$</td>
-<td>$D\leftarrow D\gg k$</td>
-<td>Arithmetic right shift</td>
-</tr>
-<tr>
-<td>SHR $k,D$</td>
-<td>$D\leftarrow D\gg k$</td>
-<td>Logical right shift</td>
-</tr>
-</tbody></table>
+<p>| Instruction   | Effect               | Description              |<br>| ——————- | —————————— | ———————————— |<br>| leaq $S$, $R$ | $R \leftarrow \&amp;S$   | Load effective address   |<br>|               |                      |                          |<br>| INC $D$       | $D \leftarrow D+1$   | Increment                |<br>| DEC $D$       | $D\leftarrow D+1$    | Decrement                |<br>| NEG D         | $D\leftarrow -D$     | Negate                   |<br>| NOT D         | $D\leftarrow ~D$     | Complement               |<br>|               |                      |                          |<br>| ADD $S,D$     | $D=D+S$              | Add                      |<br>| SUB $S,D$     | $D=D-S$              | Subtract                 |<br>| IMUL $S,D$    | $D=D*S$              | Multiply                 |<br>| XOR $S,D$     | $D=D\oplus S$        | Exclusive-or             |<br>| OR $S,D$      | $D=D\,|\,S$          | Or                       |<br>| AND $S,D$     | $D=D\&amp;S$             | And                      |<br>|               |                      |                          |<br>| SAL $k,D$     | $D\leftarrow D\ll k$ | Left shift               |<br>| SHL $k,D$     | $D\leftarrow D\ll k$ | Left shift(equal to SAL) |<br>| SAR $k,D$     | $D\leftarrow D\gg k$ | Arithmetic right shift   |<br>| SHR $k,D$     | $D\leftarrow D\gg k$ | Logical right shift      |</p>
 <p>leaq指令的源是一个地址标识符，其直接将地址运算的结果移动到寄存器中。该指令最初被用来设计计算有效地址。现在常常被用于进行一些简单的计算。同时，leaq指令的运算不会修改标志位。</p>
 </li>
 </ol>

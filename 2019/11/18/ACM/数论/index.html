@@ -235,8 +235,18 @@
 <p>证明思路：对m应用算数基本定理分解，使用式1可证</p>
 <p>欧拉定理：$a^{\phi(m)}\equiv1\pmod m$</p>
 <p>证明思路：取m的既约剩余系，对既约剩余系乘以与m互素的a，提出$a^{\phi(m)}$，化简可证</p>
-<p>扩展欧拉定理<br>$$<br>a^x=<br>\begin{equation}<br>\left{<br>    \begin{array}{l}<br>        a^{x\bmod\phi(m)}&amp;(a,m)=1\<br>        a^x&amp;(a,m)\neq1,x&lt;\phi(m)\<br>        a^{xmod\phi(m)+\phi(m)}&amp;(a,m)\ne1,x\ge\phi(m)<br>    \end{array}<br>\right.<br>\end{equation}<br>$$</p>
-<p>证明思路：第一个式子由欧拉定理直接易得，第二个式子显然，第三个式子证明思路如下：</p>
+<p>扩展欧拉定理</p>
+<script type="math/tex; mode=display">
+a^x=
+\begin{equation}  
+\left\{
+    \begin{array}{l}
+        a^{x\bmod\phi(m)}&(a,m)=1\\
+        a^x&(a,m)\neq1,x<\phi(m)\\
+        a^{xmod\phi(m)+\phi(m)}&(a,m)\ne1,x\ge\phi(m)
+    \end{array}  
+\right.  
+\end{equation}</script><p>证明思路：第一个式子由欧拉定理直接易得，第二个式子显然，第三个式子证明思路如下：</p>
 <p>先考虑简单情况，当$m=p^k$时，有$(a,p)=1$或$(a,p)=p$</p>
 <p>前者的情况由欧拉定理显然得出。</p>
 <p>$m=1$时显然。</p>
@@ -254,7 +264,18 @@
 <h3 id="二次剩余"><a href="#二次剩余" class="headerlink" title="二次剩余"></a>二次剩余</h3><p>定义：设素数$p&gt;2$，$d$是整数，$p\nmid d$如果同余方程$x^2\equiv d\pmod p$有解，则称$d$是模$p$的二次剩余；若无解则称$d$是模$p$的非二次剩余。</p>
 <p>在模$p$的一个既约剩余系中，恰有$(p-1)/2$个模$p$的二次剩余和二次非剩余（在既约剩余系中寻找x，构成二次剩余的配对，剩下的就是无法构成的）</p>
 <p>欧拉判别法：素数$p&gt;2$，$p\nmid d$，那么，$d$是模$p$的​二次剩余的充要条件是$d^{\frac{p-1}2}\equiv 1\pmod p$</p>
-<p>Lengendre符号，设素数$p&gt;2$ ，定义整变数的函数：<br>$$<br>(\frac dp)=<br>\begin{equation}<br>\left{<br>        \begin{array}{l}<br>            1&amp;当d是模p的二次剩余\<br>            -1&amp;当d是模p的二次剩余\<br>            0&amp;p\mid d<br>        \end{array}<br>\right.<br>\end{equation}<br>$$<br>Cipolla算法</p>
+<p>Lengendre符号，设素数$p&gt;2$ ，定义整变数的函数：</p>
+<script type="math/tex; mode=display">
+(\frac dp)=
+\begin{equation}
+\left\{
+        \begin{array}{l}
+            1&当d是模p的二次剩余\\
+            -1&当d是模p的二次剩余\\
+            0&p\mid d
+        \end{array}
+\right.
+\end{equation}</script><p>Cipolla算法</p>
 <p>前置定理：</p>
 <p>由费马小定理+平方差公式一通操作得到$n^{\frac{p-1}2}\equiv \pm1 \pmod p$</p>
 <p>若$n$是$p$的二次剩余，则必有$n^{\frac{p-1}2}\equiv-1 \pmod p$</p>
@@ -270,10 +291,21 @@
 <p>$ID(n)$，单位函数，定义为$ID(n)=n$。</p>
 <p>$ID_k(n)$，幂函数，定义为$ID(n)=n^k$。</p>
 <p>$\varepsilon(n)$，狄利克雷卷积的乘法单位，定义为若$n=1,\varepsilon(n)=1$，若$n&gt;1,\varepsilon(n)=0$。</p>
-<p>$\mu(n)$，莫比乌斯函数$\mu(n)=\begin{cases}1&amp;n=1\0&amp;存在大于两个的相同素因子\(-1)^{w(n)}&amp; 其他情况，w(n)为素因子的个数\end{cases}$</p>
-<p><strong>狄利克雷卷积</strong><br>$$<br>(f<em>g)(n)=\sum_{d\mid n}f(d)g(\frac nd)<br>$$<br>例子<br>$$<br>\varepsilon=\mu</em>1\iff\varepsilon(n)=\sum_{d\mid n}\mu(d)<br>$$<br>简要证明：$n=1$时显然。$n\geq2$时，对$n$使用唯一分解定理，$d$表示是其因子的任意组合。对于所有素因数的幂次大于1的组合，我们有$\mu=0$，对答案不产生贡献。对于剩余的所有情况，我们使用二项式定理进行合并，得到$(x-1)^k$其中$x=1$<br>$$<br>d=1<em>1\iff d(n)=\sum_{d\mid n}1\<br>\sigma=d</em>1\iff \sigma(n)=\sum_{d\mid n}d\<br>\phi=\mu<em>ID\iff\phi(n)=\sum_{d\mid n}\mu(d)</em>(\frac nd)<br>$$<br><strong>莫比乌斯反演</strong></p>
-<p>设$f(n),g(n)$为两个数论函数，如果有<br>$$<br>f(n)=\sum_{d\mid n}g(d)<br>$$<br>那么有<br>$$<br>g(n)=\sum_{d\mid n}\mu(d)f(\frac nd)<br>$$</p>
-
+<p>$\mu(n)$，莫比乌斯函数$\mu(n)=\begin{cases}1&amp;n=1\\0&amp;存在大于两个的相同素因子\(-1)^{w(n)}&amp; 其他情况，w(n)为素因子的个数\end{cases}$</p>
+<p><strong>狄利克雷卷积</strong></p>
+<script type="math/tex; mode=display">
+(f*g)(n)=\sum_{d\mid n}f(d)g(\frac nd)</script><p>例子</p>
+<script type="math/tex; mode=display">
+\varepsilon=\mu*1\iff\varepsilon(n)=\sum_{d\mid n}\mu(d)</script><p>简要证明：$n=1$时显然。$n\geq2$时，对$n$使用唯一分解定理，$d$表示是其因子的任意组合。对于所有素因数的幂次大于1的组合，我们有$\mu=0$，对答案不产生贡献。对于剩余的所有情况，我们使用二项式定理进行合并，得到$(x-1)^k$其中$x=1$</p>
+<script type="math/tex; mode=display">
+d=1*1\iff d(n)=\sum_{d\mid n}1\\
+\sigma=d*1\iff \sigma(n)=\sum_{d\mid n}d\\
+\phi=\mu*ID\iff\phi(n)=\sum_{d\mid n}\mu(d)*(\frac nd)</script><p><strong>莫比乌斯反演</strong></p>
+<p>设$f(n),g(n)$为两个数论函数，如果有</p>
+<script type="math/tex; mode=display">
+f(n)=\sum_{d\mid n}g(d)</script><p>那么有</p>
+<script type="math/tex; mode=display">
+g(n)=\sum_{d\mid n}\mu(d)f(\frac nd)</script>
     </div>
 
     
