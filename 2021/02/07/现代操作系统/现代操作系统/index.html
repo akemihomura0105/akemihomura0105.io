@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/link_list_manage_free_address.png">
 <meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/stack_segment_model.png">
 <meta property="article:published_time" content="2021-02-07T05:23:08.159Z">
-<meta property="article:modified_time" content="2021-02-08T08:42:53.868Z">
+<meta property="article:modified_time" content="2021-02-09T15:41:51.437Z">
 <meta property="article:author" content="Akemihomura">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -192,7 +192,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-08 16:42:53" itemprop="dateModified" datetime="2021-02-08T16:42:53+08:00">2021-02-08</time>
+                <time title="修改时间：2021-02-09 23:41:51" itemprop="dateModified" datetime="2021-02-09T23:41:51+08:00">2021-02-09</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -667,9 +667,9 @@
 <li>藉由特殊的硬件，IBM360 同样实现了在无内存抽象下的多道程序。为了防止进程之间内存上的非法互相访问，IBM360 对内存进行分块划分，对每一个块用一标号标记。这个标记可以被操作系统修改，其用于标识内存的所属权。对于每个进程，IBM360 在PSW上进行与内存块类似的标记。只有当内存块与PSW上的标记相同时才被允许访问。但仅做如上处理仅能保证进程不互相访问。每个进程的内存空间在不知道其他进程的使用情况下仍会重叠。若 os 将其分配至不重叠的空间下，会出现新的问题。进程本身不会知道自己被分配的空间，其对内存空间的绝对寻址会发生错误a（其真实的寻址位置应是原有的位置加上一偏移量）。 为了解决这一问题，引入了 <strong>静态重定位(static relocation)</strong> 技术。装入程序在将进程装入至内存时，将会替换掉代码中的绝对地址，对其施加一偏移量，此时进程便可正常工作。</li>
 </ol>
 <h2 id="第二节、地址空间"><a href="#第二节、地址空间" class="headerlink" title="第二节、地址空间"></a>第二节、地址空间</h2><ol>
-<li><p>在第一节中，我们可以看到，多个同时运行的进程无法在同一时刻共享彼此的内存。为了实现多道程序，我们需要将其各自的地址分离。由此引申出的新的抽象概念就是<strong>地址空间(address space)</strong>。地址空间是某个进程可以使用的地址的集合。抽象的结果就是，地址空间将原本进程之间唯一共享的物理地址，拆分成了每个进程独有一份的若干空间。不同进程无需考虑其他进程使用的物理地址（此时不同进程之间进行类似jmp 16384这样的操作时，跳转得到的实际的物理地址不同)。我们称这个位于地址空间中的地址为逻辑地址。</p>
+<li><p>在第一节中，我们可以看到，多个同时运行的进程无法在同一时刻共享彼此的内存。为了实现多道程序，我们需要将其各自的地址分离。由此引申出的新的抽象概念就是<strong>地址空间(address space)</strong>。地址空间是某个进程可以使用的地址的集合。抽象的结果就是，地址空间将原本进程之间唯一共享的物理地址，拆分成了每个进程独有一份的若干空间。不同进程无需考虑其他进程使用的物理地址（此时不同进程之间进行类似jmp 16384这样的操作时，跳转得到的实际的物理地址不同)。</p>
 </li>
-<li><p>地址空间虽然可以解决不同进程之间的内存访问问题，然而地址空间是一个抽象的概念，实际上并不存在这样的空间，进程实际上仍在访问物理地址。可以发现，地址空间实际上是做了一个逻辑地址到物理地址的一个映射。而为了实现这个地址映射，我们可以像类似 IBM360 里使用的静态重定位一样，对地址施加一个偏移量。然而静态装填存在若干缺陷，如程序装入后就不能再次改变位置，无法很好的共享内存映像。造成其缺点的原因可以归为其地址映射是在程序运行前的静态操作，不够灵活。故现今广泛使用的是另一种方式：<strong>动态重定位(dynamic relocation)</strong>。通过添加<strong>基址寄存器(base register)</strong>与<strong>界寄存器(limit register)</strong>，我们可以通过改变两个寄存器的值来动态的改变地址映射。在每次进行内存访问时，都会将逻辑地址与基址寄存器相加，得到真正的物理地址，随后与界寄存器比较，查看是否非法访问内存。这就是动态重定位的原理，这仿佛是将整个地址空间按照基址寄存器进行了一次平移一样。</p>
+<li><p>地址空间虽然可以解决不同进程之间的内存访问问题，然而地址空间是一个抽象的概念，实际上并不存在这样的空间，进程实际上仍在访问物理地址。可以发现，地址空间实际上是做了一个逻辑地址到物理地址的一个映射。而为了实现这个地址映射，我们可以像类似 IBM360 里使用的静态重定位一样，对地址施加一个偏移量。然而静态装填存在若干缺陷，如程序装入后就不能再次改变位置，无法很好的共享内存映像。造成其缺点的原因可以归为其地址映射是在程序运行前的静态操作，不够灵活。故现今广泛使用的是另一种方式：<strong>动态重定位(dynamic relocation)</strong>。通过添加<strong>基址寄存器(base register)</strong>与<strong>界寄存器(limit register)</strong>，我们可以通过改变两个寄存器的值来动态的改变地址映射。在每次进行内存访问时，都会将地址与基址寄存器相加，得到真正的物理地址，随后与界寄存器比较，查看是否非法访问内存。这就是动态重定位的原理，这仿佛是将整个地址空间按照基址寄存器进行了一次平移一样。</p>
 </li>
 <li><p>再谈交换。此时的交换不再像第二节一样用于处理内存冲突的问题。因为计算机内存大小有限，不可看作无穷大，以及磁盘的单位存储空间的价格要低于内存，这使得我们可以通过交换技术从某种意义上扩大内存空间。在多道程序的系统中，并不是所有打开的程序都在运行。不常用的程序可能被交换到硬盘中，从而给其他程序留出空间。此时有一种情况，当某个进程被换出时，在其下一次换入时，可能这个地方已经被其他进程所使用，其必须找到另外的一块空间或将某些进程交换置磁盘。这就需要我们对内存的可用空间进行管理。</p>
 </li>
@@ -692,6 +692,33 @@
 </li>
 <li><p>堆栈模型，进程往往在运行前无法肯定其实际使用的内存大小，其往往会在运行的过程中实现内存的扩张。我们熟悉的堆和栈就是这样的可扩张的空间。其位于地址空间的两侧，向着相反的方向扩张。具体可见下图。</p>
 <p><img src="/blog_images/modern_operating_systems/stack_segment_model.png" alt="stack_segment_model"></p>
+<h2 id="第三节、虚拟内存"><a href="#第三节、虚拟内存" class="headerlink" title="第三节、虚拟内存"></a>第三节、虚拟内存</h2></li>
+<li><p><strong>虚拟内存(virtual memory)</strong>。虚拟内存技术使得 os 可以运行超过其真实 ROM 容量的程序。其将程序分解为若干小段，称这些小段为<strong>页(pages)</strong>。每一页有着一段连续的内存空间，但页与页之前无需连续。同时，页可以不在内存中，其可以存在于磁盘上。当程序使用那块内存时，os 会将磁盘中的页交换至内存后再重新执行之前的指令。</p>
+</li>
+<li><p><strong>分页技术(Paging)</strong>。分页技术将真实的内存划分为若干大小的页，我们称其为<strong>实页(real page)</strong>。而程序实际使用的内存空间，则被划分为称为<strong>虚页(virtual page)</strong>，虚页和实页有相同的大小。分页技术是建立在地址空间的抽象基础上的。每一个进程的 PCB 内都有一个页表。实际上，页表是实现地址映射的数据结构。我们将从虚页映射到实页的页表称为内页表，将从虚页映射到磁盘的页表称为外页表。在这个机制下，允许虚页映射到磁盘由此，磁盘成为了内存的延申。分页后，进程实际看到的是由若干虚页组成的<strong>虚拟地址(virtual space)</strong>。在进程访问内存时，虚拟地址将会交由<strong>内存管理单元(MMU,memory management unit)</strong>转换为物理地址后进行寻址。 </p>
+</li>
+<li><p><strong>页错误(page fault)</strong>。当虚页指向的实页不存在于内存中时，此时称发生了页错误。页错误发生后，操作系统会选择内存，从磁盘中交换出信息，</p>
+</li>
+<li><p><strong>页表(page table)</strong>。页表是 MMU 实现虚拟地址向物理地址转换的重要数据结构。每个实页及虚页都有其对应的页号。页表就是按照虚页号依次将虚页及与其有关的信息排列成的一个线性数据结构。页表元素由：<strong>实页号</strong>，<strong>存在位</strong>，保护位，修改位，引用位，缓存允许位等构成。页表将虚拟地址映射至物理地址，其核心工作原理如下：</p>
+<ol>
+<li>给定一个虚拟地址，将虚拟地址根据页面大小找到虚页号以及其偏移量。</li>
+<li>根据虚页号查找页表，判断是否存在，若不存在，转至3，否则转至4。</li>
+<li>发生页错误，触发页中断。从外页表找到数据在磁盘中的位置，将数据换入内存，同时修改内页表的标志位。</li>
+<li>将虚页号替换为实页号，与偏移量拼接，得到物理地址。</li>
+</ol>
+</li>
+<li><p>因为页表的存在，那些访问内存的语句都需要访问一次页表。同时很多语句，其时间的主要开销为对内存的访问。此时页表的增加会极大的降低效率，因故我们引入<strong>快表(translation lookaside buffer)</strong>这一概念。快表是一种特殊的 cache ，其用于缓存页面文件，加快内存访问的速度。实际的程序中，很多的内存访问都具有重复性和连续性。如，循环语句中循环变量的遍历。引入快表后，虚页到实页的地址变换，将分成两个路线同时进行。虚页号同时被发送给快表和内页表。当快表找到对应的表项时，则直接通过快表，快速得到物理地址。若没有找到，则像之前一样，通过内页表映射得到物理地址，并删除快表中的某个元素，同时将这组映射添加进快表。</p>
+<p>快表的管理既可以使用硬件实现，也可以使用软件实现。软件实现应用在许多 RISC 操作系统，如 MIPS 。当用软件实现时，MMU的复杂度降低，可以给CPU更多的空间来优化处理，os 也可以根据具体的应用（如网页服务器）来做出特等的优化。软件实现的代价则是降低了快表的速度。</p>
+</li>
+<li><p><strong>软丢失(soft miss)</strong>，指TLB未命中，但表项存在于内存中。</p>
+<p><strong>硬丢失(hard miss)</strong>，指表项不在内存中，必须从磁盘中获取。</p>
+<p><strong>次级错误(minor page fault)</strong>，指虚页不在进程的虚拟空间出现，但对应的页面已经在物理内存的情况。这种情况可以在进程之间进行内存共享时发生。共享的内存已经被某一个进程换入内存，但另一个进程的页表并不知道这件事情，故出现错误。此种情况只需要在页表中重新建立连接即可。</p>
+<p><strong>重大错误(major page fault)</strong>，即硬丢失。</p>
+<p><strong>段错误(segment fault)</strong>，此时进程非法访问内存，操作系统通常会终止该进程的运行。</p>
+</li>
+<li><p><strong>多级页表(multilevel page tables)</strong>。当计算机的虚拟内存不断增大时，页表的大小将会迅速膨胀。但此时进程并用到全部的虚拟空间，页表中的许多页面并不会被访问到。但是为了保证我们能快速的随机访问到表项，我们不能破环页表的线性结构。故我们引入了多级页表这一树状结构。原有的虚拟地址被拆分为：二级页表虚页号，一级页表虚页号，偏移量。此时我们将原有的页表分成若干连续的段，每一段用一个页表来保存，我们称之为一级页表。注意，此时段内虚页号是连续的。随后，我们用一个二级页表作为下方一级页表的父亲。当我们进行地址映射时，我们首先通过二级页表完成二级页表虚页号到一级页表的映射，随后再通过映射到的一级页表完成一级页表虚页号到实页号的映射，最后加上偏移量，就是最终得到的物理地址了。我们可以发现，此时的映射过程中，我们只需维护查询的一级页表（叶子节点）到二级页表（根节点）的这一段内容，即可完成每次映射都是快速的随机访问。此时，即便我们没有保存每一个一级页表，这也不影响我们的查询。这样就解决了页表大小过大的问题。可以发现，多级页表实际上是一个时间换空间的树型结构，其以增加查询次数（由一次查表变为二级页表与一级页表两次）换取无需存储每一个页表的能力。</p>
+</li>
+<li><p><strong>反置页表(inverted page tables)</strong>。反置页表与多级页表一样，都是解决页表膨胀的一种方案，其原理同样是不保存无用的表项。反置页表只会保存一对虚页号与实页号，即只有有实页号的虚页才会被保存，反置页表最大与实页大小一致。这时，虽然我们可以解决页表的膨胀问题，但是此时我们无法通过旧有的方式完成虚页到实页的映射，若不做特殊处理，我们只能依次遍历页表，这显然是不可接受的。一种可能的方法是，使用hash，将虚页号hash变换至反置页表的表项中，这使得我们无需依次遍历页表也可以完成变换。</p>
 </li>
 </ol>
 
@@ -775,7 +802,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">第一章 操作系统初步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">第二章 进程与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%EF%BC%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">第一节：进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">第二节、线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">2.3.</span> <span class="nav-text">第三节、进程间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E8%B0%83%E5%BA%A6"><span class="nav-number">2.4.</span> <span class="nav-text">第四节、调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第三章 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%E3%80%81%E6%97%A0%E5%86%85%E5%AD%98%E6%8A%BD%E8%B1%A1%E4%B8%8B%E7%9A%84-OS"><span class="nav-number">3.1.</span> <span class="nav-text">第一节、无内存抽象下的 OS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">3.2.</span> <span class="nav-text">第二节、地址空间</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">第一章 操作系统初步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">第二章 进程与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%EF%BC%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">第一节：进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">第二节、线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">2.3.</span> <span class="nav-text">第三节、进程间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E8%B0%83%E5%BA%A6"><span class="nav-number">2.4.</span> <span class="nav-text">第四节、调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第三章 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%E3%80%81%E6%97%A0%E5%86%85%E5%AD%98%E6%8A%BD%E8%B1%A1%E4%B8%8B%E7%9A%84-OS"><span class="nav-number">3.1.</span> <span class="nav-text">第一节、无内存抽象下的 OS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">3.2.</span> <span class="nav-text">第二节、地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text">第三节、虚拟内存</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
