@@ -31,8 +31,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/link_list_manage_free_address.png">
 <meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/stack_segment_model.png">
+<meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/mechanism_and_policy.png">
 <meta property="article:published_time" content="2021-02-07T05:23:08.159Z">
-<meta property="article:modified_time" content="2021-02-15T04:39:34.238Z">
+<meta property="article:modified_time" content="2021-02-16T08:10:34.775Z">
 <meta property="article:author" content="Akemihomura">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -192,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-15 12:39:34" itemprop="dateModified" datetime="2021-02-15T12:39:34+08:00">2021-02-15</time>
+                <time title="修改时间：2021-02-16 16:10:34" itemprop="dateModified" datetime="2021-02-16T16:10:34+08:00">2021-02-16</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -760,6 +761,38 @@
 <li><strong>内存映射文件(memory-mapping files)</strong>。DLL 实际上是内存映射文件的一个特例。内存映射文件提供了一种将文件映射到内存的方式，其运用了虚拟内存技术。在没有对文件进行访问前，文件不会被加载到内存。若发生访问，则会按页进行装载。对内存的操作将会视为对文件的操作。在进程终止或显式的关闭内存映射文件时，内存内的信息将会被回送至磁盘，对应的文件会被修改。内存映射文件提供了一种 I/O 的新方式。其直接将文件从内存映射至进程的虚拟空间，减少了从内核空间到用户空间的一次映射，因此与传统的文件 I/O 相比，其效率更高。同时，内存映射文件也可以作为进程通信的一种方式。当多个进程同时映射到同一个文件时，此时进程对文件的修改将会通过内存立即反映到其他的进程中（因为其他进程也可以访问这块空间）。</li>
 <li>页的清理机制。当发生硬丢失时，os 必须选择一个物理页交换至磁盘。若发生硬丢失时选中了脏页。此时页的交换将会因回写消耗大量的时间。为了提供可以交换的页，并且提升效率，os 提供了清理机制。os 在后台运行一个分页守护进程。此进程周期性的检查当前的内存状态，若空余的页过少，进程就会运行。其根据页置换算法把若干页从页表中删除，若该页是脏页，则会进行回写。同时，此时的页实际上并没有离开内存，当其拥有者再次访问时，只需要在对应的页表上进行注册即可，无需访问磁盘。通过这样的机制，可以使得在真正发生硬丢失时，有更大的概率从分页守护进程中获得一个干净的页。实际上，分页守护进程的用途就是预处理这些页。这一机制可以使用双指针实现，指针一端指向脏页，另一端指向干净的页。脏页端不断回写至磁盘，同时移动指针，在发生页错误时，从干净端获取干净的页。</li>
 </ol>
+<h2 id="第六节、实现上的一些问题"><a href="#第六节、实现上的一些问题" class="headerlink" title="第六节、实现上的一些问题"></a>第六节、实现上的一些问题</h2><ol>
+<li><p>操作系统与分页。os 会参与到分页机制中，这发生在以下 4 个时间：</p>
+<ol>
+<li>进程创建。os 需要为进程决定页表的大小，在磁盘中划分为页表服务的交换区。</li>
+<li>进程执行。当进程被调度执行的时，os 需要通知 MMU 为当前的进程进行重置，同时刷新快表。os 还需要将当前的页表设定为当前进程的页表，这个过程通常是由 os 将页表的起始地址填入 MMU 内部的页表寄存器来完成的。</li>
+<li>页错误。发生页错误时，os 需要通过读取硬件寄存器以知道是哪一个页的访问出现问题，随后执行之前提到过的对页错误的一系列处理操作。</li>
+<li>进程终止。当进程终止时，os 需要负责释放其占用的一系列资源，页表，磁盘交换区等。</li>
+</ol>
+</li>
+<li><p>页错误的处理，下述 10 个步骤详细描述了页错误的处理流程:</p>
+<ol>
+<li>硬件检测到页错误，陷入内核态处理页错误。硬件将程序计数器保存至栈中。同时，在大多数实现下，与当前 CPU 执行的指令有关的信息将会保存在 CPU 内部的寄存器中，以便页错误处理结束以后重新运行该语句。</li>
+<li>汇编例程调用操作系统，保存通用寄存器及其他可能变化的信息。</li>
+<li>os 定位不在内存中的虚页，这通常保存在某个寄存器中。</li>
+<li>os 检测访问是否合法。若不合法，则发生段错误，os 将终止进程。若合法，os将检查是否存在空闲的页。若存在，则进行分配。若不存在，则运行页置换算法</li>
+<li>如果页置换算法选中的页是脏页，这个进程将会被临时挂起，同时将脏页回写至磁盘。这个过程中，该页会被标记为 busy 以防止其他程序对页的访问。</li>
+<li>脏页回写完成后，os 将需要的页从硬盘中换入内存。这个过程结束后，该页的 busy 将会被重置。</li>
+<li>出错指令的程序计数器将会被回退到出错前的状态。</li>
+<li>重新调度进程。当该进程被调度时，操作系统回到调用它的例程。</li>
+<li>例程继续运行，还原现场，随后回到用户态，就像没有发生页错误一样继续执行之前出错的程序。</li>
+</ol>
+</li>
+<li><p>指令备份。在发生页错误时，很多情况下操作系统并不能自己断定出错指令的位置。此时 CPU 硬件会提供一系列寄存器，这些寄存器可以用来描述上一次执行的指令地址，描述程序计数器的自增或自减长度。有了这些信息，os 才可以找到出错的指令并在也处理结束时，回退到这条指令。</p>
+</li>
+<li><p><strong>页面锁(pinning page)</strong>，被锁定的页面不可以被交换。考虑以下情形，当页调度使用全局调度算法时，某一进程发出 I/O 请求，当 DMA 传输建立时，该进程会被挂起。os 此时转而运行其他进程，若其他进程此时发生了页错误，并且在处理页错误的过程中选中了 DMA 传输的物理块。此时 DMA 传输的位置将会出现错误。因此，使用页面锁可以保证页面不被交换。</p>
+</li>
+<li><p><strong>后备存储(backing store)</strong>，页不仅仅映射至内存，其还需要映射至后备存储以便完成页错误时的处理。可以将进程的代码段映射至可执行二进制文件中，将动态加载的共享库程序段映射到动态调用的库文件。将其他段映射到交换文件中。交换文件位于磁盘中的交换区，其上不搭载文件系统。</p>
+</li>
+<li><p>机制与策略的分离。<strong>机制(mechanism)</strong>，指 os 可以做什么。<strong>策略(policy)</strong>，指 os 怎么做什么。前者指 os 提供的一系列接口，后者指程序如何利用一系列接口来完成某项任务。机制与策略的分离是一种设计上的概念。机制是一种框架，其相对固定，不易改变。机制与策略的分离可以提供模块化的代码，以及更加灵活的结构。比如内存管理就可以分为三个部分：MMU 处理器（负责与 MMU 硬件打交道），内核层的页错误处理器，用户层的外部页表处理器。它们将呈现出下图的关系：</p>
+<p><img src="/blog_images/modern_operating_systems/mechanism_and_policy.png" alt="mechanism and policy"></p>
+</li>
+</ol>
 
     </div>
 
@@ -841,7 +874,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">第一章 操作系统初步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">第二章 进程与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%EF%BC%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">第一节：进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">第二节、线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">2.3.</span> <span class="nav-text">第三节、进程间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E8%B0%83%E5%BA%A6"><span class="nav-number">2.4.</span> <span class="nav-text">第四节、调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第三章 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%E3%80%81%E6%97%A0%E5%86%85%E5%AD%98%E6%8A%BD%E8%B1%A1%E4%B8%8B%E7%9A%84-OS"><span class="nav-number">3.1.</span> <span class="nav-text">第一节、无内存抽象下的 OS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">3.2.</span> <span class="nav-text">第二节、地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text">第三节、虚拟内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">第四节、页面置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%8A%82%E3%80%81%E5%88%86%E9%A1%B5%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">3.5.</span> <span class="nav-text">第五节、分页系统设计的细节</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">第一章 操作系统初步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">第二章 进程与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%EF%BC%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">第一节：进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">第二节、线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">2.3.</span> <span class="nav-text">第三节、进程间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E8%B0%83%E5%BA%A6"><span class="nav-number">2.4.</span> <span class="nav-text">第四节、调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第三章 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%E3%80%81%E6%97%A0%E5%86%85%E5%AD%98%E6%8A%BD%E8%B1%A1%E4%B8%8B%E7%9A%84-OS"><span class="nav-number">3.1.</span> <span class="nav-text">第一节、无内存抽象下的 OS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">3.2.</span> <span class="nav-text">第二节、地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text">第三节、虚拟内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">第四节、页面置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%8A%82%E3%80%81%E5%88%86%E9%A1%B5%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">3.5.</span> <span class="nav-text">第五节、分页系统设计的细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E8%8A%82%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="nav-number">3.6.</span> <span class="nav-text">第六节、实现上的一些问题</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
