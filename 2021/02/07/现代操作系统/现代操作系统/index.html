@@ -31,9 +31,12 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/link_list_manage_free_address.png">
 <meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/stack_segment_model.png">
+<meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/page_table.png">
 <meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/mechanism_and_policy.png">
+<meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/binary_file_structure.png">
+<meta property="og:image" content="http://akemihomura0105.github.io/blog_images/modern_operating_systems/directory.png">
 <meta property="article:published_time" content="2021-02-07T05:23:08.159Z">
-<meta property="article:modified_time" content="2021-02-16T08:10:34.775Z">
+<meta property="article:modified_time" content="2021-02-19T07:27:54.787Z">
 <meta property="article:author" content="Akemihomura">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
@@ -193,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-16 16:10:34" itemprop="dateModified" datetime="2021-02-16T16:10:34+08:00">2021-02-16</time>
+                <time title="修改时间：2021-02-19 15:27:54" itemprop="dateModified" datetime="2021-02-19T15:27:54+08:00">2021-02-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -265,14 +268,14 @@
 <p>· 因为内存的I/O速度较慢，CPU内部配有寄存器，CPU直接与寄存器进行交流。有的寄存器具有特定的功能。</p>
 <p>如<strong>程序计数器</strong>，<strong>栈指针</strong>，<strong>PSW（Program Status Word）</strong>程序状态字。程序计数器用来标识CPU下一个获取的指令位置，栈指针用来指示当前栈顶部的内存地址，PSW包括很多状态码，其由比较指令，系统优先级，系统的运行状态（内核态/管态）以及其他控制信息来决定。</p>
 <p>· 每一个CPU都有着自己特定的指令集，这就是为什么一个x86架构的处理器不能执行ARM架构的程序，反之亦然。</p>
-<p>· <strong>管道技术</strong>。事实上，现代的CPU不会每次只执行取指，解码，执行中的一步，通过将负责这三个任务的单元分离，在执行n号任务的时候，进行n+1号的解码，同时进行n+2号的取指。其使原来串行工作的任务得以并行进行，减少了CPU中部分模组的闲置率，提高了CPU的吞吐率与主频，从而提高了运行效率。但是管道技术也有缺点，如果任务n+1依赖于任务n产生的结果，程序就会出现问题。这种情况称之为CPU的冒险，详情见其他书籍。</p>
-<p>· <strong>超标量技术</strong>。在同一个时间周期内吗，CPU的部件乱序执行多次不同的任务。其要求这一周期内运算的指令不应有冲突，不存在跳转指令。详情见其他书籍。</p>
+<p>· <strong>流水线技术</strong>。事实上，现代的CPU不会每次只执行取指，解码，执行中的一步，通过将负责这三个任务的单元分离，在执行n号任务的时候，进行n+1号的解码，同时进行n+2号的取指。其使原来串行工作的任务得以并行进行，减少了CPU中部分模组的闲置率，提高了CPU的吞吐率与主频，从而提高了运行效率。但是管道技术也有缺点，如果任务n+1依赖于任务n产生的结果，程序就会出现问题。这种情况称之为CPU的冒险，详情见其他书籍。</p>
+<p>· <strong>超标量技术</strong>。在同一个时间周期内，CPU的部件乱序执行多次不同的任务。其要求这一周期内运算的指令不应有冲突，不存在跳转指令。详情见其他书籍。</p>
 <p>· 大多数CPU都具有用户态和内核态，在用户态下，类似于I/O，存储器访问，更改PSW的值等都是被禁止的。用户程序想要获取这些权限，需要从操作系统处获取。用户程序必须发出<strong>系统调用（system call）</strong>。这将使其陷入内核态，并将控制权转移至操作系统。<strong>陷阱</strong>指令使计算机从用户态切换至内核态，并启动操作系统的相关功能。当操作系统完成任务时，控制权回再次转移会用户程序，系统再次变为用户态。陷阱发生的时间是固定的，其取决于用户程序何时发出陷阱指令。类似的能使操作系统改变状态的还有<strong>中断</strong>以及<strong>异常</strong>。</p>
 <p>· 多核CPU，CPU具有多个处理器，可以同时处理多个任务。</p>
 </li>
 <li><p><strong>存储器</strong>。</p>
 <p>· 因为物理原因，存储器无法做到速度，容量，成本三方面均优。因此为了节约成本以及提高CPU的效率，计算机内有着不同的存储器来满足需要。其中速度由快到慢依次是：<strong>寄存器（Registers）</strong>，<strong>高速缓存（Cache）</strong>，<strong>主存储器（Main memory）</strong>，<strong>磁盘（Magnetic disk）</strong></p>
-<p>· 寄存器与CPU的材料相同，其与CPU一样快，因此CPU与寄存器的访问没有延迟。32位CPU寄存器的容量通常为32*32bits，64位的则是64*64bits，程序在软件中必须自行管理寄存器的使用。</p>
+<p>· 寄存器与CPU的材料相同，其与CPU一样快，因此CPU对寄存器的访问没有延迟。32位CPU寄存器的容量通常为32*32bits，64位的则是64*64bits，程序在软件中必须自行管理寄存器的使用。</p>
 <p>·　高速缓存。高速缓存主要由硬件操控，其内部又设置了L1，L2，L3三级缓存。当CPU发送来从主存储器中读取数据的请求时，会首先寻找高速缓存中是否有其需要的信息。如果有，则从高速缓存中读取并传回给CPU。在高速缓存中寻找到所需信息的这一结果称为<strong>高速缓存命中 （cache hit）</strong>。在计算机运行中产生的一些信息，如：URL解析生成的IP地址）会被存储到cache中，以备以后的需要。</p>
 <p>· <strong>内存 RAM（Random Access Memory）</strong>CPU如果从cache中找不到需要的信息时，就会去RAM中寻找。</p>
 <p>· <strong>ROM（Read Only Memory）</strong>只读存储器。</p>
@@ -298,8 +301,8 @@
 </li>
 <li><p>计算机的启动。在主板上有一个叫做<strong>BIOS(Basic Input Output System</strong>的程序。BIOS包括低级的I/O软件，包括从键盘获取信息，向屏幕传输信息，进行磁盘I/O，其通常存储在<strong>闪存(flash RAM)</strong>中。当计算机启动时，BIOS首先被启动。其首先检测计算机上有多少可用的RAM以及键盘等其他基本设备是否被正确的接入及正常响应。它通过扫描PCIe与PCI总线去获得所有连接到计算机的设备。如果现有的设备与上一次启动计算机时的设备不同，新的设备会首先被确认。随后BIOS通过访问CMOS内存来决定如何启动。其从存储设备的第一个扇区读取信息，随后运行这段程序，启动操作系统。</p>
 </li>
-<li><p>进程：进程是运行中的程序。其中与每一个进程相关联的一个概念叫做<strong>地址空间(address space)</strong>。进程可以对地址空间进行读写操作，地址空间包括进程的程序代码，数据，栈。地址空间也与一些寄存器（程序计数器，栈指针），一些已经打开的文件，相关的进程等相关联。通过进程这一概念，CPU可以通过轮流处理不同的进程来实现并发。在很多操作系统中，进程的所有相关信息全部被存储在操作系统的一个叫做<strong>进程表(process table)</strong>中。进程及其的地址空间通常被称为<strong>核快照(core image)</strong>。</p>
-<p>进程管理中关键的系统调用是进程的创建与终止调用。如果一个进程可以创建多个进程，我们就可以得到一个进程的树形结构。其中被创建的进程称为创建它的那个进程的子进程。</p>
+<li><p>进程：进程是运行中的程序。其中与每一个进程相关联的一个概念叫做<strong>地址空间(address space)</strong>。进程可以对地址空间进行读写操作，地址空间包括进程的程序代码，数据，栈。地址空间也与一些寄存器（程序计数器，栈指针），已经打开的文件，进程等相关联。通过进程这一概念，CPU可以对不同的进程轮流处理来实现并发。在很多操作系统中，进程的所有相关信息全部被存储在操作系统的进程表(process table)<strong>中。进程及其地址空间通常被称为</strong>核快照(core image)**。</p>
+<p>进程管理中关键的系统调用是进程的创建与终止调用。如果一个进程可以创建多个进程，我们就可以得到一个进程的树形结构。其中被创建的进程称为该进程的子进程。</p>
 <p>当一个进程需要与其他不同计算机上的进程进行通信时，为了防止发送出去的信息丢失，此时进程可能会要求操作系统每隔一段时间去确认对方是否收到信息。在设定完这个计时器后，程序可以去做其他的事情。当一段时间过去后，操作系统对进程发送一个<strong>alarm signal</strong>。这个信号会使进程暂时停下其现在的工作，使进程将其信息存储在栈中，然后执行信号处理程序。</p>
 <p>每一个使用操作系统的人都有一个由系统分发的<strong>UID(User Identification)</strong>。每一个进程也有UID，其用来表明是哪一个用户创建了这个进程。每一个子进程，都有着和其父亲一样的UID。用户也可以是按照组来进行划分，每一个组都有<strong>GID(Group Identification)</strong>。其中一类特别的UID，在UNIX中叫做<strong>超级用户(superuser)</strong>，在Windows中叫做<strong>管理员(Administrator)</strong>。其拥有着特别的权限，其可能无视一些保护规则。通常只有系统的管理员知道密码。</p>
 </li>
@@ -329,7 +332,7 @@
 </li>
 <li><p>与进程管理有关的系统调用</p>
 <p>· <strong>Fork</strong>。在POSIX中，唯一的创建新进程的方法就是调用Fork。Fork会将创建者所有的信息全部复制到新创建的进程中。因为现在两者的变量各自独立，两者间对各自变量的修改不会影响到对方的变量。在父进程执行fork语句前，只有一个进程在运行这段代码。而在父进程执行fork语句后，就有两个进程在执行这段代码了。同时fork有一个奇妙的特性，它只会在父进程中被调用一次，却可以在父进程与子进程中给出不同的返回值。在子进程中，其返回值为0。在父进程中，其返回子进程的<strong>进程标识符(Process IDentifier, PID)</strong>。当fork出现错误时，其返回一个负数。通过返回值，我们可以知道当前运行的进程是父进程还是子进程。</p>
-<p>· <strong>Waitpid</strong>。考虑以下情形，用户在cmd中输入了一串指令，此时cmd用fork创建了一个子进程，之后这个子进程处理完毕以后，cmd才会继续读入用户的指令。等待子程序处理完毕这个行为，需要用waitpid这个系统调用。当第一个参数$pid&gt;0$时，其等待一个PID为pid的进程结束。当$pid=-1$时，其等待任何一个子进程结束。当$pid=0$时，其等待同一个进程组的任何子进程退出。当$pid&lt;-1$时，其等待特定进程组的任何子进程退出，特定进程组的编号为pid 的绝对值。Waitpid的第二个参数时一个地址，当等待的进程结束时，这个地址上的值会被设为结束进程的返回值。第三个参数用于实现Waitpid的一些不同的功能，如没有子进程退出也会立即返回。</p>
+<p>· <strong>Waitpid</strong>。考虑以下情形，用户在cmd中输入了一串指令，此时cmd用fork创建了一个子进程，之后这个子进程处理完毕以后，cmd才会继续读入用户的指令。等待子程序处理完毕这个行为，需要用waitpid这个系统调用。当第一个参数$pid&gt;0$时，其等待一个PID为$pid$的进程结束。当$pid=-1$时，其等待任何一个子进程结束。当$pid=0$时，其等待同一个进程组的任何子进程退出。当$pid&lt;-1$时，其等待特定进程组的任何子进程退出，特定进程组的编号为pid 的绝对值。Waitpid的第二个参数是一个地址，当等待的进程结束时，这个地址上的值会被设为结束进程的返回值。第三个参数用于实现Waitpid的一些不同的功能，如没有子进程退出也会立即返回。</p>
 <p>·<strong>Execve</strong>。一个进程在其最初被fork时，其内容与父进程相同。为了执行与父进程不同的功能，我们需要使用execve来替换掉这个进程的核快照。第一个参数name表明要载入当前进程核快照的新程序的路径名，第二个参数表明传入新进程的命令行参数，对应于c语言main函数中的argv数组，最后一个参数指定了新程序的环境列表。</p>
 <p>关于c语言main函数中可选的三个参数:main(argc, argv, envp)</p>
 <p>举这样的一个例子，当你在命令行中输入命令    cp file1 file2时，程序cp的main函数中的argc = 3，argv[0] = “cp”,argv[1] = “file1”,argv[2] = “file2”。envp保存的是一个指针，指向环境变量。</p>
@@ -670,9 +673,9 @@
 </li>
 </ol>
 <h1 id="第三章-内存管理"><a href="#第三章-内存管理" class="headerlink" title="第三章 内存管理"></a>第三章 内存管理</h1><h2 id="第一节、无内存抽象下的-OS"><a href="#第一节、无内存抽象下的-OS" class="headerlink" title="第一节、无内存抽象下的 OS"></a>第一节、无内存抽象下的 OS</h2><ol>
-<li>早期的操作系统不具备内存抽象的能力，所有的进程直接访问物理内存。此时的 os 不具备同时运行多个进程的能力。因为每个进程之间的并不知道对方所用的内存，同时运行多个进程将使得程序之间发生冲突。如进程 A 写入了进程 B 将要读入的内存空间，使得进程 B 工作异常。</li>
-<li><strong>交换(swapping)</strong>技术，是指利用硬盘空间，将内存映像写入磁盘空间进行保存的一种技术。藉由此项技术，无内存抽象的 os 可运行多个程序。此时内存中永远只有一个进程，当 os 在进程间调度切换时，原本在内存中的程序将会被切换至磁盘。同时，os 从磁盘换出需要运行的进程映像。</li>
-<li>藉由特殊的硬件，IBM360 同样实现了在无内存抽象下的多道程序。为了防止进程之间内存上的非法互相访问，IBM360 对内存进行分块划分，对每一个块用一标号标记。这个标记可以被操作系统修改，其用于标识内存的所属权。对于每个进程，IBM360 在PSW上进行与内存块类似的标记。只有当内存块与PSW上的标记相同时才被允许访问。但仅做如上处理仅能保证进程不互相访问。每个进程的内存空间在不知道其他进程的使用情况下仍会重叠。若 os 将其分配至不重叠的空间下，会出现新的问题。进程本身不会知道自己被分配的空间，其对内存空间的绝对寻址会发生错误a（其真实的寻址位置应是原有的位置加上一偏移量）。 为了解决这一问题，引入了 <strong>静态重定位(static relocation)</strong> 技术。装入程序在将进程装入至内存时，将会替换掉代码中的绝对地址，对其施加一偏移量，此时进程便可正常工作。</li>
+<li>早期的操作系统不具备内存抽象的能力，所有的进程直接访问物理内存。此时的操作系统不具备同时运行多个进程的能力。因为每个进程之间的并不知道对方所用的内存，同时运行多个进程将使得程序之间发生冲突。如进程 A 写入了进程 B 将要读入的内存空间，使得进程 B 工作异常。</li>
+<li><strong>交换(swapping)</strong>技术，是指利用硬盘空间，将内存映像写入磁盘空间进行保存的一种技术。藉由此项技术，无内存抽象的操作系统可运行多个程序。此时内存中永远只有一个进程，当操作系统在进程间调度切换时，原本在内存中的程序将会被切换至磁盘。同时，操作系统从磁盘换出需要运行的进程映像。</li>
+<li>藉由特殊的硬件，IBM360 同样实现了在无内存抽象下的多道程序。为了防止进程之间内存上的非法互相访问，IBM360 对内存进行分块划分，对每一个块用一标号标记。这个标记可以被操作系统修改，其用于标识内存的所属权。对于每个进程，IBM360 在PSW上进行与内存块类似的标记。只有当内存块与PSW上的标记相同时才被允许访问。但仅做如上处理仅能保证进程不互相访问。每个进程的内存空间在不知道其他进程的使用情况下仍会重叠。若操作系统将其分配至不重叠的空间下，会出现新的问题。进程本身不会知道自己被分配的空间，其对内存空间的绝对寻址会发生错误a（其真实的寻址位置应是原有的位置加上一偏移量）。 为了解决这一问题，引入了 <strong>静态重定位(static relocation)</strong> 技术。装入程序在将进程装入至内存时，将会替换掉代码中的绝对地址，对其施加一偏移量，此时进程便可正常工作。</li>
 </ol>
 <h2 id="第二节、地址空间"><a href="#第二节、地址空间" class="headerlink" title="第二节、地址空间"></a>第二节、地址空间</h2><ol>
 <li><p>在第一节中，我们可以看到，多个同时运行的进程无法在同一时刻共享彼此的内存。为了实现多道程序，我们需要将其各自的地址分离。由此引申出的新的抽象概念就是<strong>地址空间(address space)</strong>。地址空间是某个进程可以使用的地址的集合。抽象的结果就是，地址空间将原本进程之间唯一共享的物理地址，拆分成了每个进程独有一份的若干空间。不同进程无需考虑其他进程使用的物理地址（此时不同进程之间进行类似jmp 16384这样的操作时，跳转得到的实际的物理地址不同)。</p>
@@ -696,14 +699,14 @@
 </ol>
 <p>这些算法各有优缺点，无法片面的评价好坏，应具体情况具体分析。</p>
 </li>
-<li><p>内存空洞。假定有两个进程 A，B，其分别占据 10000~19999,20000~29999，这两段物理地址。此时的空间是连续被利用的，也就是20000~30000没有被断开。当进程 A 被换至磁盘，同时需要占据长度为7000的进程 C 被分配至原本A的空间时，我们会发现，此时进程 C 占据了 10000~16999 的空间。此时 17000~19999 这段大小为 3000 的空间就是空洞，其只能装填大小小于 3000 的进程。随着 os 的不断运行，会有越来越多的空洞，这将导致内存实际上的损失。通过<strong>内存压缩(memory compaction)</strong>，os将会重新整理进程的内存分布，从而消除空洞。显然，因其要遍历内存，故内存压缩时间开销极大。</p>
+<li><p>内存空洞。假定有两个进程 A，B，其分别占据 10000~19999,20000~29999，这两段物理地址。此时的空间是连续被利用的，也就是20000~30000没有被断开。当进程 A 被换至磁盘，同时需要占据长度为7000的进程 C 被分配至原本A的空间时，我们会发现，此时进程 C 占据了 10000~16999 的空间。此时 17000~19999 这段大小为 3000 的空间就是空洞，其只能装填大小小于 3000 的进程。随着操作系统的不断运行，会有越来越多的空洞，这将导致内存实际上的损失。通过<strong>内存压缩(memory compaction)</strong>，操作系统将会重新整理进程的内存分布，从而消除空洞。显然，因其要遍历内存，故内存压缩时间开销极大。</p>
 </li>
 <li><p>堆栈模型，进程往往在运行前无法肯定其实际使用的内存大小，其往往会在运行的过程中实现内存的扩张。我们熟悉的堆和栈就是这样的可扩张的空间。其位于地址空间的两侧，向着相反的方向扩张。具体可见下图。</p>
 <p><img src="/blog_images/modern_operating_systems/stack_segment_model.png" alt="stack_segment_model"></p>
 </li>
 </ol>
 <h2 id="第三节、虚拟内存"><a href="#第三节、虚拟内存" class="headerlink" title="第三节、虚拟内存"></a>第三节、虚拟内存</h2><ol>
-<li><p><strong>虚拟内存(virtual memory)</strong>。虚拟内存技术使得 os 可以运行超过其真实 ROM 容量的程序。其将程序分解为若干小段，称这些小段为<strong>页(pages)</strong>。每一页有着一段连续的内存空间，但页与页之前无需连续。同时，页可以不在内存中，其可以存在于磁盘上。当程序使用那块内存时，os 会将磁盘中的页交换至内存后再重新执行之前的指令。</p>
+<li><p><strong>虚拟内存(virtual memory)</strong>。虚拟内存技术使得操作系统可以运行超过其真实 ROM 容量的程序。其将程序分解为若干小段，称这些小段为<strong>页(pages)</strong>。每一页有着一段连续的内存空间，但页与页之前无需连续。同时，页可以不在内存中，其可以存在于磁盘上。当程序使用那块内存时，操作系统会将磁盘中的页交换至内存后再重新执行之前的指令。</p>
 </li>
 <li><p><strong>分页技术(Paging)</strong>。分页技术将真实的内存划分为若干大小的页，我们称其为<strong>实页(real page)</strong>。而程序实际使用的内存空间，则被划分为称为<strong>虚页(virtual page)</strong>，虚页和实页有相同的大小。分页技术是建立在地址空间的抽象基础上的。每一个进程的 PCB 内都有一个页表。实际上，页表是实现地址映射的数据结构。我们将从虚页映射到实页的页表称为内页表，将从虚页映射到磁盘的页表称为外页表。在这个机制下，允许虚页映射到磁盘由此，磁盘成为了内存的延申。分页后，进程实际看到的是由若干虚页组成的<strong>虚拟地址(virtual space)</strong>。在进程访问内存时，虚拟地址将会交由<strong>内存管理单元(MMU,memory management unit)</strong>转换为物理地址后进行寻址。 </p>
 </li>
@@ -716,9 +719,10 @@
 <li>发生页错误，触发页中断。从外页表找到数据在磁盘中的位置，将数据换入内存，同时修改内页表的标志位。</li>
 <li>将虚页号替换为实页号，与偏移量拼接，得到物理地址。</li>
 </ol>
+<p><img src="/blog_images/modern_operating_systems/page_table.png" alt="page_table"></p>
 </li>
 <li><p>因为页表的存在，那些访问内存的语句都需要访问一次页表。同时很多语句，其时间的主要开销为对内存的访问。此时页表的增加会极大的降低效率，因故我们引入<strong>快表(translation lookaside buffer)</strong>这一概念。快表是一种特殊的 cache ，其用于缓存页面文件，加快内存访问的速度。实际的程序中，很多的内存访问都具有重复性和连续性。如，循环语句中循环变量的遍历。引入快表后，虚页到实页的地址变换，将分成两个路线同时进行。虚页号同时被发送给快表和内页表。当快表找到对应的表项时，则直接通过快表，快速得到物理地址。若没有找到，则像之前一样，通过内页表映射得到物理地址，并删除快表中的某个元素，同时将这组映射添加进快表。</p>
-<p>快表的管理既可以使用硬件实现，也可以使用软件实现。软件实现应用在许多 RISC 操作系统，如 MIPS 。当用软件实现时，MMU的复杂度降低，可以给CPU更多的空间来优化处理，os 也可以根据具体的应用（如网页服务器）来做出特等的优化。软件实现的代价则是降低了快表的速度。</p>
+<p>快表的管理既可以使用硬件实现，也可以使用软件实现。软件实现应用在许多 RISC 操作系统，如 MIPS 。当用软件实现时，MMU的复杂度降低，可以给CPU更多的空间来优化处理，操作系统也可以根据具体的应用（如网页服务器）来做出特等的优化。软件实现的代价则是降低了快表的速度。</p>
 </li>
 <li><p><strong>软丢失(soft miss)</strong>，指TLB未命中，但表项存在于内存中。</p>
 <p><strong>硬丢失(hard miss)</strong>，指表项不在内存中，必须从磁盘中获取。</p>
@@ -742,7 +746,7 @@
 <li>有引用，没有修改</li>
 <li>有修改，有引用</li>
 </ol>
-<p>在每次进行置换时从低到高依次检索每个类，若某个类中存在对应的页，则将其置换。我们有理由认为，既没有修改，也没有引用的表项在之后也不会被用到。需要注意的是，对于状态 1 ，修改必然伴随着引用。但这里引用位可以被 os 周期性的清除。故1类实际上是在较远的时间里使用的页。</p>
+<p>在每次进行置换时从低到高依次检索每个类，若某个类中存在对应的页，则将其置换。我们有理由认为，既没有修改，也没有引用的表项在之后也不会被用到。需要注意的是，对于状态 1 ，修改必然伴随着引用。但这里引用位可以被操作系统周期性的清除。故1类实际上是在较远的时间里使用的页。</p>
 </li>
 <li><p><strong>先进先出置换算法(FIFO, first-in,first out page replacement algorithm)</strong>。类似队列，每次置换时选择最先进入页表的页置换。</p>
 </li>
@@ -754,7 +758,7 @@
 </li>
 <li><p><strong>不经常使用算法(NFU,not frequently used algorithm)</strong>。对于每一个表项，在硬件或软件上都有一个 k 位的计数器。在每个时钟中断后，每个计数器都会被右移一位。这个右移的操作称为<strong>衰老</strong>同时，每当某个表项被访问，我们就将表项最高位置 1。每次置换选取所以计数器中最小的那一个所对应的表项即可。</p>
 </li>
-<li><p><strong>工作集置换算法(the working set page replacement algorithm)</strong>。进程往往具有<strong>访问局部性(locality of reference)</strong>，即一个进程往往只会访问某一个内存范围。我们称一个进程在某一时段下的所需要的页的集合为<strong>工作集(working set)</strong>。如果工作集完全位于内存，则不会发生页错误。如果工作集只有很少的一部分位于内存，则会发生大量的页错误，我们称这种现象为<strong>抖动(thrashing</strong>。很多进程通常会大量使用某一些页，少量的随机使用其他的页。如果我们将这些大量使用的页常驻在内存，就可以减少页错误的发生。定义工作集$w(k,t)=在t时间下，在k个时间单位下的所有页$。工作集置换算法对在工作集以外的页进行置换。在每个时钟中断时，页表中的引用位将会被清零，同时将当前时间记录给每一个原本引用位为 1 的页。随后算法根据当前时间与记录的页的时间，寻找尚未在工作集中的页，将其置换。若找不到这样的页，os 就会尝试调入一块新的页加入到工作集中。可以发现，工作集的大小是动态变化的。</p>
+<li><p><strong>工作集置换算法(the working set page replacement algorithm)</strong>。进程往往具有<strong>访问局部性(locality of reference)</strong>，即一个进程往往只会访问某一个内存范围。我们称一个进程在某一时段下的所需要的页的集合为<strong>工作集(working set)</strong>。如果工作集完全位于内存，则不会发生页错误。如果工作集只有很少的一部分位于内存，则会发生大量的页错误，我们称这种现象为<strong>抖动(thrashing</strong>。很多进程通常会大量使用某一些页，少量的随机使用其他的页。如果我们将这些大量使用的页常驻在内存，就可以减少页错误的发生。定义工作集$w(k,t)=在t时间下，在k个时间单位下的所有页$。工作集置换算法对在工作集以外的页进行置换。在每个时钟中断时，页表中的引用位将会被清零，同时将当前时间记录给每一个原本引用位为 1 的页。随后算法根据当前时间与记录的页的时间，寻找尚未在工作集中的页，将其置换。若找不到这样的页，操作系统就会尝试调入一块新的页加入到工作集中。可以发现，工作集的大小是动态变化的。</p>
 </li>
 <li><p><strong>工作集时钟置换算法(WSClock page replacement algorithm)</strong>。工作集算法与时钟算法的结合。用时钟算法的模式对引用位为 1 的页进行引用位置 0，同时对引用位为 0 的页使用工作集算法来判定是置换，还是换入新的页表。</p>
 </li>
@@ -762,43 +766,86 @@
 <h2 id="第五节、分页系统设计的细节"><a href="#第五节、分页系统设计的细节" class="headerlink" title="第五节、分页系统设计的细节"></a>第五节、分页系统设计的细节</h2><ol>
 <li>当某个进程发生页错误需要进行换页时，我们需要找到一个现存于内存的页面，将其换至磁盘。我们可以从该进程的页面中选取，也可以从所有进程的页面中选取，即局部页置换和全局页置换。通常而言，全局置换有着更高的效率，其可以自适应的改变页面的大小。局部置换算法在工作集变大时会发生抖动，在工作集变小时则会发生浪费。使用全局置换有助于改善这种情况。</li>
 <li>当我们使用全局置换时，我们需要跟踪每一个进程的页面使用情况以便动态改变大小。一种简单的方法是每隔一定的周期， 根据进程的大小来平均分配一个页面值。需要注意的是，有些指令可能最少需要k个页面才能正常运行，故分配时还应设置获得页面的一个最小值。在进程运行的过程中会发生缺页，我们可以根据缺页的频率设计算法来进行页面大小的分配。这个算法就是<strong>缺页率置换算法(PFF algorithm, page fault frequency algorithm)</strong>。该算法会计算在一定时间内发生的缺页次数，将次数除以时间得到缺页率。如果缺页率小于预设常数 T ，则说明分配的页面过大。反之则说明，分配的页面过小。同时，可以发现，PFF 可以与LRU，FIFO等算法同时使用， PFF 只是起到一个调控页面大小的作用。同时因为工作集系列的算法本身已经确定了页面的个数（工作集的大小），故无法与 PFF 算法同时使用。</li>
-<li>当 os 运行的程序过多时，此时仅凭 PFF 等类似的算法进行调度也无法避免进程的抖动（页面就那么多，进程太多分不过来）。此时进程会出现大量的页错误，操作系统的运行速度会大幅降低。此时只能采取临时牺牲部分进程来换取运行效率的提升。通过使用交换技术， os 将某些进程换入磁盘以换取其他进程缺页率的下降。但仅仅考虑缺页率仍然是不够的，还需要考虑程序是 I/O 受限还是 CPU 受限。当缺页率降低时，意味着此时内存中得进程变少，更容易出现 CPU 闲置得情况，这不利于 CPU 受限的程序。反之，当缺页率增加时，频繁的触发缺页中断，这使得 I/O 时间变短，不利于 I/O 受限的程序。（此处关系属自行猜测，尚未验证）</li>
-<li>页面大小的选取同样需要仔细斟酌。因为分页系统中内存的选取是以页为单位的，因此我们可能存在着某个页没有被完全使用的情况（索取内存不是页面大小的整数倍），我们称这个浪费的空间为<strong>内碎片（internal fragmentation)</strong>。若页面的大小为 $p$ ，每一段连续的内存都会产生 $p/2$ 期望大小的内碎片。可以发现，当页面大小越大时，内碎片越大，这是大页面的缺点。但是在运行较大的程序时，页面越大，程序所用的页越少。当发生硬丢失时， os 需要去硬盘中找到对应的页，读入内存的时间开销主要是磁盘的寻道。换言之，处理硬错误的时间开销与页面大小关系不大。这意味着，大页面因为有着更少的页，发生硬丢失的次数更少，程序可以运行的更快。此外，基于类似的原因，大页面的 TLB 表可以更有效的利用，同样的空间，大页面的 TLB 表内的内存大小更大。同时，更小的页面会使得同样容量下，页表的空间变大。在使用中，os 可以根据不同的用途自定义页面的大小，如对于 os 的内核采取大的页面，对于一般进程采取小的页面。</li>
+<li>当操作系统运行的程序过多时，此时仅凭 PFF 等类似的算法进行调度也无法避免进程的抖动（页面就那么多，进程太多分不过来）。此时进程会出现大量的页错误，操作系统的运行速度会大幅降低。此时只能采取临时牺牲部分进程来换取运行效率的提升。通过使用交换技术，操作系统将某些进程换入磁盘以换取其他进程缺页率的下降。但仅仅考虑缺页率仍然是不够的，还需要考虑程序是 I/O 受限还是 CPU 受限。当缺页率降低时，意味着此时内存中得进程变少，更容易出现 CPU 闲置得情况，这不利于 CPU 受限的程序。反之，当缺页率增加时，频繁的触发缺页中断，这使得 I/O 时间变短，不利于 I/O 受限的程序。（此处关系属自行猜测，尚未验证）</li>
+<li>页面大小的选取同样需要仔细斟酌。因为分页系统中内存的选取是以页为单位的，因此我们可能存在着某个页没有被完全使用的情况（索取内存不是页面大小的整数倍），我们称这个浪费的空间为<strong>内碎片（internal fragmentation)</strong>。若页面的大小为 $p$ ，每一段连续的内存都会产生 $p/2$ 期望大小的内碎片。可以发现，当页面大小越大时，内碎片越大，这是大页面的缺点。但是在运行较大的程序时，页面越大，程序所用的页越少。当发生硬丢失时，操作系统需要去硬盘中找到对应的页，读入内存的时间开销主要是磁盘的寻道。换言之，处理硬错误的时间开销与页面大小关系不大。这意味着，大页面因为有着更少的页，发生硬丢失的次数更少，程序可以运行的更快。此外，基于类似的原因，大页面的 TLB 表可以更有效的利用，同样的空间，大页面的 TLB 表内的内存大小更大。同时，更小的页面会使得同样容量下，页表的空间变大。在使用中，操作系统可以根据不同的用途自定义页面的大小，如对于操作系统的内核采取大的页面，对于一般进程采取小的页面。</li>
 <li><strong>动态链接库(dynamic link libraries)</strong>，也称<strong>共享库(shared libraries)</strong>，多个进程之间往往会同时调用某些相同的库，如 I/O 库，图像库等。如果在每一个进程里都存放一个相同的库，这势必会引起内存的浪费。 DLL 技术使得我们可以动态的实现对库的链接。任何存在于二进制目标文件中，但是没有在内部定义的函数称为<strong>未定义的外部标识符(undefined external)</strong>。当运行程序时，DLL 中的相关函数将会被链接器加载到进程的虚拟地址空间中，此时得到了一个完整的程序。DLL 在内存中只需保存一次，多个使用了相同 DLL 的程序只需要引用内存中的同一个 DLL 即可。同时，对 DLL 进行修改时，只需修改 DLL 的部分，无需重新编译整个程序，这为大型项目中的测试更新提供了便利。需要注意的是，因为所有进程共享一个 DLL 库，因此 DLL 库中不能使用绝对地址寻址（只有一个DLL副本，装入时只会按照某个进程的地址空间装入，不同进程的虚拟地址空间所映射的内存是不同的）。DLL 应该使用<strong>位置独立的代码(position-independent code)</strong>。</li>
 <li><strong>内存映射文件(memory-mapping files)</strong>。DLL 实际上是内存映射文件的一个特例。内存映射文件提供了一种将文件映射到内存的方式，其运用了虚拟内存技术。在没有对文件进行访问前，文件不会被加载到内存。若发生访问，则会按页进行装载。对内存的操作将会视为对文件的操作。在进程终止或显式的关闭内存映射文件时，内存内的信息将会被回送至磁盘，对应的文件会被修改。内存映射文件提供了一种 I/O 的新方式。其直接将文件从内存映射至进程的虚拟空间，减少了从内核空间到用户空间的一次映射，因此与传统的文件 I/O 相比，其效率更高。同时，内存映射文件也可以作为进程通信的一种方式。当多个进程同时映射到同一个文件时，此时进程对文件的修改将会通过内存立即反映到其他的进程中（因为其他进程也可以访问这块空间）。</li>
-<li>页的清理机制。当发生硬丢失时，os 必须选择一个物理页交换至磁盘。若发生硬丢失时选中了脏页。此时页的交换将会因回写消耗大量的时间。为了提供可以交换的页，并且提升效率，os 提供了清理机制。os 在后台运行一个分页守护进程。此进程周期性的检查当前的内存状态，若空余的页过少，进程就会运行。其根据页置换算法把若干页从页表中删除，若该页是脏页，则会进行回写。同时，此时的页实际上并没有离开内存，当其拥有者再次访问时，只需要在对应的页表上进行注册即可，无需访问磁盘。通过这样的机制，可以使得在真正发生硬丢失时，有更大的概率从分页守护进程中获得一个干净的页。实际上，分页守护进程的用途就是预处理这些页。这一机制可以使用双指针实现，指针一端指向脏页，另一端指向干净的页。脏页端不断回写至磁盘，同时移动指针，在发生页错误时，从干净端获取干净的页。</li>
+<li>页的清理机制。当发生硬丢失时，操作系统必须选择一个物理页交换至磁盘。若发生硬丢失时选中了脏页。此时页的交换将会因回写消耗大量的时间。为了提供可以交换的页，并且提升效率，操作系统提供了清理机制。操作系统在后台运行一个分页守护进程。此进程周期性的检查当前的内存状态，若空余的页过少，进程就会运行。其根据页置换算法把若干页从页表中删除，若该页是脏页，则会进行回写。同时，此时的页实际上并没有离开内存，当其拥有者再次访问时，只需要在对应的页表上进行注册即可，无需访问磁盘。通过这样的机制，可以使得在真正发生硬丢失时，有更大的概率从分页守护进程中获得一个干净的页。实际上，分页守护进程的用途就是预处理这些页。这一机制可以使用双指针实现，指针一端指向脏页，另一端指向干净的页。脏页端不断回写至磁盘，同时移动指针，在发生页错误时，从干净端获取干净的页。</li>
 </ol>
 <h2 id="第六节、实现上的一些问题"><a href="#第六节、实现上的一些问题" class="headerlink" title="第六节、实现上的一些问题"></a>第六节、实现上的一些问题</h2><ol>
-<li><p>操作系统与分页。os 会参与到分页机制中，这发生在以下 4 个时间：</p>
+<li><p>操作系统与分页。操作系统会参与到分页机制中，这发生在以下 4 个时间：</p>
 <ol>
-<li>进程创建。os 需要为进程决定页表的大小，在磁盘中划分为页表服务的交换区。</li>
-<li>进程执行。当进程被调度执行的时，os 需要通知 MMU 为当前的进程进行重置，同时刷新快表。os 还需要将当前的页表设定为当前进程的页表，这个过程通常是由 os 将页表的起始地址填入 MMU 内部的页表寄存器来完成的。</li>
-<li>页错误。发生页错误时，os 需要通过读取硬件寄存器以知道是哪一个页的访问出现问题，随后执行之前提到过的对页错误的一系列处理操作。</li>
-<li>进程终止。当进程终止时，os 需要负责释放其占用的一系列资源，页表，磁盘交换区等。</li>
+<li>进程创建。操作系统需要为进程决定页表的大小，在磁盘中划分为页表服务的交换区。</li>
+<li>进程执行。当进程被调度执行的时，操作系统需要通知 MMU 为当前的进程进行重置，同时刷新快表。操作系统还需要将当前的页表设定为当前进程的页表，这个过程通常是由操作系统将页表的起始地址填入 MMU 内部的页表寄存器来完成的。</li>
+<li>页错误。发生页错误时，操作系统需要通过读取硬件寄存器以知道是哪一个页的访问出现问题，随后执行之前提到过的对页错误的一系列处理操作。</li>
+<li>进程终止。当进程终止时，操作系统需要负责释放其占用的一系列资源，页表，磁盘交换区等。</li>
 </ol>
 </li>
 <li><p>页错误的处理，下述 10 个步骤详细描述了页错误的处理流程:</p>
 <ol>
 <li>硬件检测到页错误，陷入内核态处理页错误。硬件将程序计数器保存至栈中。同时，在大多数实现下，与当前 CPU 执行的指令有关的信息将会保存在 CPU 内部的寄存器中，以便页错误处理结束以后重新运行该语句。</li>
 <li>汇编例程调用操作系统，保存通用寄存器及其他可能变化的信息。</li>
-<li>os 定位不在内存中的虚页，这通常保存在某个寄存器中。</li>
-<li>os 检测访问是否合法。若不合法，则发生段错误，os 将终止进程。若合法，os将检查是否存在空闲的页。若存在，则进行分配。若不存在，则运行页置换算法</li>
+<li>操作系统定位不在内存中的虚页，这通常保存在某个寄存器中。</li>
+<li>操作系统检测访问是否合法。若不合法，则发生段错误，操作系统将终止进程。若合法，操作系统将检查是否存在空闲的页。若存在，则进行分配。若不存在，则运行页置换算法</li>
 <li>如果页置换算法选中的页是脏页，这个进程将会被临时挂起，同时将脏页回写至磁盘。这个过程中，该页会被标记为 busy 以防止其他程序对页的访问。</li>
-<li>脏页回写完成后，os 将需要的页从硬盘中换入内存。这个过程结束后，该页的 busy 将会被重置。</li>
+<li>脏页回写完成后，操作系统将需要的页从硬盘中换入内存。这个过程结束后，该页的 busy 将会被重置。</li>
 <li>出错指令的程序计数器将会被回退到出错前的状态。</li>
 <li>重新调度进程。当该进程被调度时，操作系统回到调用它的例程。</li>
 <li>例程继续运行，还原现场，随后回到用户态，就像没有发生页错误一样继续执行之前出错的程序。</li>
 </ol>
 </li>
-<li><p>指令备份。在发生页错误时，很多情况下操作系统并不能自己断定出错指令的位置。此时 CPU 硬件会提供一系列寄存器，这些寄存器可以用来描述上一次执行的指令地址，描述程序计数器的自增或自减长度。有了这些信息，os 才可以找到出错的指令并在也处理结束时，回退到这条指令。</p>
+<li><p>指令备份。在发生页错误时，很多情况下操作系统并不能自己断定出错指令的位置。此时 CPU 硬件会提供一系列寄存器，这些寄存器可以用来描述上一次执行的指令地址，描述程序计数器的自增或自减长度。有了这些信息，操作系统才可以找到出错的指令并在也处理结束时，回退到这条指令。</p>
 </li>
-<li><p><strong>页面锁(pinning page)</strong>，被锁定的页面不可以被交换。考虑以下情形，当页调度使用全局调度算法时，某一进程发出 I/O 请求，当 DMA 传输建立时，该进程会被挂起。os 此时转而运行其他进程，若其他进程此时发生了页错误，并且在处理页错误的过程中选中了 DMA 传输的物理块。此时 DMA 传输的位置将会出现错误。因此，使用页面锁可以保证页面不被交换。</p>
+<li><p><strong>页面锁(pinning page)</strong>，被锁定的页面不可以被交换。考虑以下情形，当页调度使用全局调度算法时，某一进程发出 I/O 请求，当 DMA 传输建立时，该进程会被挂起。操作系统此时转而运行其他进程，若其他进程此时发生了页错误，并且在处理页错误的过程中选中了 DMA 传输的物理块。此时 DMA 传输的位置将会出现错误。因此，使用页面锁可以保证页面不被交换。</p>
 </li>
 <li><p><strong>后备存储(backing store)</strong>，页不仅仅映射至内存，其还需要映射至后备存储以便完成页错误时的处理。可以将进程的代码段映射至可执行二进制文件中，将动态加载的共享库程序段映射到动态调用的库文件。将其他段映射到交换文件中。交换文件位于磁盘中的交换区，其上不搭载文件系统。</p>
 </li>
-<li><p>机制与策略的分离。<strong>机制(mechanism)</strong>，指 os 可以做什么。<strong>策略(policy)</strong>，指 os 怎么做什么。前者指 os 提供的一系列接口，后者指程序如何利用一系列接口来完成某项任务。机制与策略的分离是一种设计上的概念。机制是一种框架，其相对固定，不易改变。机制与策略的分离可以提供模块化的代码，以及更加灵活的结构。比如内存管理就可以分为三个部分：MMU 处理器（负责与 MMU 硬件打交道），内核层的页错误处理器，用户层的外部页表处理器。它们将呈现出下图的关系：</p>
+<li><p>机制与策略的分离。<strong>机制(mechanism)</strong>，指操作系统可以做什么。<strong>策略(policy)</strong>，指操作系统怎么做什么。前者指操作系统提供的一系列接口，后者指程序如何利用一系列接口来完成某项任务。机制与策略的分离是一种设计上的概念。机制是一种框架，其相对固定，不易改变。机制与策略的分离可以提供模块化的代码，以及更加灵活的结构。比如内存管理就可以分为三个部分：MMU 处理器（负责与 MMU 硬件打交道），内核层的页错误处理器，用户层的外部页表处理器。它们将呈现出下图的关系：</p>
 <p><img src="/blog_images/modern_operating_systems/mechanism_and_policy.png" alt="mechanism and policy"></p>
 </li>
+</ol>
+<h2 id="第七节、分段"><a href="#第七节、分段" class="headerlink" title="第七节、分段"></a>第七节、分段</h2><p>另一个维度进行内存的划分，按照代码逻辑进行划分。目前Linux 和 windows 均未使用段式管理，有关段的内容暂略。</p>
+<h1 id="第四章-文件系统"><a href="#第四章-文件系统" class="headerlink" title="第四章 文件系统"></a>第四章 文件系统</h1><p>磁盘的最小访问单位是<strong>扇区(sector)</strong>，文件系统对其进一步抽象，使得加载在文件系统之上的程序对磁盘的最小访问单位变为<strong>块(block)</strong>。由此一块磁盘可以被抽象为若干个连续的块，每一个块用块号唯一标识。</p>
+<h2 id="第一节、文件"><a href="#第一节、文件" class="headerlink" title="第一节、文件"></a>第一节、文件</h2><ol>
+<li><p>文件的命名格式。不同的操作系统有着不同的命名方式。有的操作系统，如windows，其对文件名大小写不敏。而 UNIX 则对大小写敏感。部分操作系统支持在文件名后添加 “.*” 的后缀名。后缀名通常用于指示文件的类型，比如 .txt 表示文本文件。在 UNIX 操作系统中，后缀名更多的是用于提醒用户文件的类型，操作系统仍然可以将一个后缀名为 .txt 的文件作为一个可执行程序运行，因为文件的可执行标识为为 1 。而在 windows 中，后缀名切实的指定了一个文件的类型，若没有后缀名，windows 无从判断文件的类型，只能将该任务交给用户判断。</p>
+</li>
+<li><p>单个文件按照其内部信息的组成方式可以分为两种类型：流式文件，记录式文件。前者将数据按顺序组织，其对于操作系统而言是一串无意义的 01 串。对此类文件的具体解释依赖于用户程序。记录式文件则需要维护文件内部的数据结构，如树形结构的记录式文件。其根据输入的给定的键值进行跳转，找到其下一个存储的信息。UNIX 和 windows 使用的都是流式文件的组成方式。</p>
+</li>
+<li><p>许多操作系统都有不同的文件类型，如存放用户数据的一般文件，存储目录结构的目录文件，用于抽象 I/O 的字符特殊文件和块特殊文件。一般文件可以大体上分为 ASCII 文件和二进制文件。前者就是普通的文本文件，可以被任何编辑器轻易的解析。需要注意的是，文本文件通常需要分行，为了让操作系统识别行末，需要进行标记。不同的操作系统有着不同的标记方式。如 UNIX 的标记是<strong>换行(LF, line feed)</strong>，Macintosh 则是<strong>回车(CR, carriage return)</strong>，windows  是CR LF。当处理跨平台的文本文件时可能需要注意这一问题。二进制文件需要被特定的程序解析，其具有内部的结构。如早期的 UNIX 的一个二进制可执行文件的格式如下图所示。</p>
+<p><img src="/blog_images/modern_operating_systems/binary_file_structure.png" alt="binary_file_structure"></p>
+</li>
+<li><p>很多操作系统都支持对文件的串行或随机访问。对于随机访问，UNIX 和 windows 提供了一种 seek 的系统调用来改变当前文件指针所指向的位置。</p>
+</li>
+<li><p>文件除了具有基本的数据以外，还需保存若干属性。这些属性也被称为<strong>元数据(metadata)</strong>。不同操作系统提供不同的属性，下表是不同操作系统可能支持的属性：</p>
+<p>| 属性                              | 描述                                                         |<br>| ————————————————- | —————————————————————————————— |<br>| 保护(Protection)                  | 确定文件的访问权限                                           |<br>| 密码(Password)                    | 访问文件需要的密码                                           |<br>| 创建者(Creator)                   | 文件创建者的 id                                              |<br>| 只读标记(Read-only flag)          | 0表示既可以读又可以写，1表示只能读                           |<br>| 隐藏标记(Hidden flag)             | 标识文件是否在文件列表中可见                                 |<br>| 系统标记(System flag)             | 标识文件是否是系统文件                                       |<br>| 备份标记(Archive flag)            | 标识文件是否被备份                                           |<br>| 文件类型标记(ASCII/binary flag)   | 标识文件的类型                                               |<br>| 随机访问标记(Random access)       | 标识文件是否支持随机访问                                     |<br>| 临时标记(Temporary access)        | 标识文件是否是临时文件，若是，则会在创建其的进程退出时自动删除 |<br>| 锁标记(Lock flag)                 | 标识文件是否上锁                                             |<br>| 创建时间(Creation time)           | 创建时间                                                     |<br>| 最近访问时间(Time of last access) | 最近访问时间                                                 |<br>| 最近修改时间(Time of last change) | 最近修改时间                                                 |</p>
+</li>
+<li><p>文件操作程序样例：cp 指令的简单实现。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*File copy program.Error checking and reporting is minimal.*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt; /* include necessary header files */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>; <span class="comment">/* ANSI prototype */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 4096 <span class="comment">/* use a buffer size of 4096 bytes */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OUTPUT_MODE 0700 <span class="comment">/* protection bits for output file */</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> in_fd, out_fd, rd_count, wt_count;</span><br><span class="line">	<span class="keyword">char</span> buffer[BUF_SIZE];</span><br><span class="line">	<span class="keyword">if</span> (argc != <span class="number">3</span>) <span class="built_in">exit</span>(<span class="number">1</span>); <span class="comment">/* syntax error if argc is not 3 */</span></span><br><span class="line">	<span class="comment">/* Open the input file and create the output file */</span></span><br><span class="line">		in_fd = open(argv[<span class="number">1</span>], O_RDONLY); <span class="comment">/* open the source file */</span></span><br><span class="line">	<span class="keyword">if</span> (in_fd &lt; <span class="number">0</span>) <span class="built_in">exit</span>(<span class="number">2</span>); <span class="comment">/* if it cannot be opened, exit */</span></span><br><span class="line">	out_fd = creat(argv[<span class="number">2</span>], OUTPUT_MODE); <span class="comment">/* create the destination file */</span></span><br><span class="line">	<span class="keyword">if</span> (out_fd &lt; <span class="number">0</span>) <span class="built_in">exit</span>(<span class="number">3</span>); <span class="comment">/* if it cannot be created, exit */</span></span><br><span class="line">	<span class="comment">/* Copy loop */</span></span><br><span class="line">		<span class="keyword">while</span> (TRUE) &#123;</span><br><span class="line">			rd count = read(in_fd, buffer, BUF_SIZE); <span class="comment">/* read a block of data */</span></span><br><span class="line">			<span class="keyword">if</span> (rd_count &lt;= <span class="number">0</span>) <span class="keyword">break</span>; <span class="comment">/* if end of file or error, exit loop */</span></span><br><span class="line">			wt_count = write(out_fd, buffer, rd_count); <span class="comment">/* wr ite data */</span></span><br><span class="line">			<span class="keyword">if</span> (wt_count &lt;= <span class="number">0</span>) <span class="built_in">exit</span>(<span class="number">4</span>); <span class="comment">/* wt count &lt;= 0 is an error */</span></span><br><span class="line">		&#125;</span><br><span class="line">	<span class="comment">/* Close the files */</span></span><br><span class="line">		close(in_fd);</span><br><span class="line">	close(out_fd);</span><br><span class="line">	<span class="keyword">if</span> (rd_count == <span class="number">0</span>) <span class="comment">/* no error on last read */</span></span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">5</span>); <span class="comment">/* error on last read */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="第二节、目录"><a href="#第二节、目录" class="headerlink" title="第二节、目录"></a>第二节、目录</h2></li>
+<li><p>为了找到一个文件，我们需要对文件进行管理。这就是目录系统的职责。目录系统是一个树形结构，根目录是最上层的目录。对于单级目录系统，根目录下属直接连接各个文件。对于多级目录系统，根目录下不仅可以连接多个文件，还可以连接多个目录。下面是多级目录的图示：</p>
+<p><img src="/blog_images/modern_operating_systems/directory.png" alt="directory"></p>
+</li>
+<li><p>确定目录系统后，为了找到某个文件，我们需要一个称作<strong>路径名(path name)</strong>的字符串描述一个文件的位置。为了描述目录的层级结构，我们用分隔符来表示目录的层级。在 UNIX 系统中是 ‘/‘ ，在 windows 系统中是 ‘\\’ 。路径的形式有两种，一种是<strong>绝对路径(absolute path name)</strong>，一种是<strong>相对路径(relative path name)</strong>。前者要求从根目录开始，一直指定到文件所在的地址。后者则是从<strong>工作目录(working directory)</strong>开始指定地址。工作目录通常是当前的工作的目录。若路径名以分隔符开始，则这是一个绝对路径，否则则是一个相对路径。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp &#x2F;usr&#x2F;ast&#x2F;mailbox &#x2F;usr&#x2F;ast&#x2F;mailbox.bak</span><br><span class="line">cp mailbox mailbox.bak</span><br></pre></td></tr></table></figure>
+<p>第一个语句使用了绝对路径，第二个使用了相对路径，此时的工作目录是”/usr/ast/“</p>
+<p>大部分的操作系统还支持使用 “.” 来表示当前目录，”..” 来表示上一级目录。</p>
+</li>
+<li><p><strong>硬链接(hard link)</strong>与<strong>符号链接(symoblic link)</strong>。两种链接方式都允许同一个文件出现在文件系统的不同地方。其区别是，符号链接是通过路径名进行访问，其在创建时保存文件的路径。硬链接则引用 i-node 。当原文件被删除时，符号链接无法正常工作，而硬链接仍然保存着原有的文件。</p>
+</li>
+</ol>
+<h2 id="第三节、文件系统的实现"><a href="#第三节、文件系统的实现" class="headerlink" title="第三节、文件系统的实现"></a>第三节、文件系统的实现</h2><ol>
+<li><p>文件系统要求掉电不丢失，故文件系统通常保存在磁盘里。磁盘可以被划分为多个分区，每个分区上都可以独立的运行不同的文件系统。磁盘的 0 号扇区被称为<strong>主引导记录(MBR, master boot record)</strong>，其用于引导系统。在 MBR 的末端有分区表，它记录了磁盘的分区情况。当计算机启动时， BIOS 系统读入 MBR 并执行。MBR 内的程序将选择某一个分区，并执行这个分区内第一个盘块的程序。这个盘块被称为<strong>引导盘块(boot block)</strong>。这个盘块负责引导这个分区内的操作系统。通常而言，一个文件系统包括如下图所示的若干信息。<strong>超级块(supe)</strong>包含了文件系统的关键参数，在引导时这部分将会被加载到内存中。其存储了诸如文件系统的类型，有多少个盘块这样的用于管理的关键信息。随后是空闲的磁盘块，之后是用于描述每个文件信息的inode段，根目录，文件与目录段。</p>
+</li>
+<li><p>我们有多种方式将文件存放到磁盘上。最直观的方式是，磁盘空间连续分配。这种存储方式的优点是：1、实现简单。我们只需用起始块号和块长度便可记录一个文件。2、访问速度快。因为我们是连续的存储，这样使得磁盘的寻道时间变短。并且连续的访问也更有利于实现预读取的操作。但这种存储方式有致命的缺点：随着文件的创建和删除，磁盘空间将会出现碎片。同时这样的存储方式使得我们难以方便的修改文件。试想某个文件在磁盘中 A 与文件 B 与 C 紧密相连。此时若尝试向 A 中添加元素，我们就必须将文件 A 移动至另一段更大的空间中。这是极其浪费时间的。同时因为内碎片的影响，即使空闲盘块的总数大于我们所要保存的文件，我们也不一定能找到一段空间来存储这个文件。综上，其致命的缺点使得此类分布方式只能应用于特定的场合，如只读不写的 CD-ROM, DVD, 蓝光碟上。</p>
+</li>
+<li><p>另外的磁盘空间分配方式是链式分配。通过将块以链表的形式进行维护，我们就得到了块链接法。对每一个块我们都可以维护一个指向下一个块的指针。这样我们就可以轻易的在文件后添加信息。需要注意的是，因为我们必须依次遍历块链表，此时对文件的随机访问效率极低。同时，如果将指针存在块中，每个块的实际存储大小将不再是 2 的幂次。而实际应用中，很多文件都是 2 的幂次，这将导致存储效率的略微降低。</p>
+</li>
+<li><p>如果我们将块链接法中的链表指针以数组的形式如下图所示进行实现，对其维护并加载到内存时，上述的两个问题都可解决。我们称这个表为<strong>文件分配表(FAT, File Allocation Table)</strong>。其问题在于，我们需要将整个数组都加载至内存，这对内存的占用过大。</p>
+<p><img src="" alt=""></p>
+</li>
+<li><p>若我们对每个文件的盘块的地址如下图所示单独存储，我们可以得到一个数据结构，我们称其为<strong>i-node(index-node)</strong>。每一个文件都有一个 i-node 来保存文件存储的盘块。i-node 结点将被统一保存在文件系统的某个段中。此时若要访问文件，我们只需加载一次 i-node 块至内存即可获得该文件所占用的盘块。</p>
+</li>
+<li></li>
 </ol>
 
     </div>
@@ -881,7 +928,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">第一章 操作系统初步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">第二章 进程与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%EF%BC%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">第一节：进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">第二节、线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">2.3.</span> <span class="nav-text">第三节、进程间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E8%B0%83%E5%BA%A6"><span class="nav-number">2.4.</span> <span class="nav-text">第四节、调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第三章 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%E3%80%81%E6%97%A0%E5%86%85%E5%AD%98%E6%8A%BD%E8%B1%A1%E4%B8%8B%E7%9A%84-OS"><span class="nav-number">3.1.</span> <span class="nav-text">第一节、无内存抽象下的 OS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">3.2.</span> <span class="nav-text">第二节、地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text">第三节、虚拟内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">第四节、页面置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%8A%82%E3%80%81%E5%88%86%E9%A1%B5%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">3.5.</span> <span class="nav-text">第五节、分页系统设计的细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E8%8A%82%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="nav-number">3.6.</span> <span class="nav-text">第六节、实现上的一些问题</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%88%9D%E6%AD%A5"><span class="nav-number">1.</span> <span class="nav-text">第一章 操作系统初步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">第二章 进程与线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%EF%BC%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">2.1.</span> <span class="nav-text">第一节：进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E7%BA%BF%E7%A8%8B"><span class="nav-number">2.2.</span> <span class="nav-text">第二节、线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1"><span class="nav-number">2.3.</span> <span class="nav-text">第三节、进程间通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E8%B0%83%E5%BA%A6"><span class="nav-number">2.4.</span> <span class="nav-text">第四节、调度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">3.</span> <span class="nav-text">第三章 内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%E3%80%81%E6%97%A0%E5%86%85%E5%AD%98%E6%8A%BD%E8%B1%A1%E4%B8%8B%E7%9A%84-OS"><span class="nav-number">3.1.</span> <span class="nav-text">第一节、无内存抽象下的 OS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4"><span class="nav-number">3.2.</span> <span class="nav-text">第二节、地址空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98"><span class="nav-number">3.3.</span> <span class="nav-text">第三节、虚拟内存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E8%8A%82%E3%80%81%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">第四节、页面置换算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E8%8A%82%E3%80%81%E5%88%86%E9%A1%B5%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E7%9A%84%E7%BB%86%E8%8A%82"><span class="nav-number">3.5.</span> <span class="nav-text">第五节、分页系统设计的细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E8%8A%82%E3%80%81%E5%AE%9E%E7%8E%B0%E4%B8%8A%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="nav-number">3.6.</span> <span class="nav-text">第六节、实现上的一些问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E8%8A%82%E3%80%81%E5%88%86%E6%AE%B5"><span class="nav-number">3.7.</span> <span class="nav-text">第七节、分段</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">4.</span> <span class="nav-text">第四章 文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%8A%82%E3%80%81%E6%96%87%E4%BB%B6"><span class="nav-number">4.1.</span> <span class="nav-text">第一节、文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E8%8A%82%E3%80%81%E7%9B%AE%E5%BD%95"><span class="nav-number">4.2.</span> <span class="nav-text">第二节、目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E8%8A%82%E3%80%81%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.3.</span> <span class="nav-text">第三节、文件系统的实现</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
